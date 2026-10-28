@@ -1,7 +1,7 @@
 'use strict';
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { buildScenario, variance, toCSV } = require('../forecast.js');
+const { buildScenario, variance, varianceBreakdown, toCSV } = require('../forecast.js');
 
 test('default actuals and forecasts reconcile to independently calculated reference figures', () => {
   const model = buildScenario();
@@ -12,9 +12,9 @@ test('default actuals and forecasts reconcile to independently calculated refere
   assert.equal(model.outlook.budget.revenue, 1510419);
   assert.equal(model.outlook.budget.operatingResult, 402250);
   assert.equal(model.outlook.forecast.revenue, 1641646);
-  assert.equal(model.outlook.forecast.operatingResult, 448153);
+  assert.equal(model.outlook.forecast.operatingResult, 436153);
   assert.deepEqual(model.forecast[0].value, {
-    revenue: 122400, variableCosts: 51408, fixedCosts: 42000, operatingResult: 28992
+    revenue: 122400, variableCosts: 51408, fixedCosts: 43000, operatingResult: 27992
   });
   assert.equal(model.forecast[11].value.revenue, 152190);
 });
@@ -49,9 +49,9 @@ test('an earlier cutoff uses only actuals available at that reporting date', () 
 test('cost and growth controls can represent losses without clamping them away', () => {
   const model = buildScenario({ growth: 0, variableCost: 65, fixedCostChange: 30 });
   assert.equal(model.forecast[0].value.variableCosts, 78000);
-  assert.equal(model.forecast[0].value.fixedCosts, 54600);
-  assert.equal(model.forecast[0].value.operatingResult, -12600);
-  assert.equal(model.outlook.forecast.operatingResult, -151200);
+  assert.equal(model.forecast[0].value.fixedCosts, 55900);
+  assert.equal(model.forecast[0].value.operatingResult, -13900);
+  assert.equal(model.outlook.forecast.operatingResult, -166800);
 });
 
 test('revenue above budget can coexist with an unfavourable operating variance', () => {
@@ -98,4 +98,44 @@ test('CSV exports the displayed monthly data, both metrics and forecast assumpti
   assert.match(rows[4], /"3","45","0"$/);
   assert.match(rows[15], /"2027-09"/);
   assert.match(toCSV(buildScenario(), 'de'), /Fiktives Beispiel/);
+});
+
+
+test('zero overhead adjustment carries forward the latest actual month at every cutoff', () => {
+  for (const closedMonth of [3,6,9]) {
+    const model = buildScenario({closedMonth});
+    const actualFixed = model.history.at(-1).value.fixedCosts;
+    assert.equal(model.fixedCostBase, actualFixed);
+    assert.ok(model.forecast.every(row=>row.value.fixedCosts===actualFixed));
+    assert.equal(buildScenario({closedMonth,fixedCostChange:10}).forecast[0].value.fixedCosts,Math.round(actualFixed*1.1));
+  }
+});
+
+test('monthly growth is annualised transparently', () => {
+  assert.ok(Math.abs(buildScenario().annualisedGrowth-26.8241794563)<0.000001);
+  assert.equal(buildScenario({growth:0}).annualisedGrowth,0);
+  assert.ok(buildScenario({growth:-5}).annualisedGrowth<0);
+});
+
+test('variance breakdown reconciles actual and forecast results with correct cost signs', () => {
+  const model=buildScenario();
+  assert.deepEqual(varianceBreakdown(model,'yearToDate'),{
+    budgetResult:126488,revenueEffect:17188,variableCostEffect:-24906,fixedCostEffect:-3000,result:115770
+  });
+  assert.deepEqual(varianceBreakdown(model,'outlook'),{
+    budgetResult:402250,revenueEffect:131227,variableCostEffect:-85324,fixedCostEffect:-12000,result:436153
+  });
+  for(const closedMonth of [3,6,9]){
+    for(const reportingPeriod of ['yearToDate','outlook']){
+      const values=varianceBreakdown(buildScenario({closedMonth,growth:-5,variableCost:65,fixedCostChange:30}),reportingPeriod);
+      assert.equal(values.budgetResult+values.revenueEffect+values.variableCostEffect+values.fixedCostEffect,values.result);
+    }
+  }
+  assert.throws(()=>varianceBreakdown(model,'unknown'),RangeError);
+});
+
+test('CSV preserves the actual fixed-cost baseline alongside scenario assumptions', () => {
+  const csv=toCSV(buildScenario());
+  assert.match(csv,/Latest actual monthly fixed overheads/);
+  assert.match(csv,/"43000","2","42","0"/);
 });

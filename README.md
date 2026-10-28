@@ -37,17 +37,31 @@ npm run test:forecast
 npm run test:deploy
 ```
 
-Browser checks exercise the built site over HTTP: both languages, 320–1920px layouts, mobile navigation and keyboard interaction, enquiry validation and encoded draft contents, clipboard behavior, language persistence, accessibility scans and absence of third-party requests. Forecast checks cover keyboard controls, fixed historical actuals, rolling periods, budget comparisons, loss scenarios, language switching and CSV export.
+Browser checks exercise the built site over HTTP: both languages, 320–1920px layouts, mobile navigation and keyboard interaction, enquiry validation and encoded draft contents, clipboard behavior, language persistence, accessibility scans and absence of third-party requests. They also exercise the business-challenge finder, revenue-to-finance information flow, offer-to-enquiry links, genuine-feedback rendering safeguards and the forecasting interface. Forecast checks cover fixed actuals and budgets, rolling periods, current overhead continuity, annualised growth, variance breakdowns, loss scenarios and CSV export.
+
+## Services and offers
+
+The site presents five connected practices: Strategic Finance & Financial Intelligence; Business & Data Analytics; Revenue Operations, GTM & CRM; Business Analysis, Operations & Systems; and AI Enablement & Automation. Analytics covers performance information and its drivers; business analysis covers processes, requirements and changes to the way work runs. Each practice explains the challenge, support, typical deliverables and intended decision benefit.
+
+The paid entry offer is a Business Performance Review. Its areas, depth, inputs and fixed fee are agreed before work begins. Focused projects cover Planning & Forecasting, Reporting & Business Analytics, and Revenue & Workflow Improvement. Startup planning is a variation; ongoing support has an agreed monthly scope and capacity. No free audit, invented prices or guaranteed results are advertised.
+
+## Founders and client feedback
+
+The founder cards use only the owner-confirmed first names Kristina, Jan and Aleksandar and the confirmed co-founder relationship. Surnames, biographies, specialisms and photographs await owner-supplied facts.
+
+`approvedTestimonials` in `app.js` is intentionally empty. The testimonial section stays hidden until genuine feedback is supplied. An entry needs a name or agreed anonymous attribution, bilingual quote and context, bilingual source label and explicit approval covering publication and translations. A score is optional and must be the person's actual rating. HTTPS source links are supported; no platform branding or default five-star ratings are invented. Prior work by a founder must be identified accurately in the context. Automated tests use transient fixtures that are not production content.
+
+Visible example engagement cards are labelled as illustrative scopes, not completed client projects or testimonials.
 
 ## Illustrative rolling forecast
 
 The Strategic Finance section includes a dependency-free example in `forecast.js`. All data is hypothetical. Its selectable reporting cutoffs are March, June and September 2026; each selection shows three recent actual months and the next twelve forecast months, including the following calendar year. Summary cards distinguish year-to-date actuals from the twelve-month outlook.
 
-The original budget starts with January 2026 revenue of EUR 100,000, 2% monthly growth, variable costs of 40% and monthly fixed overheads of EUR 42,000. Historical actuals are a separate fixed dataset. Forecasts start from the selected cutoff's actual revenue and apply adjustable monthly growth, variable-cost share and fixed-overhead adjustment. Scenario controls never revise actuals or the original budget. Values round to whole euros monthly.
+The original budget starts with January 2026 revenue of EUR 100,000, 2% monthly growth, variable costs of 40% and monthly fixed overheads of EUR 42,000. Historical actuals are a separate fixed dataset. Forecasts start from the selected cutoff's actual revenue and apply adjustable monthly growth, variable-cost share and fixed-overhead adjustment. The overhead baseline is the latest actual month: EUR 42,500 in March, EUR 43,000 in June and EUR 44,000 in September. A zero adjustment carries that cost forward. The baseline and annualised growth are displayed beside the inputs. Scenario controls never revise actuals or the original budget. Values round to whole euros monthly.
 
-Operating result is revenue minus variable costs and fixed overheads. It does not model cash collection/payment timing, financing or taxes, and must not be described as cash flow. The interactive example includes a revenue/result chart, monthly budget variances, calculation notes and a CSV containing the displayed monthly data and the selected assumptions. The model runs entirely in the browser and does not collect or upload financial data. Without JavaScript, the service description remains available and the inactive example is hidden with an explanatory note.
+Operating result is revenue minus variable costs and fixed overheads. The simplified example holds adjusted overheads constant and does not model seasonality, hiring, capacity constraints, cash collection/payment timing, financing or taxes. It must not be described as cash flow or a full client forecast. A real client model needs business-specific drivers. The interactive example includes a revenue/result chart, monthly budget variances and a variance breakdown for year-to-date actuals or the forward twelve months. Revenue effects add to the budget result; higher costs reduce it. Calculation notes and a CSV disclose the assumptions and latest actual cost baseline. The model runs entirely in the browser and does not collect or upload financial data. Without JavaScript, the service description remains available and the inactive example is hidden with an explanatory note.
 
-`npm run test:forecast` checks the calculation module against independently calculated reference figures, horizon changes, cost/loss scenarios, immutable actuals and budgets, invalid assumptions and CSV contents. The finance changes are prepared on a review branch; publishing this update requires the owner's approval. Keep the existing review `noindex,nofollow` setting until separately authorised to change it.
+`npm run test:forecast` checks the calculation module against independently calculated reference figures, horizon changes, cost/loss scenarios, overhead continuity, annualised growth, variance reconciliation, immutable actuals and budgets, invalid assumptions and CSV contents. Use a review branch while preparing changes and follow the owner's publishing authorisation. Keep the existing review `noindex,nofollow` setting until separately authorised to change it.
 
 For optional browser validation, install the tools outside the checkout:
 

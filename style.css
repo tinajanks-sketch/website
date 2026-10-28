@@ -21,6 +21,127 @@
 [hidden]{display:none!important}.draft-link{display:inline-block;font-size:12px;margin-top:12px;text-decoration:underline;text-underline-offset:4px}
 .about .section-copy{color:#58625d}
 
+/* Connected practices, problem finder and scoped offers. */
+.small-label{font-size:11px;font-weight:700;line-height:1.5;color:var(--ink);letter-spacing:.02em;margin-bottom:9px}
+.practice-distinction{font-size:15px;line-height:1.8;border-top:1px solid var(--line);padding-top:20px}
+.practice-row .practice-deliverable{border-left:2px solid #c7cec3;padding-left:18px;margin:22px 0}
+.practice-deliverable>p:last-child{font-size:16px;line-height:1.8;color:#58625d}
+.practice-row>div>.practice-benefit{font-size:15px;color:#58625d;margin-bottom:24px}
+.challenge-finder{background:#eceee7}
+.challenge-finder .eyebrow,.challenge-finder .section-copy{color:#58625d}
+.challenge-finder h2,.alignment h2,.engagements h2,.founders h2,.example-engagements h2,.testimonials h2{white-space:normal}
+.choice-group{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:25px}
+.choice-group button{background:var(--white);border:1px solid #a7b09f;border-radius:5px;color:var(--ink);padding:14px 18px;font-size:14px;font-weight:500;line-height:1.5;transition:background .2s,color .2s}
+.choice-group button[aria-pressed=true]{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.choice-group button:hover{border-color:var(--ink)}
+.choice-panel{padding:clamp(25px,3vw,45px);background:var(--white);border:1px solid #d2d8cc;border-radius:5px}
+.choice-panel h3{font-size:clamp(24px,2.2vw,33px);max-width:1050px;margin-bottom:25px}
+.finder-copy{display:grid;grid-template-columns:1fr 1fr;gap:35px}
+.finder-copy p{font-size:17px;line-height:1.8;color:#58625d;margin:0}
+.finder-links{display:flex;flex-wrap:wrap;gap:25px 40px;margin-top:30px}
+.alignment{background:var(--white)}
+.flow-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px;margin-bottom:20px}
+.flow-steps button{display:flex;flex-direction:column;align-items:start;text-align:left;gap:24px;padding:24px;font-size:16px;position:relative}
+.flow-number{font-size:11px;opacity:.8}
+.flow-steps button:not(:last-child):after{content:'';position:absolute;right:-17px;top:50%;width:8px;height:8px;border-top:1px solid #68716e;border-right:1px solid #68716e;transform:rotate(45deg)}
+.flow-panel{background:var(--ivory)}
+.flow-panel p{font-size:18px;color:#58625d;max-width:1100px;line-height:1.8}
+.alignment-note{display:flex;align-items:start;justify-content:space-between;gap:30px;margin-top:25px}
+.alignment-note>p{max-width:750px;color:var(--graphite);font-size:12px;margin:0}
+.review-offer{display:grid;grid-template-columns:1.1fr 1fr;gap:55px;padding:clamp(28px,4vw,65px);border:1px solid var(--line);border-top:2px solid #b54a32;background:var(--white)}
+.review-offer h3{font-size:clamp(29px,2.8vw,44px);margin-bottom:25px}
+.offer-description{font-size:18px;color:var(--graphite);line-height:1.8}
+.review-offer .feature-list{margin:0 0 22px;padding-top:20px}
+.fee-note,.offer-note{font-size:12px;line-height:1.8;color:#58625d}
+.review-offer .fee-note{margin:25px 0}
+.review-offer .eyebrow{font-size:11px}
+.offer-group-heading{margin:55px 0 30px}
+.offer-group-heading h3{font-size:30px;margin-bottom:12px}
+.offer-group-heading p{font-size:16px;color:var(--graphite)}
+.engagement-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.engagement-card{padding:clamp(25px,2.5vw,40px)}
+.engagement-card h4{font-family:Manrope,Arial,sans-serif;font-weight:500;font-size:clamp(25px,2vw,33px);line-height:1.3;letter-spacing:-.04em;margin:0 0 25px;min-height:2.6em}
+.engagement-card>p:not(.eyebrow){font-size:17px;line-height:1.8;margin-bottom:25px}
+.engagement-card>.fee-note{font-size:12px;margin-bottom:22px}
+.engagement-card .feature-list{font-size:14px}
+.engagement-card .eyebrow{font-size:10px;text-transform:uppercase;min-height:3em}
+.startup-note,.ongoing-offer{display:flex;align-items:start;justify-content:space-between;gap:45px;border-top:1px solid #cbd1c5;margin-top:40px;padding-top:35px}
+.startup-note h3{font-size:27px;margin-bottom:16px}
+.startup-note p,.ongoing-offer>div>p:not(.eyebrow):not(.fee-note){font-size:17px;line-height:1.8;color:#58625d;max-width:1000px}
+.startup-note>a,.ongoing-offer>a{flex-shrink:0}
+.ongoing-offer{background:#eceee7;border:1px solid #d1d7ca;padding:clamp(25px,3vw,45px)}
+.ongoing-offer h3{font-size:clamp(26px,2.5vw,36px);max-width:850px;margin-bottom:20px}
+.ongoing-offer .eyebrow{color:#58625d;font-size:11px}
+.founders{background:var(--white)}
+.founder-cards,.example-cards,.testimonial-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px}
+.founder-card{padding:30px 0;border-top:1px solid var(--line)}
+.founder-initial{display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:var(--ivory);border:1px solid var(--line);border-radius:50%;font-size:18px;margin-bottom:30px}
+.founder-card h3{font-size:32px;margin-bottom:10px}
+.founder-card p{font-size:13px;color:var(--graphite)}
+.example-engagements{background:var(--ivory)}
+.example-card,.testimonial-card{background:var(--white);border:1px solid var(--line);padding:clamp(25px,2.8vw,43px)}
+.example-card .eyebrow{font-size:10px}
+.example-card h3{font-size:26px;margin-bottom:23px}
+.example-card>p:not(.eyebrow),.example-output>p:last-child{font-size:16px;color:#58625d;line-height:1.8}
+.example-output{border-top:1px solid var(--line);padding-top:20px;margin-top:25px}
+.testimonials{background:var(--white)}
+.testimonial-card{background:var(--ivory)}
+.testimonial-card blockquote{font-size:18px;line-height:1.8;margin:20px 0 30px}
+.testimonial-name{font-size:14px;font-weight:600;margin-bottom:5px}
+.testimonial-context,.testimonial-source{font-size:12px;line-height:1.8;color:#58625d}
+.testimonial-source{margin-top:15px}
+a.testimonial-source{text-decoration:underline;text-underline-offset:3px}
+.testimonial-rating{color:#963d28;letter-spacing:3px;font-size:17px}
+.forecast-assumption-note{font-size:10px;line-height:1.7;color:#58625d;margin-top:8px}
+.forecast-bridge{border:1px solid var(--line);border-radius:5px;padding:24px;margin:25px 0}
+.forecast-bridge-heading{display:flex;align-items:center;justify-content:space-between;gap:25px;flex-wrap:wrap}
+.forecast-bridge h4{font-family:Manrope,Arial,sans-serif;font-weight:500;font-size:23px;line-height:1.4;letter-spacing:-.03em;margin:0;max-width:650px}
+.variance-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;list-style:none;margin:20px 0;padding:0}
+.variance-steps li{border:1px solid var(--line);padding:15px 12px;background:var(--ivory);min-width:0}
+.variance-steps li:last-child{border-top:2px solid #b54a32}
+.variance-steps span{display:block;font-size:11px;line-height:1.6;min-height:3.2em;margin-bottom:12px}
+.variance-steps strong{font-size:clamp(16px,1.4vw,23px);font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+.choice-panel>*,.flow-steps>*,.founder-cards>*,.example-cards>*,.testimonial-cards>*,.review-offer>*{min-width:0}
+.engagement-card h4{overflow-wrap:anywhere;hyphens:auto}
+@media(max-width:1100px){
+ .engagement-cards{grid-template-columns:1fr}
+ .engagement-card h4{min-height:0;font-size:29px}
+ .engagement-card .eyebrow{min-height:0}
+ .engagement-card>p:not(.eyebrow){max-width:1000px}
+ .review-offer{gap:35px}
+ .startup-note,.ongoing-offer,.alignment-note{flex-direction:column;gap:25px}
+ .example-cards{grid-template-columns:1fr}
+ .example-card h3{max-width:800px}
+ .example-card p{max-width:1000px}
+}
+@media(max-width:900px){
+ .flow-steps{grid-template-columns:1fr 1fr;gap:15px}
+ .flow-steps button:not(:last-child):after{display:none}
+ .review-offer,.finder-copy{grid-template-columns:1fr;gap:28px}
+ .variance-steps{grid-template-columns:1fr}
+ .variance-steps li{display:flex;align-items:center;justify-content:space-between;gap:15px}
+ .variance-steps span{margin:0;min-height:0}
+ .variance-steps strong{font-size:20px}
+}
+@media(max-width:700px){
+ .choice-group{gap:10px}
+ .choice-group button{font-size:12px;padding:12px 14px}
+ .finder-links{flex-direction:column;align-items:start}
+ .choice-panel h3{font-size:25px}
+ .finder-copy p,.flow-panel p{font-size:16px}
+ .flow-steps button{font-size:14px;gap:16px}
+ .offer-group-heading h3{font-size:27px}
+ .founder-cards,.testimonial-cards{grid-template-columns:1fr}
+ .founder-card{display:grid;grid-template-columns:50px 1fr;gap:5px 22px;align-items:center;padding-block:25px}
+ .founder-initial{grid-row:span 2;margin:0}
+ .founder-card h3{font-size:27px;margin:0}
+ .founder-card p{margin:0}
+ .forecast-bridge{padding:18px}
+ .forecast-bridge h4{font-size:21px}
+ .variance-steps strong{font-size:17px}
+ .review-offer .offer-description{font-size:17px}
+}
+
 /* Strategic finance and the illustrative rolling forecast. */
 .strategic-finance{background:#f0f1eb}
 .strategic-finance .section-heading .eyebrow{color:#58625d}

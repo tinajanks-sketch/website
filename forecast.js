@@ -36,7 +36,8 @@
       index, period: period(index), kind: 'actual', budget: budget(index), value: figures(...values)
     }));
     let revenue = history[history.length - 1].value.revenue;
-    const fixedCosts = Math.round(42000 * (1 + assumptions.fixedCostChange / 100));
+    const fixedCostBase = history[history.length - 1].value.fixedCosts;
+    const fixedCosts = Math.round(fixedCostBase * (1 + assumptions.fixedCostChange / 100));
     const forecast = Array.from({ length: 12 }, (_, offset) => {
       const index = assumptions.closedMonth + offset;
       revenue = Math.round(revenue * (1 + assumptions.growth / 100));
@@ -46,7 +47,8 @@
       };
     });
     return {
-      assumptions, rows: [...history.slice(-3), ...forecast], history, forecast,
+      assumptions, fixedCostBase, annualisedGrowth: (Math.pow(1 + assumptions.growth / 100, 12) - 1) * 100,
+      rows: [...history.slice(-3), ...forecast], history, forecast,
       yearToDate: { budget: total(history, 'budget'), actual: total(history, 'value') },
       outlook: { budget: total(forecast, 'budget'), forecast: total(forecast, 'value') }
     };
@@ -54,10 +56,28 @@
   function variance(value, planned) {
     return { amount: value - planned, percent: planned === 0 ? null : (value - planned) / Math.abs(planned) * 100 };
   }
+
+  function varianceBreakdown(model, reportingPeriod = 'outlook') {
+    if (!['outlook','yearToDate'].includes(reportingPeriod)) throw new RangeError('Unknown reporting period.');
+    const group = reportingPeriod === 'outlook' ? model.outlook : model.yearToDate;
+    const value = reportingPeriod === 'outlook' ? group.forecast : group.actual;
+    return {
+      budgetResult: group.budget.operatingResult,
+      revenueEffect: value.revenue - group.budget.revenue,
+      variableCostEffect: group.budget.variableCosts - value.variableCosts,
+      fixedCostEffect: group.budget.fixedCosts - value.fixedCosts,
+      result: value.operatingResult
+    };
+  }
   const copy = {
     en: {
       exampleLabel: 'ILLUSTRATIVE EXAMPLE · HYPOTHETICAL DATA',
-      title: 'Explore a rolling forecast',
+      title: 'Illustrative rolling P&L forecast',
+      annualisedLabel: 'Annualised revenue growth', fixedBaseLabel: 'Latest actual overheads', perMonth: 'per month',
+      bridgeTitle: 'What explains the operating-result gap?', bridgeActual: 'Year to date', bridgeForecast: 'Next 12 months',
+      bridgeBudget: 'Budget result', bridgeRevenue: 'Revenue effect', bridgeVariable: 'Variable-cost effect', bridgeFixed: 'Fixed-overhead effect',
+      bridgeForecastResult: 'Forecast result', bridgeActualResult: 'Actual result', bridgeUpdated: 'Variance breakdown updated: ',
+      bridgeExplanation: 'Add the revenue and cost effects to the budget result to arrive at the actual or forecast result. Higher costs have a negative effect, even when revenue is above budget.',
       intro: 'Choose a reporting cutoff and adjust the assumptions. Historical actuals and the original budget stay fixed; the forecast covers the next 12 months.',
       currency: 'All figures in EUR', cutoffLabel: 'Latest closed month',
       march: 'March 2026', june: 'June 2026', september: 'September 2026',
@@ -73,23 +93,28 @@
       varianceNote: 'For the revenue and operating result shown here, positive variances are above budget and favourable; negative variances are below budget.',
       methodSummary: 'How this example is calculated',
       methodRevenue: 'Forecast revenue starts from the latest actual month and compounds at the selected monthly growth rate. Variable costs are the selected share of forecast revenue.',
-      methodCosts: 'Forecast fixed overheads start at EUR 42,000 per month, adjusted by the selected percentage. Operating result equals revenue minus variable costs and fixed overheads.',
-      methodLimits: 'The original budget assumes monthly revenue growth of 2%, variable costs of 40% and fixed overheads of EUR 42,000. Actual figures are a separate, fixed sample dataset. All calculations round to whole euros each month. This simplified model excludes taxes, financing and the timing of cash collections or payments; operating result is not cash flow.',
+      methodCosts: 'Forecast fixed overheads carry forward the latest actual month, adjusted by the selected percentage. Operating result equals revenue minus variable costs and fixed overheads.',
+      methodLimits: 'The original budget assumes monthly revenue growth of 2%, variable costs of 40% and fixed overheads of EUR 42,000. Actual figures are a separate, fixed sample dataset. All calculations round to whole euros each month. Fixed overheads are held constant after adjustment; seasonality, hiring and capacity constraints are not modelled. This simplified model excludes taxes, financing and the timing of cash collections or payments; operating result is not cash flow.',
       disclaimer: 'All figures are hypothetical and illustrate the method. They are not client results or a forecast for your business.',
       chartDescription: 'Budget, actual and forecast by month. The same figures are available in the monthly comparison table.',
       updated: 'Example updated. Forecast period: ', hypothetical: 'Hypothetical example',
       csvPeriod: 'Month (YYYY-MM)', csvCurrency: 'Currency', csvRevenueBudget: 'Budget revenue', csvRevenueValue: 'Actual or forecast revenue',
       csvRevenueVariance: 'Revenue variance', csvResultBudget: 'Budget operating result', csvResultValue: 'Actual or forecast operating result',
       csvResultVariance: 'Operating result variance', csvGrowth: 'Forecast monthly growth (%)',
-      csvVariableCost: 'Forecast variable costs (%)', csvFixedCost: 'Forecast fixed overhead adjustment (%)',
-      actualInsight: 'In this example, year-to-date revenue is above budget while the operating result is below it. Cost assumptions deserve attention alongside sales growth.',
+      csvFixedBase: 'Latest actual monthly fixed overheads', csvVariableCost: 'Forecast variable costs (%)', csvFixedCost: 'Forecast fixed overhead adjustment (%)',
+      actualInsight: 'In this example, year-to-date revenue is above budget while the operating result is below it. Cost drivers deserve attention alongside sales growth.',
       resultAbove: 'The next 12-month operating result is above budget in this scenario. The difference depends on the growth and cost assumptions shown.',
       resultBelow: 'The next 12-month operating result is below budget in this scenario. Review revenue assumptions and the effect of variable and fixed costs.',
       resultEqual: 'The next 12-month operating result matches budget in this scenario. The assumptions still need regular review.'
     },
     de: {
       exampleLabel: 'ANSCHAULICHES BEISPIEL · FIKTIVE DATEN',
-      title: 'Eine rollierende Planung ausprobieren',
+      title: 'Beispiel einer rollierenden Ergebnisplanung',
+      annualisedLabel: 'Auf ein Jahr hochgerechnetes Umsatzwachstum', fixedBaseLabel: 'Letzte tatsächliche Fixkosten', perMonth: 'pro Monat',
+      bridgeTitle: 'Wie entsteht die Ergebnisabweichung?', bridgeActual: 'Seit Jahresbeginn', bridgeForecast: 'Nächste zwölf Monate',
+      bridgeBudget: 'Budgetergebnis', bridgeRevenue: 'Umsatzeffekt', bridgeVariable: 'Effekt variabler Kosten', bridgeFixed: 'Fixkosteneffekt',
+      bridgeForecastResult: 'Prognoseergebnis', bridgeActualResult: 'Ist-Ergebnis', bridgeUpdated: 'Abweichungsanalyse aktualisiert: ',
+      bridgeExplanation: 'Addieren Sie die Umsatz- und Kosteneffekte zum Budgetergebnis, um das Ist- oder Prognoseergebnis zu erhalten. Höhere Kosten wirken negativ, auch wenn der Umsatz über Budget liegt.',
       intro: 'Wählen Sie einen Berichtsstand und passen Sie die Annahmen an. Historische Ist-Werte und das ursprüngliche Budget bleiben unverändert. Die Prognose umfasst jeweils die nächsten zwölf Monate.',
       currency: 'Alle Beträge in EUR', cutoffLabel: 'Letzter abgeschlossener Monat',
       march: 'März 2026', june: 'Juni 2026', september: 'September 2026',
@@ -105,15 +130,15 @@
       varianceNote: 'Bei den hier gezeigten Umsatz- und Ergebniswerten sind positive Abweichungen gegenüber dem Budget günstig; negative Abweichungen liegen unter Budget.',
       methodSummary: 'So wird dieses Beispiel berechnet',
       methodRevenue: 'Der prognostizierte Umsatz geht vom letzten Ist-Monat aus und wächst monatlich mit der gewählten Rate. Die variablen Kosten entsprechen dem gewählten Anteil am prognostizierten Umsatz.',
-      methodCosts: 'Die prognostizierten Fixkosten betragen zunächst 42.000 EUR pro Monat und werden um den gewählten Prozentsatz angepasst. Das Betriebsergebnis entspricht dem Umsatz abzüglich variabler Kosten und Fixkosten.',
-      methodLimits: 'Das ursprüngliche Budget unterstellt 2 % monatliches Umsatzwachstum, 40 % variable Kosten und monatliche Fixkosten von 42.000 EUR. Die Ist-Werte bilden einen separaten, unveränderlichen Beispieldatensatz. Monatliche Berechnungen werden auf volle Euro gerundet. Das vereinfachte Modell berücksichtigt keine Steuern, Finanzierung oder Zahlungszeitpunkte. Das Betriebsergebnis ist kein Cashflow.',
+      methodCosts: 'Die prognostizierten Fixkosten übernehmen den letzten Ist-Monat und werden um den gewählten Prozentsatz angepasst. Das Betriebsergebnis entspricht dem Umsatz abzüglich variabler Kosten und Fixkosten.',
+      methodLimits: 'Das ursprüngliche Budget unterstellt 2 % monatliches Umsatzwachstum, 40 % variable Kosten und monatliche Fixkosten von 42.000 EUR. Die Ist-Werte bilden einen separaten, unveränderlichen Beispieldatensatz. Monatliche Berechnungen werden auf volle Euro gerundet. Nach der Anpassung bleiben die Fixkosten konstant. Saisonalität, Neueinstellungen und Kapazitätsgrenzen werden nicht modelliert. Das vereinfachte Modell berücksichtigt keine Steuern, Finanzierung oder Zahlungszeitpunkte. Das Betriebsergebnis ist kein Cashflow.',
       disclaimer: 'Alle Zahlen sind fiktiv und dienen der Veranschaulichung. Sie zeigen weder Kundenergebnisse noch eine Prognose für Ihr Unternehmen.',
       chartDescription: 'Monatliche Budget-, Ist- und Prognosewerte. Dieselben Zahlen stehen in der monatlichen Vergleichstabelle zur Verfügung.',
       updated: 'Beispiel aktualisiert. Prognosezeitraum: ', hypothetical: 'Fiktives Beispiel',
       csvPeriod: 'Monat (JJJJ-MM)', csvCurrency: 'Währung', csvRevenueBudget: 'Budgetumsatz', csvRevenueValue: 'Ist- oder Prognoseumsatz',
       csvRevenueVariance: 'Umsatzabweichung', csvResultBudget: 'Budget-Betriebsergebnis', csvResultValue: 'Ist- oder Prognose-Betriebsergebnis',
       csvResultVariance: 'Ergebnisabweichung', csvGrowth: 'Monatliches Prognosewachstum (%)',
-      csvVariableCost: 'Variable Prognosekosten (%)', csvFixedCost: 'Anpassung prognostizierter Fixkosten (%)',
+      csvFixedBase: 'Letzte tatsächliche monatliche Fixkosten', csvVariableCost: 'Variable Prognosekosten (%)', csvFixedCost: 'Anpassung prognostizierter Fixkosten (%)',
       actualInsight: 'In diesem Beispiel liegt der Umsatz seit Jahresbeginn über Budget, das Betriebsergebnis jedoch darunter. Neben dem Umsatzwachstum sollten deshalb die Kostenannahmen geprüft werden.',
       resultAbove: 'Das Betriebsergebnis der nächsten zwölf Monate liegt in diesem Szenario über Budget. Die Differenz hängt von den gezeigten Wachstums- und Kostenannahmen ab.',
       resultBelow: 'Das Betriebsergebnis der nächsten zwölf Monate liegt in diesem Szenario unter Budget. Prüfen Sie die Umsatzannahmen sowie den Einfluss variabler Kosten und Fixkosten.',
@@ -126,13 +151,13 @@
       text.hypothetical, text.csvPeriod, text.status, text.csvCurrency,
       text.csvRevenueBudget, text.csvRevenueValue, text.csvRevenueVariance,
       text.csvResultBudget, text.csvResultValue, text.csvResultVariance,
-      text.csvGrowth, text.csvVariableCost, text.csvFixedCost
+      text.csvFixedBase, text.csvGrowth, text.csvVariableCost, text.csvFixedCost
     ];
     const rows = scenario.rows.map(row => [
       text.hypothetical, row.period, text[row.kind], 'EUR',
       row.budget.revenue, row.value.revenue, row.value.revenue - row.budget.revenue,
       row.budget.operatingResult, row.value.operatingResult, row.value.operatingResult - row.budget.operatingResult,
-      ...(row.kind === 'forecast' ? [scenario.assumptions.growth, scenario.assumptions.variableCost, scenario.assumptions.fixedCostChange] : ['', '', ''])
+      ...(row.kind === 'forecast' ? [scenario.fixedCostBase, scenario.assumptions.growth, scenario.assumptions.variableCost, scenario.assumptions.fixedCostChange] : ['', '', '', ''])
     ]);
     const quote = value => '"' + String(value).replace(/"/g, '""') + '"';
     return '\ufeff' + [headings, ...rows].map(row => row.map(quote).join(',')).join('\r\n') + '\r\n';
@@ -141,6 +166,7 @@
     if (!root) return null;
     let language = 'en';
     let metric = 'revenue';
+    let variancePeriod = 'outlook';
     let scenario;
     let chartWidth = 0;
     const find = selector => root.querySelector(selector);
@@ -240,6 +266,8 @@
       root.dataset.forecastStart = scenario.forecast[0].period;
       root.dataset.forecastEnd = scenario.forecast[11].period;
       root.dataset.metric = metric;
+      find('#forecast-annual-growth').textContent = text.annualisedLabel + ': ' + percent(scenario.annualisedGrowth, true);
+      find('#forecast-fixed-base').textContent = text.fixedBaseLabel + ': ' + money(scenario.fixedCostBase) + ' ' + text.perMonth;
       for (const [key, outputId] of [['growth', 'forecast-growth-value'], ['variableCost', 'forecast-variable-cost-value'], ['fixedCostChange', 'forecast-fixed-cost-value']]) {
         const formatted = percent(scenario.assumptions[key], key !== 'variableCost');
         find('#' + outputId).value = formatted;
@@ -265,6 +293,17 @@
       const historicalInsight = scenario.yearToDate.actual.revenue > scenario.yearToDate.budget.revenue && scenario.yearToDate.actual.operatingResult < scenario.yearToDate.budget.operatingResult ? text.actualInsight + ' ' : '';
       const resultDifference = scenario.outlook.forecast.operatingResult - scenario.outlook.budget.operatingResult;
       find('#forecast-insight').textContent = historicalInsight + (resultDifference > 0 ? text.resultAbove : resultDifference < 0 ? text.resultBelow : text.resultEqual);
+
+      const breakdown = varianceBreakdown(scenario, variancePeriod);
+      root.querySelectorAll('[data-bridge]').forEach(node => {
+        const key = node.dataset.bridge;
+        const effect = !['budgetResult','result'].includes(key);
+        node.textContent = money(breakdown[key], effect);
+        node.className = effect ? tone(breakdown[key]) : '';
+      });
+      root.querySelectorAll('[data-variance-period]').forEach(button => button.setAttribute('aria-pressed',String(button.dataset.variancePeriod===variancePeriod)));
+      find('#bridge-result-label').textContent = variancePeriod === 'outlook' ? text.bridgeForecastResult : text.bridgeActualResult;
+      find('#forecast-bridge-period').textContent = rangeLabel(variancePeriod === 'outlook' ? scenario.forecast : scenario.history);
       drawChart();
       renderTable();
       if (announce) find('#forecast-status').textContent = text.updated + rangeLabel(scenario.forecast) + '. ' + text.growthLabel + ': ' + percent(scenario.assumptions.growth) + '. ' + text.variableCostLabel + ': ' + percent(scenario.assumptions.variableCost) + '. ' + text.fixedCostLabel + ': ' + percent(scenario.assumptions.fixedCostChange) + '.';
@@ -283,9 +322,15 @@
       metric = button.dataset.forecastMetric;
       render();
     }));
+    root.querySelectorAll('[data-variance-period]').forEach(button => button.addEventListener('click', () => {
+      variancePeriod = button.dataset.variancePeriod;
+      render();
+      find('#forecast-status').textContent = copy[language].bridgeUpdated + (variancePeriod === 'outlook' ? copy[language].bridgeForecast : copy[language].bridgeActual) + '.';
+    }));
     find('#forecast-reset').addEventListener('click', () => {
       Object.entries(DEFAULTS).forEach(([key, value]) => { controls[key].value = String(value); });
       metric = 'revenue';
+      variancePeriod = 'outlook';
       render(true);
     });
     find('#forecast-download').addEventListener('click', () => {
@@ -308,5 +353,5 @@
     }
     return { setLanguage };
   }
-  return { DEFAULTS, buildScenario, variance, toCSV, mount };
+  return { DEFAULTS, buildScenario, variance, varianceBreakdown, toCSV, mount };
 });
