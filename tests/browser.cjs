@@ -10,7 +10,8 @@ let checks=0;
 const check=(condition,message)=>{assert.ok(condition,message);checks++;};
 (async()=>{
  const html=fs.readFileSync(path.join(root,'dist/index.html'),'utf8');
- const server=http.createServer((request,response)=>{if(!['/','/index.html'].includes(request.url)){response.writeHead(404);return response.end();}response.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});response.end(html);});
+ const germanHTML=fs.readFileSync(path.join(root,'dist/de/index.html'),'utf8');
+ const server=http.createServer((request,response)=>{const pathname=new URL(request.url,'http://localhost').pathname;if(!['/','/index.html','/de/'].includes(pathname)){response.writeHead(404);return response.end();}response.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});response.end(pathname==='/de/'?germanHTML:html);});
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  const origin='http://127.0.0.1:'+server.address().port;
  let browser;
@@ -25,7 +26,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   await page.evaluate(()=>document.fonts.ready);
   check((await page.locator('h1').innerText()).includes('Financial insight'),'English homepage renders');
   check(await page.locator('.practice-row').count()===5,'Five connected service practices');
-  check(await page.locator('.engagement-card').count()===3,'Three focused project offers');
+  check(await page.locator('.engagement-card').count()===5,'Five focused project offers');
   check(await page.locator('link[rel=canonical]').getAttribute('href')==='https://consultix.solutions/','Selected domain');
   check(await page.evaluate(()=>document.fonts.check('500 16px Manrope')&&document.fonts.check('400 16px "DM Sans"')),'Embedded fonts load');
   check(!await page.locator('#site-header').evaluate(el=>el.classList.contains('is-scrolled')),'Header starts over hero');
@@ -33,9 +34,9 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   if(screenshotDirectory){fs.mkdirSync(screenshotDirectory,{recursive:true});await page.screenshot({path:path.join(screenshotDirectory,'consultix-hero.png')});await page.screenshot({path:path.join(screenshotDirectory,'consultix-full.png'),fullPage:true});}
 
   check((await page.locator('#practice-analytics h3').innerText()).includes('Data Analytics'),'Data analytics has a dedicated practice');
-  check((await page.locator('#practice-systems h3').innerText()).includes('Business Analysis'),'Business analysis is explicit within operations and systems');
+  check((await page.locator('#practice-systems h3').innerText()).includes('Business Management'),'Operations has a dedicated practice');
   check(await page.locator('.review-offer').count()===1&&await page.locator('.ongoing-offer').count()===1,'Paid review and ongoing support are distinct offers');
-  check(await page.locator('#review-title').innerText()==='Business Performance Review','A general business review is available');
+  check(await page.locator('#review-title').innerText()==='Business Performance & Financial Planning Review','A general business review is available');
   check(await page.locator('.founder-card').count()===3,'All three confirmed founders appear');
   check(!await page.locator('#testimonials').isVisible()&&await page.locator('.testimonial-card').count()===0,'Unsupplied testimonials stay hidden');
   check((await page.locator('#example-engagements').innerText()).includes('rather than completed client projects'),'Example scopes are distinguished from client case studies');
@@ -52,19 +53,71 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
    await page.locator('.engagement-card [data-engagement='+topic+']').click();
    check(await page.locator('#interest').inputValue()===topic,'Project enquiry routes correctly: '+topic);
   }
+  check(JSON.stringify(await page.locator('.practice-row h3').allTextContents())===JSON.stringify(['Financial Management & FP&A','Business Intelligence & Data Analytics','Business Management & Operations','CRM & Commercial Systems','AI Enablement & Automation']),'Five practices follow the new boundaries and order');
+  check(await page.locator('#practice-systems a[href="#revenue-finance"]').count()===1&&await page.locator('#practice-revenue a[href="#crm-offer"]').count()===1,'Operations and CRM have clear, distinct onward links');
+  check(await page.locator('#founders img,#founders svg,#founders .founder-initial').count()===0,'Founders are text only, without portrait placeholders');
+  check(await page.evaluate(()=>translatedElements.every(node=>typeof german[node.dataset.i]==='string'&&german[node.dataset.i].trim())),'Every English content key has a German translation');
+  for(const segment of ['startup','saas','sme']){
+   await page.locator('#business-guide [data-choice='+segment+']').focus();await page.keyboard.press('Enter');
+   check(await page.locator('#segment-'+segment).isVisible(),'Audience guide works with the keyboard: '+segment);
+   check(await page.locator('#segment-'+segment+' .segment-columns>div:first-child li').count()===3,'Each segment describes three representative questions: '+segment);
+  }
+  await page.locator('#segment-sme [data-engagement=review]').click();
+  check(await page.locator('#interest').inputValue()==='review','Audience guide routes to a relevant enquiry');
+  for(const topic of ['crm','automation']){
+   await page.locator('#'+topic+'-offer [data-engagement='+topic+']').click();
+   check(await page.locator('#interest').inputValue()===topic,'New offer routes correctly: '+topic);
+  }
+  check(await page.locator('#metric-value').innerText()==='60.0%','Gross-margin example is financially correct');
+  await page.locator('#metric-delivery').fill('150000');
+  check(await page.locator('#metric-value').innerText()==='-25.0%','Metric explorer handles negative margins');
+  await page.locator('#metric-revenue').fill('0');
+  check((await page.locator('#metric-error').innerText()).includes('undefined')&&await page.locator('#metric-value').innerText()==='—','Zero revenue does not show a fabricated margin');
+  await page.locator('#metric-reset').click();
+  await page.locator('[data-metric=retention]').focus();await page.keyboard.press('Enter');
+  check(await page.locator('#metric-value').innerText()==='104.0%','Recurring-revenue retention uses the opening cohort');
+  check((await page.locator('#metric-definition').innerText()).includes('new customers are excluded'),'Retention assumptions exclude new customers');
+  await page.locator('#metric-churn').fill('50000');
+  check((await page.locator('#metric-error').innerText()).includes('cannot exceed'),'Inconsistent cohort losses are explained');
+  await page.locator('#metric-reset').click();
+  await page.locator('[data-metric=runway]').click();
+  check(await page.locator('#metric-value').innerText()==='6.0 months','Runway uses positive net cash burn');
+  await page.locator('#metric-receipts').fill('75000');
+  check((await page.locator('#metric-error').innerText()).includes('No positive net cash burn')&&!await page.locator('.metric-bars').isVisible(),'Zero burn shows an explanation, not infinite runway');
+  await page.locator('#metric-receipts').fill('');
+  check((await page.locator('#metric-error').innerText()).includes('Enter a value'),'Empty values are not silently treated as zero');
+  await page.locator('#metric-reset').click();
+  check(await page.locator('[data-kpi=forecastRevenue]').innerText()==='€1,641,646','Independent metric inputs never alter the forecast');
   await page.evaluate(()=>{
-   const common={approved:true,context:{en:'Test fixture only',de:'Nur Testdaten'},source:{label:{en:'Test source',de:'Testquelle'},url:'javascript:alert(1)'}};
-   renderApprovedTestimonials([
-    {...common,approved:false,name:'Unapproved test',quote:{en:'Not approved',de:'Nicht freigegeben'}},
+   const common={approved:true,predatesConsultix:false,context:{en:'Test fixture only',de:'Nur Testdaten'},source:{label:{en:'Test source',de:'Testquelle'},url:'javascript:alert(1)'}};
+   approvedTestimonials.push(
+    null,{...common,approved:false,name:'Unapproved test',quote:{en:'Not approved',de:'Nicht freigegeben'}},
     {...common,name:'Test A.',quote:{en:'<img src=x onerror=alert(1)> Test fixture',de:'Testdaten ohne Bild'}},
-    {...common,name:'Test B.',rating:2,quote:{en:'A supplied test rating',de:'Eine angegebene Testbewertung'}}
-   ],'en');
+    {...common,name:'Test B.',predatesConsultix:true,rating:2,quote:{en:'A supplied test rating',de:'Eine angegebene Testbewertung'}}
+   );
+   renderApprovedTestimonials(approvedTestimonials,'en');
   });
-  check(await page.locator('.testimonial-card').count()===2,'Only approved complete feedback renders');
+  check(await page.locator('.testimonial-card').count()===2&&await page.locator('.testimonial-card:visible').count()===1,'Only approved complete feedback renders, one slide at a time');
   check(await page.locator('.testimonial-card img').count()===0&&await page.locator('.testimonial-card a').count()===0,'Feedback is text-safe and unsafe source links are rejected');
   check(await page.locator('.testimonial-rating').count()===1&&(await page.locator('.testimonial-rating').getAttribute('aria-label')).startsWith('2 '),'Ratings are optional and use the supplied score');
-  await page.evaluate(()=>renderApprovedTestimonials([],'en'));
-  check(!await page.locator('#testimonials').isVisible(),'Test fixtures are removed from the review view');
+  check(await page.locator('#testimonial-previous').isDisabled()&&!await page.locator('#testimonial-next').isDisabled(),'Carousel disables the previous control at the first quote');
+  await page.locator('.testimonial-carousel').focus();await page.keyboard.press('ArrowRight');
+  check(await page.locator('#testimonial-next').isDisabled()&&(await page.locator('#testimonial-position').innerText())==='2 of 2','Keyboard advances the carousel and stops at the last quote');
+  check((await page.locator('.testimonial-card:visible .testimonial-origin').innerText()).includes('before Consultix'),'Earlier work is explicitly identified');
+  await page.locator('[data-language=de]').click();
+  check(new URL(page.url()).pathname==='/de/'&&await page.locator('link[rel=canonical]').getAttribute('href')==='https://consultix.solutions/de/','German selection has a direct address and canonical URL');
+  check(await page.locator('#testimonial-position').innerText()==='2 von 2'&&(await page.locator('.testimonial-card:visible blockquote').innerText())==='Eine angegebene Testbewertung','Carousel selection is preserved with translated text');
+  check(await page.locator('#metric-value').innerText()==='6,0 Monate'&&await page.locator('#business-guide [data-choice=sme]').getAttribute('aria-pressed')==='true','Metric and segment selections survive language switching');
+  await page.locator('.testimonial-carousel').focus();await page.keyboard.press('Home');
+  check(await page.locator('#testimonial-previous').isDisabled(),'Home returns to the first quotation');
+  await page.keyboard.press('End');
+  check(await page.locator('#testimonial-next').isDisabled(),'End moves to the last quotation');
+  await page.addScriptTag({path:axePath});
+  const testimonialAccessibility=await page.evaluate(()=>axe.run(document.getElementById('testimonials'),{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}}));
+  check(testimonialAccessibility.violations.length===0,'Active carousel accessibility: '+JSON.stringify(testimonialAccessibility.violations.map(v=>v.id)));
+  await page.evaluate(()=>{approvedTestimonials.length=0;renderApprovedTestimonials(approvedTestimonials,'de');});
+  await page.locator('[data-language=en]').click();
+  check(!await page.locator('#testimonials').isVisible(),'Zero approved testimonials hide the entire section');
 
   check(await page.locator('#forecast-demo').isVisible(),'Interactive forecast is available');
   check(await page.locator('meta[name=robots]').getAttribute('content')==='noindex,nofollow','Review indexing setting is preserved');
@@ -119,7 +172,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
    await page.locator('[data-language=en]').click();
    await page.locator('#forecast-demo').screenshot({path:path.join(screenshotDirectory,'consultix-forecast-en.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
    await page.locator('.finance-services').screenshot({path:path.join(screenshotDirectory,'consultix-finance-services.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
-   for(const [selector,name] of [['#practices','practices'],['#challenge-finder','challenge-finder'],['#engagements','offers'],['#revenue-finance','alignment'],['#founders','founders']]){
+   for(const [selector,name] of [['#practices','practices'],['#challenge-finder','challenge-finder'],['#engagements','offers'],['#revenue-finance','alignment'],['#founders','founders'],['#business-guide','segments'],['#metric-explorer','metrics']]){
     await page.locator(selector).screenshot({path:path.join(screenshotDirectory,'consultix-'+name+'.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
    }
    await page.locator('.forecast-details').evaluate(node=>{node.open=true;});
@@ -161,7 +214,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   check(await page.locator('#email-draft-link').getAttribute('target')==='_blank','Opening draft preserves website tab');
   const mail=new URL(await page.locator('#email-draft-link').getAttribute('href'));
   check(mail.pathname==='general@consultix.solutions','Draft recipient');
-  check(mail.searchParams.get('subject').includes('Revenue & Workflow Improvement'),'Selected subject encoded');
+  check(mail.searchParams.get('subject').includes('Revenue-to-Finance Alignment'),'Selected subject encoded');
   check(mail.searchParams.get('body').includes('Example & Team')&&mail.searchParams.get('body').includes('forecasts + handoffs.'),'User text encoded intact');
   check((await page.locator('#form-status').innerText()).includes('Complete sending in your email app'),'No false delivery confirmation');
   await page.locator('[data-language=de]').click();
@@ -186,12 +239,55 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
    await page.locator('.forecast-details').evaluate(node=>{node.open=false;});
    await page.locator('#forecast-demo').screenshot({path:path.join(screenshotDirectory,'consultix-forecast-mobile.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
   }
+  // Check every new panel at the narrow and wide extremes in both languages.
+  for(const language of ['en','de']){
+   await page.locator('[data-language='+language+']').click();
+   for(const width of [320,768,1440]){
+    await page.setViewportSize({width,height:1000});
+    for(const segment of ['startup','saas','sme']){
+     await page.locator('#business-guide [data-choice='+segment+']').click();
+     check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Segment '+segment+' fits '+width+' in '+language);
+    }
+    for(const metric of ['margin','retention','runway']){
+     await page.locator('[data-metric='+metric+']').click();
+     check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Metric '+metric+' fits '+width+' in '+language);
+    }
+   }
+  }
+  await page.setViewportSize({width:390,height:844});
+  if(screenshotDirectory){
+   for(const language of ['en','de']){
+    await page.locator('[data-language='+language+']').click();
+    for(const [selector,name] of [['#business-guide','segments'],['#metric-explorer','metrics'],['#revenue-finance','alignment'],['#founders','founders']]){
+     await page.locator(selector).screenshot({path:path.join(screenshotDirectory,'consultix-'+name+'-mobile-'+language+'.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
+    }
+   }
+  }
   const noScriptContext=await browser.newContext({javaScriptEnabled:false});
   const noScriptPage=await noScriptContext.newPage();await noScriptPage.goto(origin);
   check(await noScriptPage.locator('#finance-title').isVisible(),'Finance copy is available without JavaScript');
   check(!await noScriptPage.locator('#forecast-demo').isVisible(),'Inactive controls are hidden without JavaScript');
   check(await noScriptPage.locator('.finance-noscript').isVisible(),'A no-script explanation accompanies the model');
+  check(!await noScriptPage.locator('#metric-explorer').isVisible()&&!await noScriptPage.locator('#business-guide').isVisible(),'Inactive new interactions stay hidden without JavaScript');
+  check(await noScriptPage.locator('#practice-revenue').isVisible()&&await noScriptPage.locator('#contact').isVisible(),'Core services and contact remain available without JavaScript');
+  check(!await noScriptPage.locator('#enquiry-form').isVisible(),'Without JavaScript the form cannot submit personal details in a URL');
+  await noScriptPage.goto(origin+'/de/');
+  check(await noScriptPage.locator('html').getAttribute('lang')==='de'&&(await noScriptPage.locator('#practice-finance h3').innerText()).includes('Finanzmanagement'),'Direct German page renders translated services without JavaScript');
+  check(await noScriptPage.locator('link[rel=canonical]').getAttribute('href')==='https://consultix.solutions/de/','Direct German page retains its canonical address');
+  const directContext=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
+  const directPage=await directContext.newPage();await directPage.goto(origin+'/de/');
+  check(await directPage.locator('#metric-value').innerText()==='60,0%'&&await directPage.locator('[data-kpi=actualRevenue]').innerText()==='648.000 €','Direct German URL initialises both financial tools in German');
+  check(await directPage.locator('[data-language=de]').getAttribute('aria-pressed')==='true','Direct German URL selects the German toggle');
+  await directPage.locator('[data-language=en]').click();
+  check(new URL(directPage.url()).pathname==='/'&&await directPage.locator('html').getAttribute('lang')==='en','English toggle returns to the English address');
+  check(await directPage.locator('#business-guide').evaluate(node=>getComputedStyle(node.querySelector('[data-panel]:not([hidden])')).animationName)==='none','Reduced-motion setting disables panel animations');
+  await directContext.close();
+  const staticGerman=await noScriptPage.locator('[data-i]').evaluateAll(nodes=>nodes.map(node=>[node.dataset.i,node.textContent]));
+  const germanCopy=require('../content.js').de;
+  check(staticGerman.every(([key,text])=>text===germanCopy[key]),'Every static German copy element is translated before JavaScript');
   await noScriptContext.close();
+  check(!/(?:href|src)="\.\//.test(html)&&!/(?:href|src)="\.\//.test(germanHTML),'Both preview files have their local scripts, fonts and graphics embedded');
+  check(html.includes('data:font/woff2;base64,')&&germanHTML.includes('data:image/svg+xml;base64,'),'Standalone preview contains font and illustration data');
   check(errors.length===0,'No browser exceptions: '+errors.join(', '));
   check(externalRequests.length===0,'No third-party requests: '+externalRequests.join(', '));
   console.log('PASS: '+checks+' functional checks; desktop/mobile accessibility scans; no third-party requests.');

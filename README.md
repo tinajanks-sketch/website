@@ -4,6 +4,12 @@ Independent English/German business website for `consultix.solutions`, based on 
 
 The site uses plain HTML, CSS and JavaScript. It has no production package dependencies, website-builder subscription or application server requirement. Hosting-provider free-plan limits still apply; domain registration and email are separate services.
 
+## Current review version
+
+The 28 October 2026 update kit is implemented on `consultix-update-kit-review`, based on `a12fea7`. This revision is for local review only. The owner explicitly asked for no live deployment without new approval. Do not push or merge these changes to `main`, upload the build to Netlify, change DNS, or enable search indexing as part of this review.
+
+See [PREVIEW.md](PREVIEW.md) for the simplest preview instructions and [REVIEW-NOTES.md](REVIEW-NOTES.md) for changes and verification.
+
 ## Development
 
 Use the existing checkout at `/workspace/website` with Node.js 24. Cloud tasks already have isolated workspaces; do not create a Git worktree unless explicitly requested.
@@ -21,19 +27,20 @@ The development server listens on port 3000, with `PORT` available as an overrid
 npm run build
 ```
 
-This creates a standalone `dist/index.html` with the fonts, SVG architectural illustration, favicon, styles and JavaScript embedded. There are no third-party font/image requests, analytics or tracking scripts. Font licenses and exact package versions are retained under `assets`.
+This creates standalone English `dist/index.html` and German `dist/de/index.html` pages with the fonts, SVG architectural illustration, favicon, styles and JavaScript embedded. Each file opens directly in a browser. The hosted German address is `/de/`; language switching preserves interactive selections and updates the address. Core copy is rendered in each language before JavaScript runs. There are no third-party font/image requests, analytics or tracking scripts. Font licenses and exact package versions are retained under `assets`.
 
 The output also retains the font license notices and contains Netlify headers and a redirect from the www domain to the chosen apex domain. Custom-domain configuration, DNS and HTTPS are separate steps. Search indexing stays disabled during review. When the site is ready for search indexing, build with `SITE_INDEXABLE=1 npm run build` before the corresponding deployment.
 
 ## Contact behavior
 
-The displayed email address and direct mail links point to `general@consultix.solutions`. The enquiry form validates the inputs and prepares a `mailto` draft. Sending takes place in the visitor's email app. The site does not claim that a message has been delivered or submit personal data to a form backend. Email delivery and the owner's Zoho configuration require separate real-account checks.
+The displayed email address and direct mail links point to `general@consultix.solutions`. Without JavaScript the enquiry form stays hidden and direct email links remain available. This prevents the browser from submitting personal details as a page URL. With JavaScript, the enquiry form validates the inputs and prepares a `mailto` draft. Sending takes place in the visitor's email app. The site does not claim that a message has been delivered or submit personal data to a form backend. Email delivery and the owner's Zoho configuration require separate real-account checks.
 
 ## Validation
 
 ```sh
 npm run check
 npm run test:forecast
+npm run test:metrics
 npm run test:deploy
 ```
 
@@ -41,17 +48,33 @@ Browser checks exercise the built site over HTTP: both languages, 320–1920px l
 
 ## Services and offers
 
-The site presents five connected practices: Strategic Finance & Financial Intelligence; Business & Data Analytics; Revenue Operations, GTM & CRM; Business Analysis, Operations & Systems; and AI Enablement & Automation. Analytics covers performance information and its drivers; business analysis covers processes, requirements and changes to the way work runs. Each practice explains the challenge, support, typical deliverables and intended decision benefit.
+The five practices are Financial Management & FP&A; Business Intelligence & Data Analytics; Business Management & Operations; CRM & Commercial Systems; and AI Enablement & Automation. RevOps and GTM processes sit within operations, while CRM/HubSpot support has its own entry point. Revenue-to-Finance Alignment remains a visible cross-practice feature and explains pipeline, bookings, recognition, receivables and cash separately.
 
-The paid entry offer is a Business Performance Review. Its areas, depth, inputs and fixed fee are agreed before work begins. Focused projects cover Planning & Forecasting, Reporting & Business Analytics, and Revenue & Workflow Improvement. Startup planning is a variation; ongoing support has an agreed monthly scope and capacity. No free audit, invented prices or guaranteed results are advertised.
+The paid entry offer is a Business Performance & Financial Planning Review, with inputs, scope and fixed fee agreed in advance. Focused offers cover Planning & Forecasting, Reporting & Management Intelligence, Revenue-to-Finance Alignment, HubSpot & Revenue Operations Support, and a Practical AI & Workflow Pilot. Startup planning remains available. Ongoing Management & Systems Support has defined monthly capacity and responsibilities. No free audit, invented prices, regulated assurance service or broad outsourced-CFO credentials are advertised.
+
+The audience guide covers representative startup, B2B SaaS and established SME questions, possible deliverables and measures. These are possible engagement scopes, not claims about existing clients. Existing challenge-finder and service links remain available.
+
+## Bilingual content
+
+`content.js` is the shared English/German copy source for `data-i` elements. `localise.js` renders both language pages at build time. `index.html` retains readable English template text; keep this consistent with `content.js` when changing the structure or copy. Calculator-specific copy remains in `forecast.js` and `metrics.js`. German uses formal Sie. An owner-arranged native-language editorial review remains useful before approving publication.
 
 ## Founders and client feedback
 
-The founder cards use only the owner-confirmed first names Kristina, Jan and Aleksandar and the confirmed co-founder relationship. Surnames, biographies, specialisms and photographs await owner-supplied facts.
+Founder cards contain only Kristina, Jan and Aleksandar, each with the confirmed title Co-founder. The section is text only; it has no photographs, portrait placeholders, invented specialisms or biographies.
 
-`approvedTestimonials` in `app.js` is intentionally empty. The testimonial section stays hidden until genuine feedback is supplied. An entry needs a name or agreed anonymous attribution, bilingual quote and context, bilingual source label and explicit approval covering publication and translations. A score is optional and must be the person's actual rating. HTTPS source links are supported; no platform branding or default five-star ratings are invented. Prior work by a founder must be identified accurately in the context. Automated tests use transient fixtures that are not production content.
+`approvedTestimonials` in `app.js` remains empty because the kit supplies no approved quotations. The entire section stays hidden until genuine approved records exist. Its manual carousel supports up to five records, one visible at a time, previous/next bounds, ArrowLeft/ArrowRight and Home/End navigation, translated status, reduced motion and stable selection across language changes. It does not auto-advance.
 
-Visible example engagement cards are labelled as illustrative scopes, not completed client projects or testimonials.
+Each entry requires `approved: true`, `name`, bilingual `quote.en/de`, `context.en/de`, `source.label.en/de` and an explicit boolean `predatesConsultix`. Approval must cover the exact quotation, attribution, source, engagement context and both translations. Optional `title.en/de`, `company`, `source.url` and an actual integer `rating` from 1 to 5 are supported. A record about earlier founder work displays an explicit pre-Consultix label and still needs permission. Source links accept HTTPS only. Quotations and attributions use textContent. No default stars or platform badges are added.
+
+Visible example engagement cards remain clearly labelled illustrative scopes. Transient automated-test fixtures never ship as website content.
+
+## Metric explorer
+
+`metrics.js` adds three independent, hypothetical EUR examples: gross margin, net revenue retention and cash runway. Inputs stay in the browser and never change the rolling forecast. Each example includes its formula, evaluated arithmetic, proportional input bars and limitations. Percentage results and months display to one decimal; calculations retain precision until formatting.
+
+- Gross margin = (revenue − direct delivery costs) / revenue × 100. Default: (120,000 − 48,000) / 120,000 = 60.0%. Zero revenue is undefined; negative margins are allowed.
+- NRR = (opening cohort MRR + expansion − contraction − churn) / opening MRR × 100. Default: (50,000 + 8,000 − 2,000 − 4,000) / 50,000 = 104.0%. New customers are excluded. Zero opening MRR and cohort losses above the opening base show explanations.
+- Runway = available cash / (monthly cash payments − monthly cash receipts), only for positive, reasonably stable net burn. Default: 150,000 / (75,000 − 50,000) = 6.0 months. Zero/negative burn shows an explanation rather than an infinite or negative runway. This estimate does not replace a cash-flow forecast.
 
 ## Illustrative rolling forecast
 
@@ -74,7 +97,7 @@ The tests use `/usr/bin/chromium` by default. `CHROMIUM_PATH` can select another
 
 ## Publishing
 
-See [DEPLOYMENT.md](DEPLOYMENT.md). The owner has authorized publishing the source to `tinajanks-sketch/website` and connecting that repository to Netlify. Import the existing GitHub repository in Netlify, use branch `main`, build command `npm run build` and publish directory `dist`. The included `netlify.toml` already supplies those settings and Node.js 24. This route does not require a Netlify API token or activation of this chat's cloud-environment settings. A source-code upload alone does not configure hosting, DNS or HTTPS.
+See [DEPLOYMENT.md](DEPLOYMENT.md). Earlier versions were published to `tinajanks-sketch/website` and connected to Netlify. The current review requires fresh owner approval before publication. Import the existing GitHub repository in Netlify, use branch `main`, build command `npm run build` and publish directory `dist`. The included `netlify.toml` already supplies those settings and Node.js 24. This route does not require a Netlify API token or activation of this chat's cloud-environment settings. A source-code upload alone does not configure hosting, DNS or HTTPS.
 
 An optional API uploader is retained under `tools` for separately authorized API deployments. It uses the official `@netlify/open-api` 2.63.0 protocol. Unit tests simulate recovery and publication safeguards; they are not a live Netlify deployment test.
 

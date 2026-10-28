@@ -1,5 +1,7 @@
 # Put Consultix Solutions online
 
+The current update-kit changes are a review revision. The owner requested no live deployment without fresh approval. Follow PREVIEW.md to review them; the production steps below are for use after that approval.
+
 The final website address is **https://consultix.solutions/**. Netlify supplies a temporary address ending in `.netlify.app` before the custom domain is connected.
 
 ## What each account does
@@ -8,7 +10,7 @@ The final website address is **https://consultix.solutions/**. Netlify supplies 
 | --- | --- |
 | GitHub: tinajanks-sketch/website | Stores the website files |
 | Netlify | Builds and hosts the website |
-| GoDaddy | Keeps the domain registration and DNS |
+| GoDaddy | Keeps the domain registration; the owner moved DNS to Netlify |
 | Zoho Mail | Handles general@consultix.solutions |
 
 The owner has authorized the GitHub upload and Git-connected Netlify route. That route does not use a Netlify personal access token or require saving/publishing the cloud environment attached to this chat. This project has not purchased or cancelled any account or plan.
