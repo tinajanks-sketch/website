@@ -1,0 +1,90 @@
+'use strict';
+const fs=require('node:fs');
+const path=require('node:path');
+const http=require('node:http');
+const assert=require('node:assert/strict');
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
+const axePath=process.env.AXE_CORE_PATH||require.resolve('axe-core/axe.min.js');
+const root=path.resolve(__dirname,'..');
+let checks=0;
+const check=(condition,message)=>{assert.ok(condition,message);checks++;};
+(async()=>{
+ const html=fs.readFileSync(path.join(root,'dist/index.html'),'utf8');
+ const server=http.createServer((request,response)=>{if(!['/','/index.html'].includes(request.url)){response.writeHead(404);return response.end();}response.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});response.end(html);});
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+ const origin='http://127.0.0.1:'+server.address().port;
+ let browser;
+ try{
+  browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
+  const context=await browser.newContext({viewport:{width:1440,height:1000},permissions:['clipboard-read','clipboard-write'],reducedMotion:'reduce'});
+  const page=await context.newPage();
+  const errors=[],externalRequests=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  page.on('request',request=>{if(/^https?:/.test(request.url())&&!request.url().startsWith(origin+'/'))externalRequests.push(request.url());});
+  await page.goto(origin);
+  await page.evaluate(()=>document.fonts.ready);
+  check((await page.locator('h1').innerText()).includes('Financial insight'),'English homepage renders');
+  check(await page.locator('.practice-row').count()===4,'Four service practices');
+  check(await page.locator('.engagement-card').count()===2,'Both engagement formats');
+  check(await page.locator('link[rel=canonical]').getAttribute('href')==='https://consultix.solutions/','Selected domain');
+  check(await page.evaluate(()=>document.fonts.check('500 16px Manrope')&&document.fonts.check('400 16px "DM Sans"')),'Embedded fonts load');
+  check(!await page.locator('#site-header').evaluate(el=>el.classList.contains('is-scrolled')),'Header starts over hero');
+  const screenshotDirectory=process.env.CONSULTIX_SCREENSHOTS;
+  if(screenshotDirectory){fs.mkdirSync(screenshotDirectory,{recursive:true});await page.screenshot({path:path.join(screenshotDirectory,'consultix-hero.png')});await page.screenshot({path:path.join(screenshotDirectory,'consultix-full.png'),fullPage:true});}
+  for(const language of ['de','en']){
+   await page.locator('[data-language='+language+']').click();
+   check(await page.locator('html').getAttribute('lang')===language,'Document language '+language);
+   check(!(await page.locator('body').innerText()).includes('undefined'),'Complete translations '+language);
+   for(const width of [320,390,768,1024,1440,1920]){
+    await page.setViewportSize({width,height:1000});
+    check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow at '+width+' in '+language);
+   }
+   await page.addScriptTag({path:axePath});
+   const accessibility=await page.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}}));
+   check(accessibility.violations.length===0,'Accessibility '+language+': '+JSON.stringify(accessibility.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))));
+  }
+  await page.setViewportSize({width:1440,height:1000});
+  await page.locator('[data-engagement=crm]').click();
+  check(await page.locator('#interest').inputValue()==='crm','Service link selects enquiry topic');
+  check(await page.locator('#site-header').evaluate(el=>el.classList.contains('is-scrolled')),'Header readable over light sections');
+  await page.locator('#copy-email').click();
+  check(await page.evaluate(()=>navigator.clipboard.readText())==='general@consultix.solutions','Copy email works');
+  context.on('page',popup=>{popup.on('pageerror',()=>{});});
+  await page.locator('#enquiry-form button[type=submit]').click();
+  check(!await page.locator('#email-draft-link').isVisible(),'Empty form does not prepare mail');
+  await page.locator('#name').fill('Example & Team');await page.locator('#email').fill('not-an-email');await page.locator('#message').fill('Planning & CRM: forecasts + handoffs.');
+  await page.locator('#enquiry-form button[type=submit]').click();
+  check(!await page.locator('#email-draft-link').isVisible(),'Invalid email does not prepare mail');
+  await page.locator('#email').fill('example@example.com');await page.locator('#company').fill('Example GmbH');
+  await page.locator('#enquiry-form button[type=submit]').click();
+  await page.waitForFunction(()=>document.getElementById('form-status').textContent.length>0);
+  check(await page.locator('#email-draft-link').isVisible(),'Valid form prepares a reusable email draft');
+  check(await page.locator('#email-draft-link').getAttribute('target')==='_blank','Opening draft preserves website tab');
+  const mail=new URL(await page.locator('#email-draft-link').getAttribute('href'));
+  check(mail.pathname==='general@consultix.solutions','Draft recipient');
+  check(mail.searchParams.get('subject').includes('CRM & RevOps'),'Selected subject encoded');
+  check(mail.searchParams.get('body').includes('Example & Team')&&mail.searchParams.get('body').includes('forecasts + handoffs.'),'User text encoded intact');
+  check((await page.locator('#form-status').innerText()).includes('Complete sending in your email app'),'No false delivery confirmation');
+  await page.locator('[data-language=de]').click();
+  check(await page.locator('#name').inputValue()==='Example & Team','Language switch preserves enquiry');
+  await page.reload();
+  check(await page.locator('html').getAttribute('lang')==='de','Language preference persists');
+  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>scrollTo(0,0));
+  check(!await page.locator('#main-nav').isVisible(),'Mobile menu starts collapsed');
+  await page.locator('#menu-toggle').click();
+  check(await page.locator('#main-nav').isVisible(),'Mobile menu opens');
+  await page.keyboard.press('Escape');
+  check(!await page.locator('#main-nav').isVisible(),'Escape closes mobile menu');
+  check(await page.locator('#menu-toggle').evaluate(el=>el===document.activeElement),'Escape restores focus');
+  await page.locator('#menu-toggle').click();await page.locator('#main-nav a[href="#engagements"]').click();
+  check(!await page.locator('#main-nav').isVisible(),'Navigation closes mobile menu');
+  await page.locator('[data-language=en]').click();await page.evaluate(()=>scrollTo(0,0));
+  await page.addScriptTag({path:axePath});
+  const mobileAccessibility=await page.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}}));
+  check(mobileAccessibility.violations.length===0,'Mobile accessibility: '+JSON.stringify(mobileAccessibility.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))));
+  if(screenshotDirectory)await page.screenshot({path:path.join(screenshotDirectory,'consultix-mobile-hero.png')});
+  check(errors.length===0,'No browser exceptions: '+errors.join(', '));
+  check(externalRequests.length===0,'No third-party requests: '+externalRequests.join(', '));
+  console.log('PASS: '+checks+' functional checks; desktop/mobile accessibility scans; no third-party requests.');
+ }finally{if(browser)await browser.close();await new Promise(resolve=>server.close(resolve));}
+})().catch(error=>{console.error(error);process.exit(1);});
