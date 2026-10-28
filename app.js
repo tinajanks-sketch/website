@@ -11,8 +11,25 @@ const german = {
   audienceEnd:'Das Ziel sind fundiertere Entscheidungen, verlässlichere Prozesse und Systeme, die Ihre Arbeitsweise unterstützen. Das Wissen und die Verantwortung bleiben dabei in Ihrem Team.',
   practicesEyebrow:'UNSERE LEISTUNGEN', practicesTitle:'Vier verbundene Fachgebiete.',
   practicesDescription:'Jedes Fachgebiet steht für sich. Zusätzlicher Nutzen entsteht durch das Zusammenspiel: Finanzpläne berücksichtigen Vertriebsdaten, Abläufe unterstützen Umsatzziele und Automatisierung erleichtert die tägliche Arbeit.',
-  practice1Title:'Strategische Finanzen & Unternehmenssteuerung', practice1Body:'Budgetierung, Finanzplanung, Prognosen, Szenarioanalysen und Management-Reporting geben Ihrer Unternehmensleitung einen klareren Überblick über die Geschäftsentwicklung und anstehende Entscheidungen.',
-  p1tag1:'Budgetierung', p1tag2:'Finanzplanung', p1tag3:'Prognosen', p1tag4:'Szenarioanalysen', p1tag5:'Management-Reporting',
+  practice1Title:'Strategische Finanzen & Finanzielle Unternehmenssteuerung', practice1Body:'Budgetierung, rollierende Planung, Liquiditätsübersicht, Rentabilitätsanalysen und Management-Reporting: Wir verbinden Ihre Planung mit vertrieblichen und operativen Einflussfaktoren, untersuchen Budgetabweichungen und unterstützen die Bewertung anstehender Entscheidungen.',
+  p1tag1:'Budgetierung', p1tag2:'Liquiditätsplanung', p1tag3:'Rollierende Planung', p1tag4:'Abweichungsanalyse', p1tag5:'Management-Reporting',
+  financeExplore:'Strategische Finanzen und das Planungsbeispiel ansehen',
+  financeEyebrow:'STRATEGISCHE FINANZEN & FINANZIELLE UNTERNEHMENSSTEUERUNG',
+  financeTitle:'Finanzplanung, die mit Ihrem Unternehmen Schritt hält.',
+  financeLead:'Ein Budget ist dann nützlich, wenn es die nächste Entscheidung unterstützt. Verändern sich Umsatz, Kosten oder Prioritäten, sollte Ihre Finanzplanung die tatsächliche Entwicklung berücksichtigen.',
+  financeBody:'Wir verbinden Finanzpläne mit vertrieblichen und operativen Einflussfaktoren, untersuchen die Ursachen von Ergebnisveränderungen und helfen Ihrem Team, einen aussagekräftigen Ausblick auf die kommenden Monate zu pflegen.',
+  financePlanningTitle:'Budgetierung & rollierende Planung',
+  financePlanningBody:'Wenn ein Jahresbudget die Geschäftsentwicklung nicht mehr abbildet, müssen Annahmen zu Umsatz, Kosten und Ressourcen überprüft werden. Wir entwickeln treiberbasierte Budgets, rollierende Prognosen und Szenarien für die Entscheidungen Ihres Teams.',
+  financeReceive:'Was Sie erhalten',
+  financePlanningOutput:'Ein Planungsmodell mit dokumentierten Annahmen, abgestimmten Szenarien und einem praktikablen monatlichen Aktualisierungsprozess.',
+  financeVarianceTitle:'Abweichungsanalyse & Reporting',
+  financeVarianceBody:'Widersprüchliche Berichte und ungeklärte Veränderungen erschweren Entscheidungen. Wir vergleichen Ist-Ergebnisse mit Budget und Prognose, untersuchen zeitliche Effekte sowie Kostentreiber und stimmen geeignete Steuerungskennzahlen ab.',
+  financeVarianceOutput:'Budget-Ist-Vergleiche, verständlich erläuterte Abweichungen und ein Management-Reporting, das Ihre Prioritäten berücksichtigt.',
+  financeCashTitle:'Liquidität & Rentabilität',
+  financeCashBody:'Umsatzwachstum kann die Liquidität belasten, während gute Verkaufszahlen schwache Margen verdecken. Wir untersuchen Zahlungszeitpunkte und Rentabilität, etwa nach Kunden, Projekten oder Leistungen, und unterstützen die Bewertung von Ausgaben, Preisen und Kapazitäten.',
+  financeCashOutput:'Eine Liquiditätsvorschau und Rentabilitätsanalyse mit transparent erläuterten Annahmen und Grenzen.',
+  financeBenefit:'Das Ziel sind nachvollziehbare Annahmen, verständliche Abweichungen zwischen Planung und Entwicklung sowie eine fundiertere Entscheidungsgrundlage für Ihr Team. Leistungsumfang und Honorar vereinbaren wir vor Beginn.',
+  financeLink:'Ihre Finanzplanung besprechen',
   practice2Title:'Revenue & CRM Operations', practice2Body:'CRM-Prozesse, die Gestaltung des Kundenlebenszyklus, Pipeline-Steuerung und Umsatzprognosen helfen Vertriebsteams, mit konsistenten Informationen zu arbeiten. Dazu gehört bei Bedarf die Unterstützung für HubSpot und verbundene Systeme.',
   p2tag1:'CRM & HubSpot', p2tag2:'Kundenlebenszyklus', p2tag3:'Pipeline-Prozesse', p2tag4:'Umsatzprognosen',
   practice3Title:'Betriebliche Abläufe & Systeme', practice3Body:'Wir helfen, Prozesse zu erfassen, Übergaben zwischen Teams zu verbessern und Finanz- und Vertriebssysteme aufeinander abzustimmen. So bleiben Informationen und Verantwortlichkeiten über Abteilungsgrenzen hinweg nachvollziehbar.',
@@ -56,6 +73,7 @@ const messages = {
 const header = document.getElementById('site-header');
 const menuToggle = document.getElementById('menu-toggle');
 let language = 'en';
+const forecastDemo = window.ConsultixForecast.mount(document.getElementById('forecast-demo'));
 function setMenu(open,restoreFocus=false){
   header.classList.toggle('menu-open',open);
   menuToggle.setAttribute('aria-expanded',String(open));
@@ -74,6 +92,7 @@ function setLanguage(next){
   document.title=next==='de'?'Consultix Solutions — Finanzielle Einblicke, verbunden mit Umsetzung':'Consultix Solutions — Financial insight, connected to execution';
   document.querySelector('meta[name="description"]').content=next==='de'?'Consultix Solutions verbindet finanzielle Erkenntnisse mit praktischen Verbesserungen für Finanzen, Vertrieb und Unternehmenssysteme.': 'Consultix Solutions connects financial insight with practical improvements across finance, revenue operations and business systems.';
   document.querySelector('meta[property="og:title"]').content=document.title;
+  forecastDemo?.setLanguage(next);
   document.getElementById('copy-status').textContent='';
   document.getElementById('form-status').textContent='';
   document.getElementById('email-draft-link').hidden=true;

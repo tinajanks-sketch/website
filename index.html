@@ -15,6 +15,7 @@
   <meta property="og:url" content="https://consultix.solutions/">
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./style.css">
+  <script src="./forecast.js" defer></script>
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -68,11 +69,71 @@ in motion.</h2></div>
     <div class="container">
       <div class="split-section section-heading"><div><p class="eyebrow" data-i="practicesEyebrow">WHAT WE DO</p><h2 id="practices-title" data-i="practicesTitle">Four connected practices.</h2></div><p class="section-copy" data-i="practicesDescription">Each practice stands on its own, but the value comes from how they connect: financial plans informed by pipeline data, operations aligned with revenue goals, and automation that makes everyday work more manageable.</p></div>
       <div id="practice-list" class="practice-list">
-        <article class="practice-row"><span class="practice-number">01</span><h3 data-i="practice1Title">Strategic Finance &amp; Intelligence</h3><div><p data-i="practice1Body">Budgeting, financial planning, forecasting, scenario planning and management reporting that give leadership a clearer view of performance and the choices ahead.</p><ul class="tags"><li data-i="p1tag1">Budgeting</li><li data-i="p1tag2">Financial planning</li><li data-i="p1tag3">Forecasting</li><li data-i="p1tag4">Scenario planning</li><li data-i="p1tag5">Management reporting</li></ul></div></article>
+        <article class="practice-row"><span class="practice-number">01</span><h3 data-i="practice1Title">Strategic Finance &amp; Financial Intelligence</h3><div><p data-i="practice1Body">Budgeting, rolling forecasts, cash-flow visibility, profitability analysis and management reporting. We connect plans to commercial and operational drivers, investigate budget variances and help your team evaluate the decisions ahead.</p><ul class="tags"><li data-i="p1tag1">Budgeting</li><li data-i="p1tag2">Cash-flow planning</li><li data-i="p1tag3">Rolling forecasts</li><li data-i="p1tag4">Variance analysis</li><li data-i="p1tag5">Management reporting</li></ul><a class="text-link finance-detail-link" href="#strategic-finance"><span data-i="financeExplore">Explore strategic finance &amp; the forecast example</span><span class="arrow" aria-hidden="true">↗</span></a></div></article>
         <article class="practice-row"><span class="practice-number">02</span><h3 data-i="practice2Title">Revenue &amp; CRM Operations</h3><div><p data-i="practice2Body">CRM processes, customer lifecycle design, pipeline management and revenue forecasting that help commercial teams work from consistent information. Support can include HubSpot and the systems connected to it.</p><ul class="tags"><li data-i="p2tag1">CRM &amp; HubSpot</li><li data-i="p2tag2">Customer lifecycle</li><li data-i="p2tag3">Pipeline processes</li><li data-i="p2tag4">Revenue forecasting</li></ul></div></article>
         <article class="practice-row"><span class="practice-number">03</span><h3 data-i="practice3Title">Business Operations &amp; Systems</h3><div><p data-i="practice3Body">Practical help mapping processes, improving team handoffs and aligning finance with commercial systems, so information and responsibilities carry through the whole business.</p><ul class="tags"><li data-i="p3tag1">Process mapping</li><li data-i="p3tag2">Team handoffs</li><li data-i="p3tag3">Resource planning</li><li data-i="p3tag4">Systems alignment</li></ul></div></article>
         <article class="practice-row"><span class="practice-number">04</span><h3 data-i="practice4Title">AI, Automation &amp; Digital Improvement</h3><div><p data-i="practice4Body">Considered assessments, workflow improvements and focused automation pilots. We help you establish where new technology can be useful, how to test it and what your team needs to use it responsibly.</p><ul class="tags"><li data-i="p4tag1">AI readiness</li><li data-i="p4tag2">Workflow automation</li><li data-i="p4tag3">Pilot planning</li><li data-i="p4tag4">Systems selection</li></ul></div></article>
       </div>
+    </div>
+  </section>
+
+
+  <section class="section strategic-finance" id="strategic-finance" aria-labelledby="finance-title">
+    <div class="container">
+      <div class="split-section section-heading">
+        <div><p class="eyebrow" data-i="financeEyebrow">STRATEGIC FINANCE &amp; FINANCIAL INTELLIGENCE</p><h2 id="finance-title" data-i="financeTitle">Financial planning that keeps pace with your business.</h2></div>
+        <div class="section-copy"><p class="lead" data-i="financeLead">A budget is useful when it helps you make the next decision. As sales, costs and priorities change, your financial outlook needs to reflect what is actually happening.</p><p data-i="financeBody">We connect financial plans with commercial and operational drivers, investigate the reasons behind performance changes and help your team maintain a useful view of the months ahead.</p></div>
+      </div>
+      <div class="finance-services">
+        <article><span class="practice-number">01</span><h3 data-i="financePlanningTitle">Budgeting &amp; rolling forecasts</h3><p data-i="financePlanningBody">When an annual budget no longer reflects the business, revisit its revenue, cost and resource assumptions. We build driver-based budgets, rolling forecasts and scenarios around the decisions your team needs to make.</p><p class="finance-deliverable"><strong data-i="financeReceive">What you receive</strong><span data-i="financePlanningOutput">A planning model with documented assumptions, agreed scenarios and a practical monthly update process.</span></p></article>
+        <article><span class="practice-number">02</span><h3 data-i="financeVarianceTitle">Variance analysis &amp; reporting</h3><p data-i="financeVarianceBody">Conflicting reports and unexplained movements make it difficult to act. We compare actual results with budget and forecast, examine timing and cost drivers, and agree on performance measures that support management decisions.</p><p class="finance-deliverable"><strong data-i="financeReceive">What you receive</strong><span data-i="financeVarianceOutput">Budget-versus-actual reporting, clear variance commentary and a management reporting pack built around your priorities.</span></p></article>
+        <article><span class="practice-number">03</span><h3 data-i="financeCashTitle">Cash flow &amp; profitability</h3><p data-i="financeCashBody">Revenue growth can put pressure on cash, and strong sales can hide weak margins. We examine cash timing and profitability by an agreed lens, such as client, project or service, to help evaluate spending, pricing and capacity choices.</p><p class="finance-deliverable"><strong data-i="financeReceive">What you receive</strong><span data-i="financeCashOutput">A cash-flow outlook and profitability analysis, with the assumptions and limitations explained.</span></p></article>
+      </div>
+
+      <div id="forecast-demo" class="forecast-demo" hidden>
+        <div class="forecast-demo-heading">
+          <div><p class="eyebrow" data-fi="exampleLabel">ILLUSTRATIVE EXAMPLE · HYPOTHETICAL DATA</p><h3 id="forecast-title" data-fi="title">Explore a rolling forecast</h3><p data-fi="intro">Choose a reporting cutoff and adjust the assumptions. Historical actuals and the original budget stay fixed; the forecast covers the next 12 months.</p></div>
+          <span class="forecast-unit" data-fi="currency">All figures in EUR</span>
+        </div>
+        <div class="forecast-controls">
+          <div class="forecast-control"><label for="forecast-cutoff" data-fi="cutoffLabel">Latest closed month</label><select id="forecast-cutoff"><option value="3" data-fi="march">March 2026</option><option value="6" selected data-fi="june">June 2026</option><option value="9" data-fi="september">September 2026</option></select></div>
+          <div class="forecast-control"><div class="forecast-control-heading"><label for="forecast-growth" data-fi="growthLabel">Monthly revenue growth</label><output for="forecast-growth" id="forecast-growth-value">2%</output></div><input id="forecast-growth" type="range" min="-5" max="8" step="0.5" value="2"></div>
+          <div class="forecast-control"><div class="forecast-control-heading"><label for="forecast-variable-cost" data-fi="variableCostLabel">Variable costs / revenue</label><output for="forecast-variable-cost" id="forecast-variable-cost-value">42%</output></div><input id="forecast-variable-cost" type="range" min="25" max="65" step="1" value="42"></div>
+          <div class="forecast-control"><div class="forecast-control-heading"><label for="forecast-fixed-cost" data-fi="fixedCostLabel">Fixed overhead adjustment</label><output for="forecast-fixed-cost" id="forecast-fixed-cost-value">0%</output></div><input id="forecast-fixed-cost" type="range" min="-20" max="30" step="5" value="0"></div>
+        </div>
+        <div class="forecast-summary">
+          <article class="forecast-kpi"><p class="forecast-kpi-label" data-fi="actualRevenue">Actual revenue · year to date</p><p class="forecast-kpi-period" data-forecast-period="actual"></p><p class="forecast-kpi-value" data-kpi="actualRevenue"></p><p class="forecast-kpi-comparison" data-kpi-comparison="actualRevenue"></p></article>
+          <article class="forecast-kpi"><p class="forecast-kpi-label" data-fi="actualResult">Actual operating result · year to date</p><p class="forecast-kpi-period" data-forecast-period="actual"></p><p class="forecast-kpi-value" data-kpi="actualResult"></p><p class="forecast-kpi-comparison" data-kpi-comparison="actualResult"></p></article>
+          <article class="forecast-kpi forecast-kpi-outlook"><p class="forecast-kpi-label" data-fi="forecastRevenue">Forecast revenue · next 12 months</p><p class="forecast-kpi-period" data-forecast-period="forecast"></p><p class="forecast-kpi-value" data-kpi="forecastRevenue"></p><p class="forecast-kpi-comparison" data-kpi-comparison="forecastRevenue"></p></article>
+          <article class="forecast-kpi forecast-kpi-outlook"><p class="forecast-kpi-label" data-fi="forecastResult">Forecast operating result · next 12 months</p><p class="forecast-kpi-period" data-forecast-period="forecast"></p><p class="forecast-kpi-value" data-kpi="forecastResult"></p><p class="forecast-kpi-comparison" data-kpi-comparison="forecastResult"></p></article>
+        </div>
+        <div class="forecast-chart-heading">
+          <div class="forecast-metrics" role="group" aria-label="Chart and table metric" data-f-label="metricGroup"><button type="button" data-forecast-metric="revenue" aria-pressed="true" data-fi="revenue">Revenue</button><button type="button" data-forecast-metric="operatingResult" aria-pressed="false" data-fi="operatingResult">Operating result</button></div>
+          <div class="forecast-legend"><span class="legend-budget" data-fi="budget">Budget</span><span class="legend-actual" data-fi="actual">Actual</span><span class="legend-forecast" data-fi="forecast">Forecast</span></div>
+        </div>
+        <p class="forecast-axis-label" data-fi="chartUnit">EUR thousands</p>
+        <div id="forecast-chart" class="forecast-chart"></div>
+        <p class="forecast-period-note" data-fi="periodNote">The chart and monthly table show the last three closed months and the next 12 forecast months. Actual summaries above cover the year to date.</p>
+        <p id="forecast-insight" class="forecast-insight"></p>
+        <div class="forecast-actions"><button type="button" id="forecast-reset" class="forecast-secondary" data-fi="reset">Reset example</button><button type="button" id="forecast-download" class="forecast-secondary" data-fi="download">Download monthly data (CSV)</button></div>
+        <details class="forecast-details">
+          <summary data-fi="tableSummary">View monthly budget comparisons</summary>
+          <div class="forecast-table-scroll" role="region" tabindex="0" aria-label="Monthly budget comparisons" data-f-label="tableRegion">
+            <table id="forecast-table"><caption data-fi="tableCaption">Hypothetical monthly figures in EUR. Variance is actual or forecast minus budget.</caption><thead><tr><th scope="col" data-fi="month">Month</th><th scope="col" data-fi="status">Status</th><th scope="col" data-fi="budget">Budget</th><th scope="col" data-fi="actualForecast">Actual / forecast</th><th scope="col" data-fi="variance">Variance · EUR</th><th scope="col" data-fi="variancePercent">Variance · %</th></tr></thead><tbody></tbody></table>
+          </div>
+          <p class="forecast-period-note" data-fi="varianceNote">For the revenue and operating result shown here, positive variances are above budget and favourable; negative variances are below budget.</p>
+        </details>
+        <details class="forecast-method">
+          <summary data-fi="methodSummary">How this example is calculated</summary>
+          <p data-fi="methodRevenue">Forecast revenue starts from the latest actual month and compounds at the selected monthly growth rate. Variable costs are the selected share of forecast revenue.</p>
+          <p data-fi="methodCosts">Forecast fixed overheads start at EUR 42,000 per month, adjusted by the selected percentage. Operating result equals revenue minus variable costs and fixed overheads.</p>
+          <p data-fi="methodLimits">The original budget assumes monthly revenue growth of 2%, variable costs of 40% and fixed overheads of EUR 42,000. Actual figures are a separate, fixed sample dataset. All calculations round to whole euros each month. This simplified model excludes taxes, financing and the timing of cash collections or payments; operating result is not cash flow.</p>
+        </details>
+        <p class="forecast-disclaimer" data-fi="disclaimer">All figures are hypothetical and illustrate the method. They are not client results or a forecast for your business.</p>
+        <p id="forecast-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+      </div>
+      <noscript><p class="finance-noscript">Enable JavaScript to explore the illustrative rolling forecast. / Aktivieren Sie JavaScript, um das Beispiel einer rollierenden Planung zu nutzen.</p></noscript>
+      <div class="finance-next-step"><p data-i="financeBenefit">The aim is to make assumptions visible, explain the gaps between plan and performance, and give your team a clearer basis for decisions. The scope and fee are agreed before work begins.</p><a class="text-link" href="#contact" data-engagement="planning"><span data-i="financeLink">Discuss your financial planning</span><span class="arrow" aria-hidden="true">↗</span></a></div>
     </div>
   </section>
 

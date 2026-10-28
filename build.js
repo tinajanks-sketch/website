@@ -10,12 +10,14 @@ const dataUrl=name=>{
 let html=read('index.html');
 const stylesheet='<link rel="stylesheet" href="./style.css">';
 const script='<script src="./app.js" defer></script>';
-if(!html.includes(stylesheet)||!html.includes(script)||!html.includes('</body>'))throw Error('Expected stylesheet, script or body tag is missing.');
+const forecastScript='<script src="./forecast.js" defer></script>';
+if(!html.includes(stylesheet)||!html.includes(script)||!html.includes(forecastScript)||!html.includes('</body>'))throw Error('Expected stylesheet, script or body tag is missing.');
 const css=read('style.css').replace(/url\(['"]\.\/assets\/([a-z0-9.-]+)['"]\)/g,(_,name)=>'url("'+dataUrl(name)+'")');
 html=html.replace(stylesheet,()=>'<style>'+css+'</style>');
 html=html.replace(script,'');
+html=html.replace(forecastScript,'');
 html=html.replace('href="./assets/favicon.svg"',()=> 'href="'+dataUrl('favicon.svg')+'"');
-html=html.replace('</body>',()=>'<script>'+read('app.js')+'</script></body>');
+html=html.replace('</body>',()=>'<script>'+read('forecast.js')+'</script><script>'+read('app.js')+'</script></body>');
 if(process.env.SITE_INDEXABLE==='1')html=html.replace('content="noindex,nofollow"','content="index,follow"');
 if(/(?:href|src)="\.\//.test(html)||/url\(['"]\.\/assets\//.test(html))throw Error('A local asset has not been embedded.');
 const output=path.join(__dirname,'dist');

@@ -31,13 +31,65 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   check(!await page.locator('#site-header').evaluate(el=>el.classList.contains('is-scrolled')),'Header starts over hero');
   const screenshotDirectory=process.env.CONSULTIX_SCREENSHOTS;
   if(screenshotDirectory){fs.mkdirSync(screenshotDirectory,{recursive:true});await page.screenshot({path:path.join(screenshotDirectory,'consultix-hero.png')});await page.screenshot({path:path.join(screenshotDirectory,'consultix-full.png'),fullPage:true});}
+  check(await page.locator('#forecast-demo').isVisible(),'Interactive forecast is available');
+  check(await page.locator('meta[name=robots]').getAttribute('content')==='noindex,nofollow','Review indexing setting is preserved');
+  check(await page.locator('[data-kpi=actualRevenue]').innerText()==='€648,000','Year-to-date actual revenue reconciles');
+  check(await page.locator('[data-kpi=forecastRevenue]').innerText()==='€1,641,646','Twelve-month forecast reconciles');
+  check(await page.locator('#forecast-chart svg[role=img]').count()===1,'Chart has an accessible image role');
+  const actualRowsBefore=await page.locator('#forecast-table tr[data-kind=actual]').allTextContents();
+  const actualSummaryBefore=await page.locator('[data-kpi=actualResult]').innerText();
+  const baselineForecast=await page.locator('[data-kpi=forecastRevenue]').innerText();
+  await page.locator('#forecast-growth').focus();await page.keyboard.press('ArrowRight');
+  check(await page.locator('#forecast-growth').inputValue()==='2.5','Revenue assumption works with the keyboard');
+  check(await page.locator('[data-kpi=forecastRevenue]').innerText()!==baselineForecast,'Changing growth updates forecast totals');
+  check(JSON.stringify(await page.locator('#forecast-table tr[data-kind=actual]').allTextContents())===JSON.stringify(actualRowsBefore),'Changing assumptions preserves historical rows');
+  check(await page.locator('[data-kpi=actualResult]').innerText()===actualSummaryBefore,'Changing assumptions preserves actual summaries');
+  await page.locator('#forecast-cutoff').selectOption('9');
+  check(await page.locator('#forecast-demo').getAttribute('data-forecast-start')==='2026-10'&&await page.locator('#forecast-demo').getAttribute('data-forecast-end')==='2027-09','Reporting cutoff rolls the full twelve-month horizon');
+  check(await page.locator('#forecast-table tr[data-kind=forecast]').count()===12,'Exactly twelve forecast months are shown');
+  check(await page.locator('#forecast-table tr[data-kind=actual]').count()===3,'Monthly view distinguishes the three recent actual months');
+  await page.locator('#forecast-reset').click();
+  check(await page.locator('#forecast-cutoff').inputValue()==='6'&&await page.locator('#forecast-growth').inputValue()==='2','Reset restores cutoff and assumptions');
+  await page.locator('.forecast-details>summary').click();
+  await page.locator('[data-forecast-metric=operatingResult]').click();
+  check((await page.locator('#forecast-table tr[data-period="2026-04"] td').nth(2).innerText())==='€16,860','Monthly operating result matches the source figures');
+  check((await page.locator('#forecast-table tr[data-period="2026-04"] td').nth(3).innerText())==='-€4,813','Budget-versus-actual operating variance reconciles');
+  await page.locator('#forecast-variable-cost').focus();await page.keyboard.press('End');
+  await page.locator('#forecast-fixed-cost').focus();await page.keyboard.press('End');
+  await page.locator('#forecast-growth').focus();await page.keyboard.press('Home');
+  check((await page.locator('[data-kpi=forecastResult]').innerText()).startsWith('-'),'Cost assumptions can produce a loss');
+  check(await page.locator('#forecast-chart .forecast-zero-line').count()===1,'Chart shows a zero baseline for negative results');
+  check(!(await page.locator('#forecast-chart').innerHTML()).includes('NaN'),'Negative scenarios produce valid chart coordinates');
+  const [download]=await Promise.all([page.waitForEvent('download'),page.locator('#forecast-download').click()]);
+  const csv=fs.readFileSync(await download.path(),'utf8');
+  check(download.suggestedFilename()==='consultix-illustrative-forecast-en.csv'&&csv.includes('Hypothetical example'),'Export identifies the figures as illustrative');
+  check(csv.includes('"2026-07","Forecast","EUR"')&&csv.includes('"114000"'),'CSV reflects the selected scenario');
+  await page.locator('[data-language=de]').click();
+  check(await page.locator('#forecast-growth').inputValue()==='-5'&&await page.locator('#forecast-demo').getAttribute('data-metric')==='operatingResult','Language switch preserves the scenario and metric');
+  check((await page.locator('#forecast-title').innerText()).includes('rollierende Planung'),'Forecast interface is translated into German');
+  check((await page.locator('#forecast-chart svg title').first().textContent()).includes('Betriebsergebnis'),'Chart accessibility text is translated');
+  await page.locator('#forecast-reset').click();
+  if(screenshotDirectory){
+   await page.locator('.forecast-details').evaluate(node=>{node.open=false;});
+   await page.locator('#forecast-demo').screenshot({path:path.join(screenshotDirectory,'consultix-forecast-de.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
+   await page.locator('[data-language=en]').click();
+   await page.locator('#forecast-demo').screenshot({path:path.join(screenshotDirectory,'consultix-forecast-en.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
+   await page.locator('.finance-services').screenshot({path:path.join(screenshotDirectory,'consultix-finance-services.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
+   await page.locator('.forecast-details').evaluate(node=>{node.open=true;});
+  }
+
   for(const language of ['de','en']){
    await page.locator('[data-language='+language+']').click();
    check(await page.locator('html').getAttribute('lang')===language,'Document language '+language);
    check(!(await page.locator('body').innerText()).includes('undefined'),'Complete translations '+language);
    for(const width of [320,390,768,1024,1440,1920]){
     await page.setViewportSize({width,height:1000});
+    await page.waitForFunction(()=>document.querySelector('#forecast-chart svg').viewBox.baseVal.width===Math.max(260,Math.round(document.getElementById('forecast-chart').getBoundingClientRect().width)));
     check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow at '+width+' in '+language);
+    check(await page.evaluate(()=>{
+     const labels=[...document.querySelectorAll('.forecast-month-tick')].map(node=>node.getBoundingClientRect());
+     return labels.every((bounds,index)=>index===0||bounds.left>=labels[index-1].right+2);
+    }),'Chart month labels do not overlap at '+width+' in '+language);
    }
    await page.addScriptTag({path:axePath});
    const accessibility=await page.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}}));
@@ -82,7 +134,17 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   await page.addScriptTag({path:axePath});
   const mobileAccessibility=await page.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}}));
   check(mobileAccessibility.violations.length===0,'Mobile accessibility: '+JSON.stringify(mobileAccessibility.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))));
-  if(screenshotDirectory)await page.screenshot({path:path.join(screenshotDirectory,'consultix-mobile-hero.png')});
+  if(screenshotDirectory){
+   await page.screenshot({path:path.join(screenshotDirectory,'consultix-mobile-hero.png')});
+   await page.locator('.forecast-details').evaluate(node=>{node.open=false;});
+   await page.locator('#forecast-demo').screenshot({path:path.join(screenshotDirectory,'consultix-forecast-mobile.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
+  }
+  const noScriptContext=await browser.newContext({javaScriptEnabled:false});
+  const noScriptPage=await noScriptContext.newPage();await noScriptPage.goto(origin);
+  check(await noScriptPage.locator('#finance-title').isVisible(),'Finance copy is available without JavaScript');
+  check(!await noScriptPage.locator('#forecast-demo').isVisible(),'Inactive controls are hidden without JavaScript');
+  check(await noScriptPage.locator('.finance-noscript').isVisible(),'A no-script explanation accompanies the model');
+  await noScriptContext.close();
   check(errors.length===0,'No browser exceptions: '+errors.join(', '));
   check(externalRequests.length===0,'No third-party requests: '+externalRequests.join(', '));
   console.log('PASS: '+checks+' functional checks; desktop/mobile accessibility scans; no third-party requests.');
