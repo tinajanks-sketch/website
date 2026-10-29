@@ -36,11 +36,11 @@ test('primary buttons regain the brighter coral identity without losing contrast
   assert.match(css,/--cta-coral-hover:#FFA080/);
   assert.match(css,/\.button\s*\{[^}]*background:var\(--cta-coral\)/);
   assert.match(css,/\.hero-actions \.button::after\s*\{/);
-  assert.match(css,/\.site-header:not\(\.is-scrolled\):not\(\.menu-open\) \.brand-mark/);
+  assert.doesNotMatch(css,/\.site-header:not\(\.is-scrolled\):not\(\.menu-open\) \.brand-mark/);
 });
 test('hero typography is reduced and has responsive safeguards',()=>{
-  assert.match(css,/\.hero h1\s*\{[^}]*font-size:clamp\(54px,6\.05vw,94px\)/);
-  assert.match(css,/@media\(max-width:380px\)\s*\{[^}]*\.hero h1\s*\{font-size:clamp\(39px,11\.8vw,44px\)/);
+  assert.match(css,/\.hero h1\s*\{[^}]*font-size:clamp\(49px,5\.2vw,80px\)/);
+  assert.match(css,/@media\(max-width:380px\)\s*\{[^}]*\.hero h1\s*\{font-size:clamp\(35px,10vw,39px\)/);
   assert.match(css,/\.hero-description\s*\{[^}]*max-width:760px/);
   assert.match(css,/\.hero-illustration\s*\{[^}]*opacity:\.52/);
 });
@@ -52,4 +52,10 @@ test('interactive visual styling and motion safeguards are preserved',()=>{
   assert.match(css, /summary:focus-visible/);
   assert.match(html, /noindex,nofollow/);
   assert.match(html, /id="testimonials"[^>]*hidden/);
+});
+
+test('the original brand mark and favicon remain unchanged',()=>{
+  const favicon=fs.readFileSync(path.join(root,'assets/favicon.svg'),'utf8').trim();
+  assert.match(html, /<svg class="brand-mark" viewBox="0 0 42 64"/);
+  assert.equal(favicon,'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#181B1D"/><path d="m21 29 24-22M21 35l24 22" fill="none" stroke="#F47758" stroke-width="3"/><circle cx="17" cy="32" r="4" fill="none" stroke="#F47758" stroke-width="3"/></svg>');
 });
