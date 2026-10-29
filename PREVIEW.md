@@ -11,7 +11,7 @@ This review branch proposes a site-wide colour and typography update. It has **n
 
 Netlify reported a **successful deploy-preview** build for this branch. Source-level colour, contrast and structural checks passed. Full visual/browser accessibility testing and mobile screenshots have not been completed and should be checked before approval. The live domain remains unchanged by this preview.
 
-Review both languages, the desktop hero and 320px mobile layout, and try the forecast, KPI explorer, challenge selector and contact form. The new dark slate, warm ivory and muted copper scheme should feel consistent across all sections.
+Review both languages, the smaller desktop hero headline, the original Consultix logo, the brighter coral action button and 320px mobile layout, and try the forecast, KPI explorer, challenge selector and contact form. The new dark slate, warm ivory and muted copper scheme should feel consistent across all sections.
 
 The update was prepared on `consultix-update-kit-review`; the owner approved publication on 29 October 2026. Opening the supplied preview files does not change consultix.solutions. The co-founder section is removed. A separate, clearly labelled testimonial-layout screenshot is a design preview, not published client feedback.
 
