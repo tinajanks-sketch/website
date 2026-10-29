@@ -6,7 +6,7 @@ The site uses plain HTML, CSS and JavaScript. It has no production package depen
 
 ## New five-practice positioning (review branch; not published)
 
-The owner requested a new finance-led, commercially connected positioning on 29 October 2026. The proposed content and design updates are on `consultix-five-practices-2026-review`, which must not be merged or deployed before an explicit new approval. The published main branch is not modified by these review changes.
+The owner requested a new finance-led, commercially connected positioning on 29 October 2026 and **explicitly approved publication later that day**. The revision was prepared on `consultix-five-practices-2026-review` for merging into the existing GitHub-to-Netlify production workflow. New, unrelated changes still require approval before publication.
 
 The five practices in order are:
 
@@ -18,7 +18,7 @@ The five practices in order are:
 
 A native HTML details-based 'connected performance' perspective explorer now explains how financial, commercial and operating decisions connect. The existing financial forecast, KPI calculator, challenge selector, business guide and revenue-to-finance flow remain in place. All new content is bilingual with pre-rendered German fallback. No fake testimonials, badges, or client results were added.
 
-The review intentionally preserves the financial arithmetic, legal content, email settings, assets and Netlify settings. Follow up with `npm run check`, `npm run build`, `npm run test:forecast`, `npm run test:metrics`, `npm run test:browser`, `npm run test:deploy`, plus responsive and German language review before publication. The review branch has not itself been browser-tested in this conversation.
+The review intentionally preserves the financial arithmetic, legal content, email settings, assets and Netlify settings. Follow up with `npm run check`, `npm run build`, `npm run test:forecast`, `npm run test:metrics`, `npm run test:browser`, `npm run test:deploy`, plus responsive and German language review before publication. The Netlify pull-request deploy-preview status succeeded. Full automated browser testing and screenshot inspection were not completed in this conversation; see `AGENTS.md` for the follow-up Codex QA task.
 
 ## Current review version
 
