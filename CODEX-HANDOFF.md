@@ -1,9 +1,9 @@
 # Consultix Solutions — five-practice positioning and design handoff
-Updated: 29 October 2026. **Review only. Do not deploy or merge without the owner's explicit approval.**
+Updated: 29 October 2026. **The owner explicitly approved publication of this revision on 29 October 2026.** All further changes and deployments beyond this approved scope require approval.
 
 Website: https://consultix.solutions/
 Repository: https://github.com/tinajanks-sketch/website
-Review branch: `consultix-five-practices-2026-review`
+Source review branch: `consultix-five-practices-2026-review` (approved for publication to main)
 Business email: general@consultix.solutions
 
 ## Context and purpose
@@ -60,4 +60,4 @@ npm run test:deploy
 ```
 Then manually test English and German directly at root and /de/, with and without JavaScript, and desktop/mobile widths including 320px. Check all five practice/offer cards, enquiry selection, details toggles, focus handling, reduced motion, accessibility, every forecast input and CSV download. Verify the built preview independently before sharing screenshots. These checks **have not yet been run** against the new review branch in this conversation.
 
-Stop before publishing. Present the reviewed preview and exact test results for approval.
+Publication of this specific revision has been approved. Before any subsequent update, provide the test results and a reviewable PR; do not deploy further unapproved changes. See `AGENTS.md` for the post-publication Codex continuation task.
