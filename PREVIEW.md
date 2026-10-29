@@ -1,5 +1,18 @@
 # Preview the Consultix update
 
+## Mineral Slate & Copper review preview — 29 October 2026
+
+This review branch proposes a site-wide colour and typography update. It has **not** been merged into the live website.
+
+- English preview: https://deploy-preview-3--consultixsolutions.netlify.app/
+- German preview: https://deploy-preview-3--consultixsolutions.netlify.app/de/
+- Review PR: https://github.com/tinajanks-sketch/website/pull/3
+- Design documentation: [DESIGN-SYSTEM-2026.md](DESIGN-SYSTEM-2026.md)
+
+Netlify reported a **successful deploy-preview** build for this branch. Source-level colour, contrast and structural checks passed. Full visual/browser accessibility testing and mobile screenshots have not been completed and should be checked before approval. The live domain remains unchanged by this preview.
+
+Review both languages, the desktop hero and 320px mobile layout, and try the forecast, KPI explorer, challenge selector and contact form. The new dark slate, warm ivory and muted copper scheme should feel consistent across all sections.
+
 The update was prepared on `consultix-update-kit-review`; the owner approved publication on 29 October 2026. Opening the supplied preview files does not change consultix.solutions. The co-founder section is removed. A separate, clearly labelled testimonial-layout screenshot is a design preview, not published client feedback.
 
 ## Open the ready-made files
