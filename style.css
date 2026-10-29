@@ -400,7 +400,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
     linear-gradient(0deg,rgba(17,34,42,.45),transparent 55%);
 }
 .hero h1{
-  font-size:clamp(54px,6.05vw,94px);
+  font-size:clamp(49px,5.2vw,80px);
   line-height:1.08;
   letter-spacing:-.056em;
   font-weight:500;
@@ -505,17 +505,17 @@ h2{letter-spacing:-.048em}
 .field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{border-color:var(--mineral)}
 .enquiry-form{border-radius:12px}
 @media(max-width:1200px){
-  .hero h1{font-size:clamp(58px,6.5vw,82px)}
+  .hero h1{font-size:clamp(52px,5.9vw,72px)}
   .hero-description{max-width:710px}
 }
 @media(max-width:1000px){
-  .hero h1{font-size:clamp(55px,7.4vw,76px)}
+  .hero h1{font-size:clamp(48px,6.3vw,65px)}
   .hero{padding-top:calc(var(--header-height) + 70px);min-height:780px}
   .hero-illustration{background-position:64% center}
 }
 @media(max-width:700px){
   .hero{padding-top:calc(var(--header-height) + 64px);min-height:100svh}
-  .hero h1{font-size:clamp(42px,9vw,63px);line-height:1.12;letter-spacing:-.052em;max-width:100%;text-wrap:pretty}
+  .hero h1{font-size:clamp(38px,8.1vw,52px);line-height:1.12;letter-spacing:-.052em;max-width:100%;text-wrap:pretty}
   .hero-description{font-size:16px;line-height:1.7;max-width:620px;margin-top:25px}
   .hero-illustration{background-position:68% center;opacity:.38}
   .hero:after{background:linear-gradient(90deg,rgba(19,37,47,.91),rgba(19,37,47,.69))}
@@ -525,7 +525,7 @@ h2{letter-spacing:-.048em}
   .forecast-demo{border-radius:10px}
 }
 @media(max-width:380px){
-  .hero h1{font-size:clamp(39px,11.8vw,44px)}
+  .hero h1{font-size:clamp(35px,10vw,39px)}
   .hero-description{font-size:15.5px}
   .hero-actions{align-items:flex-start}
   .hero-actions .button{width:100%}
@@ -537,7 +537,7 @@ h2{letter-spacing:-.048em}
 }
 
 
-/* High-visibility primary CTA and refreshed Consultix mark, owner feedback 29 Oct 2026.
+/* High-visibility primary CTA, preserving the established Consultix logo, owner feedback 29 Oct 2026.
    Copper remains the restrained brand accent; vivid coral is reserved for primary actions. */
 :root{--cta-coral:#F47758;--cta-coral-hover:#FFA080}
 .button{
@@ -574,9 +574,6 @@ h2{letter-spacing:-.048em}
   transition:transform .18s ease;
 }
 .hero-actions .button:hover::after{transform:translate(2px,-2px)}
-.site-header:not(.is-scrolled):not(.menu-open) .brand-mark,
-.site-footer .brand-mark{color:var(--cta-coral)}
-.site-header.is-scrolled .brand-mark,.site-header.menu-open .brand-mark{color:var(--coral)}
 @media(max-width:700px){
   .hero-actions .button{min-height:56px;font-size:14px;padding:15px 23px}
 }
