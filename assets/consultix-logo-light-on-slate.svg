@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title" viewBox="0 0 760 160">
+<title id="title">Consultix Solutions</title>
+<g fill="none" stroke="#F47758" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.5">
+<path d="M34 67 80 20M34 79l46 47"/>
+<circle cx="22" cy="73" r="6" fill="#F47758" stroke="none"/>
+</g>
+<text x="111" y="95" fill="#F7F5F0" font-family="Manrope,Inter,Arial,sans-serif" font-weight="550" font-size="79" letter-spacing="-4">Consultix</text>
+<text x="116" y="129" fill="#CBD9DD" font-family="'DM Sans',Inter,Arial,sans-serif" font-weight="650" font-size="15" letter-spacing="8">SOLUTIONS</text>
+</svg>
