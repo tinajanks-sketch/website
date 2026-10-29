@@ -49,3 +49,6 @@ The owner approved this version on 29 October 2026. To publish it:
 3. Open `https://consultix.solutions/` and `/de/`, then check the mobile menu, languages, tools and contact draft. On Windows, press **Ctrl+F5** if an older copy appears.
 
 Use the existing Git workflow; the preview ZIP is for offline review. Search indexing, legal/footer content, contact address and domain settings are outside this update's publishing approval.
+
+## Shorter-copy and editorial structure review
+The same design preview now includes an additional editorial revision: shorter visible text, five expandable service summaries, scoped project-detail disclosures, shorter standard headings and no automatic heading hyphenation. Examine a long service title on desktop and on 320px mobile; verify that text wraps between words rather than breaking one in half. Open a service's *Scope and deliverables* panel and an offer's *What the project includes* panel to confirm all supporting information remains accessible. The interactive financial forecast and Revenue-to-Finance visual should still function independently of these panels. Do not publish this branch without approval.
