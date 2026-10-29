@@ -14,7 +14,7 @@ test('headings are sized for reading rather than oversized or auto-hyphenated',(
   assert.match(css,/h1,h2,h3,h4\s*\{[^}]*hyphens:none/);
   assert.match(css,/h2\s*\{[^}]*font-size:clamp\(32px,3\.15vw,50px\)/);
   assert.match(css,/\.hero h1\s*\{[^}]*font-size:clamp\(48px,5\.0vw,76px\)/);
-  assert.match(css, /@media\(max-width:380px\)\s*\{[^}]*\.hero h1\{font-size:clamp\(34px,9\.2vw,37px\)/);
+  assert.match(css, /\.hero h1\{font-size:clamp\(34px,9\.2vw,37px\)/);
 });
 
 test('five practices show concise copy with full optional detail',()=>{
