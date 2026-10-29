@@ -39,3 +39,6 @@ Then test the actual English and German pages, direct URLs, mobile down to 320 p
 
 ## Codex continuation task
 For this specific colour/typography refresh, work from `consultix-mineral-slate-copper-design` and review `DESIGN-SYSTEM-2026.md`; capture English/German desktop and mobile screenshots and test all existing functions. Use a separate review PR for subsequent fixes. Avoid redesigning working interactions or changing domain/email infrastructure. Do not merge any follow-up PR without explicit approval.
+
+## Editorial homepage revision
+The review branch also simplifies copy and introduces progressive disclosure for the five practices, five offer cards, finance service detail, principles and illustrative briefs. Read `DESIGN-SYSTEM-2026.md` for the information hierarchy. The headline must stay moderately sized without mid-word hyphens. Keep all practice details accessible to keyboard and screen reader users, preserve direct enquiry links, and test English/German with and without JavaScript. Run `npm run test:content-layout` in addition to existing checks. Do not publish this review branch without separate explicit approval.
