@@ -4,6 +4,10 @@ Independent English/German business website for `consultix.solutions`, based on 
 
 The site uses plain HTML, CSS and JavaScript. It has no production package dependencies, website-builder subscription or application server requirement. Hosting-provider free-plan limits still apply; domain registration and email are separate services.
 
+## Mineral Slate & Copper design refresh (review only)
+
+A website-wide editorial colour and typography update is prepared on `consultix-mineral-slate-copper-design`. It uses deep slate, warm ivory, mineral blue and restrained copper, improves the hero's typography and contrast, and refines the service, financial tool and contact styling. **This design branch is a preview, not a production deployment.** See `DESIGN-SYSTEM-2026.md` for the rationale and QA checklist.
+
 ## New five-practice positioning (review branch; not published)
 
 The owner requested a new finance-led, commercially connected positioning on 29 October 2026 and **explicitly approved publication later that day**. The revision was prepared on `consultix-five-practices-2026-review` for merging into the existing GitHub-to-Netlify production workflow. New, unrelated changes still require approval before publication.
