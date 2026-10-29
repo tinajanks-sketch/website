@@ -311,7 +311,8 @@
     "practiceEnquire": "Discuss this service",
     "examplesExpand": "Explore the illustrative briefs",
     "valuesExplore": "Our principles",
-    "financeServicesExpand": "Explore planning and reporting support"
+    "financeServicesExpand": "Explore planning and reporting support",
+    "offerDetails": "What the project includes"
   },
   "de": {
     "skip": "Zum Inhalt springen",
@@ -619,7 +620,8 @@
     "practiceEnquire": "Diese Leistung besprechen",
     "examplesExpand": "Beispielhafte Projektbeschreibungen ansehen",
     "valuesExplore": "Unsere Grundsätze",
-    "financeServicesExpand": "Mehr zu Finanzplanung und Reporting"
+    "financeServicesExpand": "Mehr zu Finanzplanung und Reporting",
+    "offerDetails": "Was das Projekt umfasst"
   }
 };
 });
