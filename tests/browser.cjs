@@ -34,12 +34,12 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   if(screenshotDirectory){fs.mkdirSync(screenshotDirectory,{recursive:true});await page.screenshot({path:path.join(screenshotDirectory,'consultix-hero.png')});await page.screenshot({path:path.join(screenshotDirectory,'consultix-full.png'),fullPage:true});}
 
   check((await page.locator('#practice-analytics h3').innerText()).includes('Data Analytics'),'Data analytics has a dedicated practice');
-  check((await page.locator('#practice-systems h3').innerText()).includes('Business Management'),'Operations has a dedicated practice');
+  check((await page.locator('#practice-systems h3').innerText()).includes('Revenue-to-Finance'),'Revenue-to-Finance has a dedicated practice');
   check(await page.locator('.review-offer').count()===1&&await page.locator('.ongoing-offer').count()===1,'Paid review and ongoing support are distinct offers');
-  check(await page.locator('#review-title').innerText()==='Business Performance & Financial Planning Review','A general business review is available');
+  check(await page.locator('#review-title').innerText()==='Business Performance & Planning Review','A general business review is available');
   check(await page.locator('#founders,.founder-card,[data-i=cofounder]').count()===0,'The co-founder section is removed');
   check(!await page.locator('#testimonials').isVisible()&&await page.locator('.testimonial-card').count()===0,'Unsupplied testimonials stay hidden');
-  check((await page.locator('#example-engagements').innerText()).includes('rather than completed client projects'),'Example scopes are distinguished from client case studies');
+  check((await page.locator('#example-engagements').innerText()).includes('not completed client projects'),'Example scopes are distinguished from client case studies');
   check(await page.evaluate(()=>[...document.querySelectorAll('a[href^="#"]')].every(link=>document.getElementById(link.getAttribute('href').slice(1)))),'All internal links point to existing sections');
   await page.locator('#challenge-finder [data-choice=analytics]').click();
   check(await page.locator('#finder-analytics').isVisible()&&!await page.locator('#finder-finance').isVisible(),'Challenge finder shows the selected recommendation');
@@ -53,8 +53,8 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
    await page.locator('.engagement-card [data-engagement='+topic+']').click();
    check(await page.locator('#interest').inputValue()===topic,'Project enquiry routes correctly: '+topic);
   }
-  check(JSON.stringify(await page.locator('.practice-row h3').allTextContents())===JSON.stringify(['Financial Management & FP&A','Business Intelligence & Data Analytics','Business Management & Operations','CRM & Commercial Systems','AI Enablement & Automation']),'Five practices follow the new boundaries and order');
-  check(await page.locator('#practice-systems a[href="#revenue-finance"]').count()===1&&await page.locator('#practice-revenue a[href="#crm-offer"]').count()===1,'Operations and CRM have clear, distinct onward links');
+  check(JSON.stringify(await page.locator('.practice-row h3').allTextContents())===JSON.stringify(['Financial Planning & Management Reporting','Revenue Operations Management & CRM','Business Intelligence & Data Analytics','Revenue-to-Finance Alignment','AI Enablement & Automation']),'Five practices follow the new boundaries and order');
+  check(await page.locator('#practice-systems a[href="#revenue-finance"]').count()===1&&await page.locator('#practice-revenue a[href="#crm-offer"]').count()===1,'RevOps and Revenue-to-Finance have distinct onward links');
   check(await page.evaluate(()=>translatedElements.every(node=>typeof german[node.dataset.i]==='string'&&german[node.dataset.i].trim())),'Every English content key has a German translation');
   for(const segment of ['startup','saas','sme']){
    await page.locator('#business-guide [data-choice='+segment+']').focus();await page.keyboard.press('Enter');
@@ -186,7 +186,8 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
    await page.locator('#forecast-demo').screenshot({path:path.join(screenshotDirectory,'consultix-forecast-de.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
    await page.locator('[data-language=en]').click();
    await page.locator('#forecast-demo').screenshot({path:path.join(screenshotDirectory,'consultix-forecast-en.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
-   await page.locator('.finance-services').screenshot({path:path.join(screenshotDirectory,'consultix-finance-services.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
+   await page.locator('.finance-services-disclosure summary').click();
+    await page.locator('.finance-services').screenshot({path:path.join(screenshotDirectory,'consultix-finance-services.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
    for(const [selector,name] of [['#practices','practices'],['#challenge-finder','challenge-finder'],['#engagements','offers'],['#revenue-finance','alignment'],['#business-guide','segments'],['#metric-explorer','metrics']]){
     await page.locator(selector).screenshot({path:path.join(screenshotDirectory,'consultix-'+name+'.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
    }
@@ -296,7 +297,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   check(await noScriptPage.locator('#practice-revenue').isVisible()&&await noScriptPage.locator('#contact').isVisible(),'Core services and contact remain available without JavaScript');
   check(!await noScriptPage.locator('#enquiry-form').isVisible(),'Without JavaScript the form cannot submit personal details in a URL');
   await noScriptPage.goto(origin+'/de/');
-  check(await noScriptPage.locator('html').getAttribute('lang')==='de'&&(await noScriptPage.locator('#practice-finance h3').innerText()).includes('Finanzmanagement'),'Direct German page renders translated services without JavaScript');
+  check(await noScriptPage.locator('html').getAttribute('lang')==='de'&&(await noScriptPage.locator('#practice-finance h3').innerText()).includes('Finanzplanung'),'Direct German page renders translated services without JavaScript');
   check(await noScriptPage.locator('link[rel=canonical]').getAttribute('href')==='https://consultix.solutions/de/','Direct German page retains its canonical address');
   const directContext=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
   const directPage=await directContext.newPage();await directPage.goto(origin+'/de/');

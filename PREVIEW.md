@@ -1,5 +1,18 @@
 # Preview the Consultix update
 
+## Mineral Slate & Copper review preview — 29 October 2026
+
+The site-wide colour, typography and editorial update was **approved for publication on 29 October 2026**. This file preserves the original preview reference and QA history.
+
+- English preview: https://deploy-preview-3--consultixsolutions.netlify.app/
+- German preview: https://deploy-preview-3--consultixsolutions.netlify.app/de/
+- Review PR: https://github.com/tinajanks-sketch/website/pull/3
+- Design documentation: [DESIGN-SYSTEM-2026.md](DESIGN-SYSTEM-2026.md)
+
+Netlify reported a **successful deploy-preview** build for this branch. Source-level colour, contrast and structural checks passed. Full visual/browser accessibility testing and mobile screenshots have not been completed and should be checked before approval. The preview itself did not modify the live domain; publishing uses the approved GitHub `main` merge and Netlify production deployment.
+
+Review both languages, the smaller desktop hero headline, the original Consultix logo, the brighter coral action button and 320px mobile layout, and try the forecast, KPI explorer, challenge selector and contact form. The new dark slate, warm ivory and muted copper scheme should feel consistent across all sections.
+
 The update was prepared on `consultix-update-kit-review`; the owner approved publication on 29 October 2026. Opening the supplied preview files does not change consultix.solutions. The co-founder section is removed. A separate, clearly labelled testimonial-layout screenshot is a design preview, not published client feedback.
 
 ## Open the ready-made files
@@ -36,3 +49,6 @@ The owner approved this version on 29 October 2026. To publish it:
 3. Open `https://consultix.solutions/` and `/de/`, then check the mobile menu, languages, tools and contact draft. On Windows, press **Ctrl+F5** if an older copy appears.
 
 Use the existing Git workflow; the preview ZIP is for offline review. Search indexing, legal/footer content, contact address and domain settings are outside this update's publishing approval.
+
+## Shorter-copy and editorial structure review
+The same design preview now includes an additional editorial revision: shorter visible text, five expandable service summaries, scoped project-detail disclosures, shorter standard headings and no automatic heading hyphenation. Examine a long service title on desktop and on 320px mobile; verify that text wraps between words rather than breaking one in half. Open a service's *Scope and deliverables* panel and an offer's *What the project includes* panel to confirm all supporting information remains accessible. The interactive financial forecast and Revenue-to-Finance visual should still function independently of these panels. The owner explicitly approved publishing this version on 29 October 2026. Subsequent changes require separate approval.
