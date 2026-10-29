@@ -535,3 +535,52 @@ h2{letter-spacing:-.048em}
   .practice-row,.engagement-card,.button{transition:none!important}
   .engagement-card:hover,.button:hover{transform:none}
 }
+
+
+/* High-visibility primary CTA and refreshed Consultix mark, owner feedback 29 Oct 2026.
+   Copper remains the restrained brand accent; vivid coral is reserved for primary actions. */
+:root{--cta-coral:#F47758;--cta-coral-hover:#FFA080}
+.button{
+  background:var(--cta-coral);
+  color:#1B2D37;
+  font-weight:750;
+  border:1px solid rgba(27,45,55,.12);
+  box-shadow:0 10px 23px rgba(12,30,41,.16);
+  transition:background .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+.button:hover{
+  background:var(--cta-coral-hover);
+  color:#1B2D37;
+  box-shadow:0 13px 27px rgba(12,30,41,.23);
+}
+.button:focus-visible{
+  outline:3px solid #1B2D37;
+  outline-offset:3px;
+  box-shadow:0 0 0 6px #F7F5F0,0 10px 23px rgba(12,30,41,.16);
+}
+.hero-actions .button{
+  min-height:62px;
+  padding:18px 30px;
+  letter-spacing:.005em;
+  font-size:16px;
+}
+.hero-actions .button::after{
+  content:'↗';
+  display:inline-block;
+  font-family:Arial,sans-serif;
+  font-size:20px;
+  font-weight:400;
+  line-height:1;
+  transition:transform .18s ease;
+}
+.hero-actions .button:hover::after{transform:translate(2px,-2px)}
+.site-header:not(.is-scrolled):not(.menu-open) .brand-mark,
+.site-footer .brand-mark{color:var(--cta-coral)}
+.site-header.is-scrolled .brand-mark,.site-header.menu-open .brand-mark{color:var(--coral)}
+@media(max-width:700px){
+  .hero-actions .button{min-height:56px;font-size:14px;padding:15px 23px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-actions .button::after{transition:none}
+  .hero-actions .button:hover::after{transform:none}
+}
