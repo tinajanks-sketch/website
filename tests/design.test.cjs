@@ -29,6 +29,14 @@ test('principal text and CTA combinations meet 4.5:1 minimum contrast',()=>{
   assert.ok(contrast('#536873','#F7F5F0')>=4.5);
   assert.ok(contrast('#FFFFFF','#AC5A42')>=4.5);
   assert.ok(contrast('#E9A894','#1B2D37')>=4.5);
+  assert.ok(contrast('#1B2D37','#F47758')>=4.5);
+});
+test('primary buttons regain the brighter coral identity without losing contrast',()=>{
+  assert.match(css,/--cta-coral:#F47758/);
+  assert.match(css,/--cta-coral-hover:#FFA080/);
+  assert.match(css,/\.button\s*\{[^}]*background:var\(--cta-coral\)/);
+  assert.match(css,/\.hero-actions \.button::after\s*\{/);
+  assert.match(css,/\.site-header:not\(\.is-scrolled\):not\(\.menu-open\) \.brand-mark/);
 });
 test('hero typography is reduced and has responsive safeguards',()=>{
   assert.match(css,/\.hero h1\s*\{[^}]*font-size:clamp\(54px,6\.05vw,94px\)/);
