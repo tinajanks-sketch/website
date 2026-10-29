@@ -7,10 +7,10 @@ Read `CODEX-HANDOFF.md` before editing. It is the authoritative positioning, cop
 - Main source: `index.html`, `content.js` (English and German copy), `style.css`, `app.js`, `localise.js`, `build.js`.
 - Host: Netlify via this GitHub repository. Email: Zoho, general@consultix.solutions. Domain registered at GoDaddy.
 - Five service practices: (1) Financial Planning & Management Reporting, (2) Revenue Operations Management & CRM, (3) Business Intelligence & Data Analytics, (4) Revenue-to-Finance Alignment, (5) AI Enablement & Automation.
-- The owner **approved publication of the five-practice repositioning on 29 October 2026**. New work beyond that approved revision still requires explicit approval before being pushed or deployed.
+- The owner **approved both the five-practice positioning and the Mineral Slate & Copper editorial redesign for publication on 29 October 2026**. Subsequent independent changes require explicit approval before production deployment.
 
 ## Preserve
-- Existing architectural hero, logo, Manrope and DM Sans. The current review branch proposes a Mineral Slate & Copper visual system, documented in `DESIGN-SYSTEM-2026.md`; do not revert it to the older bright-coral palette.
+- Existing architectural hero, logo, Manrope and DM Sans. The current design system is Mineral Slate & Copper, with a brighter coral primary CTA, documented in `DESIGN-SYSTEM-2026.md`. Keep the existing website logo and favicon unchanged.
 - English and formal-German pre-rendered HTML, language toggle and navigation.
 - Existing business challenge guide, audience guide, revenue-to-finance flow, rolling P&L forecast and CSV export, metric explorer, contact routing and mailto form.
 - The connected performance lens: progressive HTML details, usable without JavaScript.
@@ -19,7 +19,7 @@ Read `CODEX-HANDOFF.md` before editing. It is the authoritative positioning, cop
 - Accounting distinction between bookings, recognised revenue, invoices, receivables and cash. Illustrative financial data is not client data.
 
 ## Design review status
-The Mineral Slate & Copper changes (with the original website logo/favicons preserved, smaller hero headline and brighter coral primary buttons) are on a **separate review branch**, not yet approved for production. Do not merge or deploy this redesign until the owner explicitly approves it. Check desktop/mobile screenshots and the readable text/controls of the financial widgets before recommending release.
+The Mineral Slate & Copper and concise editorial layout refresh **has been explicitly approved by the owner for publication on 29 October 2026**. It was developed on `consultix-mineral-slate-copper-design` and is intended for `main`. Do not restore obsolete long-form defaults or earlier oversized/auto-hyphenated headings. Check desktop/mobile screenshots and the readable text/controls of the financial widgets before recommending release.
 
 ## Required verification
 Run the test suite in the actual checkout:
@@ -38,7 +38,7 @@ npm run test:deploy
 Then test the actual English and German pages, direct URLs, mobile down to 320 px, keyboard and reduced-motion interactions, financial calculations, form topic selection and CSV behaviour. Inspect for console errors, accessibility findings and visual overflow. Report **actual results** and any environment limitations. Do not imply checks passed if they were not run.
 
 ## Codex continuation task
-For this specific colour/typography refresh, work from `consultix-mineral-slate-copper-design` and review `DESIGN-SYSTEM-2026.md`; capture English/German desktop and mobile screenshots and test all existing functions. Use a separate review PR for subsequent fixes. Avoid redesigning working interactions or changing domain/email infrastructure. Do not merge any follow-up PR without explicit approval.
+For future Codex tasks, start from the current `main` branch, read `DESIGN-SYSTEM-2026.md`, capture English/German desktop and mobile screenshots, and test all existing functions. Use a separate review PR for subsequent fixes. Avoid redesigning working interactions or changing domain/email infrastructure. Do not merge any follow-up PR without explicit approval.
 
 ## Editorial homepage revision
-The review branch also simplifies copy and introduces progressive disclosure for the five practices, five offer cards, finance service detail, principles and illustrative briefs. Read `DESIGN-SYSTEM-2026.md` for the information hierarchy. The headline must stay moderately sized without mid-word hyphens. Keep all practice details accessible to keyboard and screen reader users, preserve direct enquiry links, and test English/German with and without JavaScript. Run `npm run test:content-layout` in addition to existing checks. Do not publish this review branch without separate explicit approval.
+The review branch also simplifies copy and introduces progressive disclosure for the five practices, five offer cards, finance service detail, principles and illustrative briefs. Read `DESIGN-SYSTEM-2026.md` for the information hierarchy. The headline must stay moderately sized without mid-word hyphens. Keep all practice details accessible to keyboard and screen reader users, preserve direct enquiry links, and test English/German with and without JavaScript. Run `npm run test:content-layout` in addition to existing checks. This edition of the design and copy is owner-approved for production. Do not merge or deploy further revisions without approval.
