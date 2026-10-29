@@ -4,6 +4,22 @@ Independent English/German business website for `consultix.solutions`, based on 
 
 The site uses plain HTML, CSS and JavaScript. It has no production package dependencies, website-builder subscription or application server requirement. Hosting-provider free-plan limits still apply; domain registration and email are separate services.
 
+## New five-practice positioning (review branch; not published)
+
+The owner requested a new finance-led, commercially connected positioning on 29 October 2026. The proposed content and design updates are on `consultix-five-practices-2026-review`, which must not be merged or deployed before an explicit new approval. The published main branch is not modified by these review changes.
+
+The five practices in order are:
+
+1. Financial Planning & Management Reporting
+2. Revenue Operations Management & CRM
+3. Business Intelligence & Data Analytics
+4. Revenue-to-Finance Alignment (strategic finance, profitability, revenue, collections and planning)
+5. AI Enablement & Automation
+
+A native HTML details-based 'connected performance' perspective explorer now explains how financial, commercial and operating decisions connect. The existing financial forecast, KPI calculator, challenge selector, business guide and revenue-to-finance flow remain in place. All new content is bilingual with pre-rendered German fallback. No fake testimonials, badges, or client results were added.
+
+The review intentionally preserves the financial arithmetic, legal content, email settings, assets and Netlify settings. Follow up with `npm run check`, `npm run build`, `npm run test:forecast`, `npm run test:metrics`, `npm run test:browser`, `npm run test:deploy`, plus responsive and German language review before publication. The review branch has not itself been browser-tested in this conversation.
+
 ## Current review version
 
 The 28 October 2026 update kit is implemented on `consultix-update-kit-review`, based on `a12fea7`. The owner approved publishing the updated version on 29 October 2026 after asking for the co-founder section to be removed. Publish through the existing GitHub-to-Netlify workflow after validation. This approval does not change DNS, email, legal content or search-indexing settings. No approved client quotations were supplied, so testimonials remain hidden on the live site; a separately labelled layout screenshot uses preview placeholders only.
@@ -48,11 +64,11 @@ Browser checks exercise the built site over HTTP: both languages, 320–1920px l
 
 ## Services and offers
 
-The five practices are Financial Management & FP&A; Business Intelligence & Data Analytics; Business Management & Operations; CRM & Commercial Systems; and AI Enablement & Automation. RevOps and GTM processes sit within operations, while CRM/HubSpot support has its own entry point. Revenue-to-Finance Alignment remains a visible cross-practice feature and explains pipeline, bookings, recognition, receivables and cash separately.
+The five public practices are Financial Planning & Management Reporting; Revenue Operations Management & CRM; Business Intelligence & Data Analytics; Revenue-to-Finance Alignment; and AI Enablement & Automation. RevOps now has its own full practice alongside CRM, not merely a subset of general operations. Business intelligence includes cross-functional finance, pipeline, customer and capacity information; the strategic Revenue-to-Finance practice addresses bookings, delivery, margins, recognised revenue, receivables, collections and forecast assumptions without offering regulated accounting or assurance services.
 
-The paid entry offer is a Business Performance & Financial Planning Review, with inputs, scope and fixed fee agreed in advance. Focused offers cover Planning & Forecasting, Reporting & Management Intelligence, Revenue-to-Finance Alignment, HubSpot & Revenue Operations Support, and a Practical AI & Workflow Pilot. Startup planning remains available. Ongoing Management & Systems Support has defined monthly capacity and responsibilities. No free audit, invented prices, regulated assurance service or broad outsourced-CFO credentials are advertised.
+The paid entry offer is a Business Performance & Planning Review, with inputs, scope and fixed fee agreed before work begins. Focused offers now follow the five-practice order: Financial Planning & Management Reporting, Revenue Operations & CRM Improvement, Business Intelligence & Data Analytics, Revenue-to-Finance Alignment, and Practical AI & Workflow Pilot. Startup planning and ongoing support remain available with separately agreed scope.
 
-The audience guide covers representative startup, B2B SaaS and established SME questions, possible deliverables and measures. These are possible engagement scopes, not claims about existing clients. Existing challenge-finder and service links remain available.
+No free audit, invented price, unverified certifications, guaranteed savings, statutory tax/investment/audit advice, or broad outsourced-CFO credentials are advertised. The challenge finder, audience guide, financial simulator, metric explorer, and revenue-to-finance flow remain available with hypothetical figures distinguished from outcomes.
 
 ## Bilingual content
 
