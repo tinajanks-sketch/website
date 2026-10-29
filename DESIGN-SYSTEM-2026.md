@@ -22,12 +22,12 @@ Use copper sparingly, with slate and ivory carrying the majority of the experien
 
 ## Typography
 - Keep licensed Manrope for headings and DM Sans for body, UI and numerical labels.
-- Reduce desktop hero headline to a cap of **94px**, preserving its three-line editorial structure.
+- Reduce desktop hero headline to a cap of **80px**, preserving its three-line editorial structure.
 - Use approximately 21px max body text in the hero, a narrower reading measure and improved paragraph leading.
 - At small widths scale down gently, without clipping or horizontal overflow; preserve visible focus and readable line lengths.
 
 ## Architectural imagery
-Keep the existing architectural hero asset. Make it a subtle structural texture by reducing opacity, softening saturation and adding a stronger directional slate overlay. This preserves existing licensed/project imagery without introducing external requests or low-quality stock photographs. If the owner later wants a new background asset, obtain approval and assess the mobile crop before replacing it.
+Keep the existing website logo, brand mark, favicon and architectural hero asset unchanged. Make it a subtle structural texture by reducing opacity, softening saturation and adding a stronger directional slate overlay. This preserves existing licensed/project imagery without introducing external requests or low-quality stock photographs. If the owner later wants a new background asset, obtain approval and assess the mobile crop before replacing it.
 
 ## Page-wide changes
 - Hero: richer slate gradient, quieter architecture, smaller heading, legible paragraph and warmer accent details.
@@ -56,3 +56,6 @@ This is a **CSS-focused redesign**. Do not change the five-practice copy/order, 
 
 ## Codex follow-up
 When continuing in Codex, begin from `consultix-mineral-slate-copper-design` and read this file plus `AGENTS.md` and `CODEX-HANDOFF.md`. Prepare bilingual desktop and mobile screenshots and report any discovered problems before proposing a merge.
+
+## Owner's final visual refinements
+The founder confirmed that the existing website logo is preferred. Do not replace or recolour its symbol, change the website wordmark, or publish the experimental moodboard logo. The original favicon was restored. Restore a stronger, bright coral **primary button** (`#F47758` with dark slate text) against the otherwise restrained copper/slate palette. The hero headline cap is now **80px**, with smaller mobile typography. New logo experiments are excluded from this PR.
