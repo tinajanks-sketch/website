@@ -6,7 +6,7 @@ The site uses plain HTML, CSS and JavaScript. It has no production package depen
 
 ## Mineral Slate & Copper design refresh (review only)
 
-A website-wide editorial colour and typography update is prepared on `consultix-mineral-slate-copper-design`. It uses deep slate, warm ivory, mineral blue and restrained copper, improves the hero's typography and contrast, and refines the service, financial tool and contact styling. **This design branch is a preview, not a production deployment.** See `DESIGN-SYSTEM-2026.md` for the rationale and QA checklist.
+A website-wide editorial colour and typography update is prepared on `consultix-mineral-slate-copper-design`. It uses deep slate, warm ivory, mineral blue and restrained copper, improves the hero's typography and contrast (80px desktop headline cap), preserves the existing Consultix logo, and restores the original high-contrast coral button, and refines the service, financial tool and contact styling. **This design branch is a preview, not a production deployment.** See `DESIGN-SYSTEM-2026.md` for the rationale and QA checklist.
 
 ## New five-practice positioning (review branch; not published)
 
