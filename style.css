@@ -29,7 +29,7 @@
 .practice-row>div>.practice-benefit{font-size:15px;color:#58625d;margin-bottom:24px}
 .challenge-finder{background:#eceee7}
 .challenge-finder .eyebrow,.challenge-finder .section-copy{color:#58625d}
-.challenge-finder h2,.alignment h2,.engagements h2,.founders h2,.example-engagements h2,.testimonials h2{white-space:normal}
+.challenge-finder h2,.alignment h2,.engagements h2,.example-engagements h2,.testimonials h2{white-space:normal}
 .choice-group{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:25px}
 .choice-group button{background:var(--white);border:1px solid #a7b09f;border-radius:5px;color:var(--ink);padding:14px 18px;font-size:14px;font-weight:500;line-height:1.5;transition:background .2s,color .2s}
 .choice-group button[aria-pressed=true]{background:var(--ink);color:var(--white);border-color:var(--ink)}
@@ -72,13 +72,7 @@
 .ongoing-offer{background:#eceee7;border:1px solid #d1d7ca;padding:clamp(25px,3vw,45px)}
 .ongoing-offer h3{font-size:clamp(26px,2.5vw,36px);max-width:850px;margin-bottom:20px}
 .ongoing-offer .eyebrow{color:#58625d;font-size:11px}
-.founders{background:var(--white)}
-.founder-cards,.example-cards,.testimonial-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px}
-.founder-card{padding:30px 0;border-top:1px solid var(--line)}
-.founder-initial{display:flex;align-items:center;justify-content:center;width:50px;height:50px;background:var(--ivory);border:1px solid var(--line);border-radius:50%;font-size:18px;margin-bottom:30px}
-.founder-card h3{font-size:32px;margin-bottom:10px}
-.founder-card p{font-size:13px;color:var(--graphite)}
-.founder-card h3{margin-top:0}
+.example-cards,.testimonial-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px}
 .example-engagements{background:var(--ivory)}
 .example-card,.testimonial-card{background:var(--white);border:1px solid var(--line);padding:clamp(25px,2.8vw,43px)}
 .example-card .eyebrow{font-size:10px}
@@ -102,7 +96,7 @@ a.testimonial-source{text-decoration:underline;text-underline-offset:3px}
 .variance-steps li:last-child{border-top:2px solid #b54a32}
 .variance-steps span{display:block;font-size:11px;line-height:1.6;min-height:3.2em;margin-bottom:12px}
 .variance-steps strong{font-size:clamp(16px,1.4vw,23px);font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
-.choice-panel>*,.flow-steps>*,.founder-cards>*,.example-cards>*,.testimonial-cards>*,.review-offer>*{min-width:0}
+.choice-panel>*,.flow-steps>*,.example-cards>*,.testimonial-cards>*,.review-offer>*{min-width:0}
 .engagement-card h4{overflow-wrap:anywhere;hyphens:auto}
 @media(max-width:1100px){
  .engagement-cards{grid-template-columns:1fr}
@@ -132,11 +126,7 @@ a.testimonial-source{text-decoration:underline;text-underline-offset:3px}
  .finder-copy p,.flow-panel p{font-size:16px}
  .flow-steps button{font-size:14px;gap:16px}
  .offer-group-heading h3{font-size:27px}
- .founder-cards,.testimonial-cards{grid-template-columns:1fr}
- .founder-card{display:block;padding-block:25px}
- .founder-initial{grid-row:span 2;margin:0}
- .founder-card h3{font-size:27px;margin:0}
- .founder-card p{margin:10px 0 0}
+ .testimonial-cards{grid-template-columns:1fr}
  .forecast-bridge{padding:18px}
  .forecast-bridge h4{font-size:21px}
  .variance-steps strong{font-size:17px}

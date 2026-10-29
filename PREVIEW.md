@@ -1,6 +1,6 @@
 # Preview the Consultix update
 
-This version is saved on `consultix-update-kit-review`. It has not been published. Opening a preview does not change consultix.solutions.
+The update was prepared on `consultix-update-kit-review`; the owner approved publication on 29 October 2026. Opening the supplied preview files does not change consultix.solutions. The co-founder section is removed. A separate, clearly labelled testimonial-layout screenshot is a design preview, not published client feedback.
 
 ## Open the ready-made files
 
@@ -25,14 +25,14 @@ The server uses port **3000**. Open that port in your workspace's preview interf
 
 To regenerate the standalone files after source edits, run `npm run build`. Use `dist/index.html` or `dist/de/index.html`.
 
-## Publish later, after approval
+## Approved publishing workflow
 
 The existing Netlify project already builds GitHub's `main` branch. No new project, domain registration, token or DNS change is needed.
 
-After the owner explicitly approves this version:
+The owner approved this version on 29 October 2026. To publish it:
 
 1. Commit and merge the reviewed changes into `main`, then push `main` to the existing GitHub repository.
 2. In the existing Netlify project's **Deploys**, wait for that commit's production build to show **Published**. Its settings remain `npm run build`, `dist`, Node.js 24.
 3. Open `https://consultix.solutions/` and `/de/`, then check the mobile menu, languages, tools and contact draft. On Windows, press **Ctrl+F5** if an older copy appears.
 
-Do not drag the preview ZIP into the live Netlify project before approval: a manual production upload can replace the live website. Search indexing, legal/footer content, contact address and domain settings are outside this update's publishing approval.
+Use the existing Git workflow; the preview ZIP is for offline review. Search indexing, legal/footer content, contact address and domain settings are outside this update's publishing approval.

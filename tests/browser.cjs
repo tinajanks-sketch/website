@@ -37,7 +37,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   check((await page.locator('#practice-systems h3').innerText()).includes('Business Management'),'Operations has a dedicated practice');
   check(await page.locator('.review-offer').count()===1&&await page.locator('.ongoing-offer').count()===1,'Paid review and ongoing support are distinct offers');
   check(await page.locator('#review-title').innerText()==='Business Performance & Financial Planning Review','A general business review is available');
-  check(await page.locator('.founder-card').count()===3,'All three confirmed founders appear');
+  check(await page.locator('#founders,.founder-card,[data-i=cofounder]').count()===0,'The co-founder section is removed');
   check(!await page.locator('#testimonials').isVisible()&&await page.locator('.testimonial-card').count()===0,'Unsupplied testimonials stay hidden');
   check((await page.locator('#example-engagements').innerText()).includes('rather than completed client projects'),'Example scopes are distinguished from client case studies');
   check(await page.evaluate(()=>[...document.querySelectorAll('a[href^="#"]')].every(link=>document.getElementById(link.getAttribute('href').slice(1)))),'All internal links point to existing sections');
@@ -55,7 +55,6 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   }
   check(JSON.stringify(await page.locator('.practice-row h3').allTextContents())===JSON.stringify(['Financial Management & FP&A','Business Intelligence & Data Analytics','Business Management & Operations','CRM & Commercial Systems','AI Enablement & Automation']),'Five practices follow the new boundaries and order');
   check(await page.locator('#practice-systems a[href="#revenue-finance"]').count()===1&&await page.locator('#practice-revenue a[href="#crm-offer"]').count()===1,'Operations and CRM have clear, distinct onward links');
-  check(await page.locator('#founders img,#founders svg,#founders .founder-initial').count()===0,'Founders are text only, without portrait placeholders');
   check(await page.evaluate(()=>translatedElements.every(node=>typeof german[node.dataset.i]==='string'&&german[node.dataset.i].trim())),'Every English content key has a German translation');
   for(const segment of ['startup','saas','sme']){
    await page.locator('#business-guide [data-choice='+segment+']').focus();await page.keyboard.press('Enter');
@@ -118,6 +117,22 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   await page.evaluate(()=>{approvedTestimonials.length=0;renderApprovedTestimonials(approvedTestimonials,'de');});
   await page.locator('[data-language=en]').click();
   check(!await page.locator('#testimonials').isVisible(),'Zero approved testimonials hide the entire section');
+  check(await page.locator('#about').evaluate(node=>node.nextElementSibling.id==='example-engagements'),'Removing the founders leaves no empty section between About and examples');
+  if(screenshotDirectory){
+   await page.evaluate(()=>{
+    const preview={approved:true,predatesConsultix:false,name:'Attribution placeholder',
+     quote:{en:'Layout preview only. A genuine, approved client quotation will appear here. This is not customer feedback.',de:'Nur eine Gestaltungsvorschau. Hier wird ein echtes, freigegebenes Kundenzitat stehen. Dies ist keine Kundenbewertung.'},
+     context:{en:'Design placeholder — not a client endorsement',de:'Gestaltungsplatzhalter — keine Kundenempfehlung'},
+     source:{label:{en:'Preview content only',de:'Nur Vorschauinhalt'}}};
+    renderApprovedTestimonials([preview,{...preview,name:'Second attribution placeholder'}],'en');
+    document.getElementById('testimonials-title').textContent='Testimonial layout preview';
+    document.querySelector('[data-i=testimonialsEyebrow]').textContent='DESIGN PREVIEW · PLACEHOLDER TEXT';
+    document.querySelector('[data-i=testimonialsDescription]').textContent='This preview uses labelled placeholders. No client feedback has been published.';
+   });
+   await page.locator('#testimonials').screenshot({path:path.join(screenshotDirectory,'consultix-testimonial-layout-preview.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
+   await page.evaluate(()=>{renderApprovedTestimonials([],'en');setLanguage('en');});
+   check(!await page.locator('#testimonials').isVisible(),'Testimonial layout placeholders are removed after the screenshot');
+  }
 
   check(await page.locator('#forecast-demo').isVisible(),'Interactive forecast is available');
   check(await page.locator('meta[name=robots]').getAttribute('content')==='noindex,nofollow','Review indexing setting is preserved');
@@ -172,7 +187,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
    await page.locator('[data-language=en]').click();
    await page.locator('#forecast-demo').screenshot({path:path.join(screenshotDirectory,'consultix-forecast-en.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
    await page.locator('.finance-services').screenshot({path:path.join(screenshotDirectory,'consultix-finance-services.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
-   for(const [selector,name] of [['#practices','practices'],['#challenge-finder','challenge-finder'],['#engagements','offers'],['#revenue-finance','alignment'],['#founders','founders'],['#business-guide','segments'],['#metric-explorer','metrics']]){
+   for(const [selector,name] of [['#practices','practices'],['#challenge-finder','challenge-finder'],['#engagements','offers'],['#revenue-finance','alignment'],['#business-guide','segments'],['#metric-explorer','metrics']]){
     await page.locator(selector).screenshot({path:path.join(screenshotDirectory,'consultix-'+name+'.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
    }
    await page.locator('.forecast-details').evaluate(node=>{node.open=true;});
@@ -182,6 +197,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
    await page.locator('[data-language='+language+']').click();
    check(await page.locator('html').getAttribute('lang')===language,'Document language '+language);
    check(!(await page.locator('body').innerText()).includes('undefined'),'Complete translations '+language);
+   check(!/Kristina|Aleksandar|Co-founder|Meet the people behind Consultix|Die Menschen hinter Consultix/.test(await page.locator('body').innerText()),'No co-founder content remains in '+language);
    for(const width of [320,390,768,1024,1440,1920]){
     await page.setViewportSize({width,height:1000});
     await page.waitForFunction(()=>document.querySelector('#forecast-chart svg').viewBox.baseVal.width===Math.max(260,Math.round(document.getElementById('forecast-chart').getBoundingClientRect().width)));
@@ -244,6 +260,14 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
    await page.locator('[data-language='+language+']').click();
    for(const width of [320,768,1440]){
     await page.setViewportSize({width,height:1000});
+    for(const [root,choices] of [['challenge-finder',['finance','analytics','revenue','systems','ai']],['alignment-flow',['pipeline','delivery','billing','planning']]]){
+     for(const choice of choices){
+      const button=page.locator('#'+root+' [data-choice='+choice+']');
+      await button.click();
+      const panelID=await button.getAttribute('aria-controls');
+      check(await page.locator('#'+panelID).isVisible()&&await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),root+' '+choice+' displays without overflow at '+width+' in '+language);
+     }
+    }
     for(const segment of ['startup','saas','sme']){
      await page.locator('#business-guide [data-choice='+segment+']').click();
      check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Segment '+segment+' fits '+width+' in '+language);
@@ -258,7 +282,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   if(screenshotDirectory){
    for(const language of ['en','de']){
     await page.locator('[data-language='+language+']').click();
-    for(const [selector,name] of [['#business-guide','segments'],['#metric-explorer','metrics'],['#revenue-finance','alignment'],['#founders','founders']]){
+    for(const [selector,name] of [['#business-guide','segments'],['#metric-explorer','metrics'],['#revenue-finance','alignment']]){
      await page.locator(selector).screenshot({path:path.join(screenshotDirectory,'consultix-'+name+'-mobile-'+language+'.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
     }
    }

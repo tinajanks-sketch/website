@@ -1,6 +1,6 @@
 # Put Consultix Solutions online
 
-The current update-kit changes are a review revision. The owner requested no live deployment without fresh approval. Follow PREVIEW.md to review them; the production steps below are for use after that approval.
+The owner approved publication of the update-kit revision, with the co-founder section removed, on 29 October 2026. Use the existing GitHub main → Netlify production workflow after validation. Preserve domain/email and indexing configuration.
 
 The final website address is **https://consultix.solutions/**. Netlify supplies a temporary address ending in `.netlify.app` before the custom domain is connected.
 

@@ -6,9 +6,9 @@ The site uses plain HTML, CSS and JavaScript. It has no production package depen
 
 ## Current review version
 
-The 28 October 2026 update kit is implemented on `consultix-update-kit-review`, based on `a12fea7`. This revision is for local review only. The owner explicitly asked for no live deployment without new approval. Do not push or merge these changes to `main`, upload the build to Netlify, change DNS, or enable search indexing as part of this review.
+The 28 October 2026 update kit is implemented on `consultix-update-kit-review`, based on `a12fea7`. The owner approved publishing the updated version on 29 October 2026 after asking for the co-founder section to be removed. Publish through the existing GitHub-to-Netlify workflow after validation. This approval does not change DNS, email, legal content or search-indexing settings. No approved client quotations were supplied, so testimonials remain hidden on the live site; a separately labelled layout screenshot uses preview placeholders only.
 
-See [PREVIEW.md](PREVIEW.md) for the simplest preview instructions and [REVIEW-NOTES.md](REVIEW-NOTES.md) for changes and verification.
+See [PREVIEW.md](PREVIEW.md) for the simplest preview instructions, [REVIEW-NOTES.md](REVIEW-NOTES.md) for changes and verification, and [CODEX-HANDOFF.md](CODEX-HANDOFF.md) for the revised brief to share with Codex.
 
 ## Development
 
@@ -58,9 +58,9 @@ The audience guide covers representative startup, B2B SaaS and established SME q
 
 `content.js` is the shared English/German copy source for `data-i` elements. `localise.js` renders both language pages at build time. `index.html` retains readable English template text; keep this consistent with `content.js` when changing the structure or copy. Calculator-specific copy remains in `forecast.js` and `metrics.js`. German uses formal Sie. An owner-arranged native-language editorial review remains useful before approving publication.
 
-## Founders and client feedback
+## Client feedback
 
-Founder cards contain only Kristina, Jan and Aleksandar, each with the confirmed title Co-founder. The section is text only; it has no photographs, portrait placeholders, invented specialisms or biographies.
+The owner requested removal of the co-founder section on 29 October 2026. It is removed from the page, both language dictionaries and the associated styles. Do not restore the section from an older brief.
 
 `approvedTestimonials` in `app.js` remains empty because the kit supplies no approved quotations. The entire section stays hidden until genuine approved records exist. Its manual carousel supports up to five records, one visible at a time, previous/next bounds, ArrowLeft/ArrowRight and Home/End navigation, translated status, reduced motion and stable selection across language changes. It does not auto-advance.
 
@@ -97,7 +97,7 @@ The tests use `/usr/bin/chromium` by default. `CHROMIUM_PATH` can select another
 
 ## Publishing
 
-See [DEPLOYMENT.md](DEPLOYMENT.md). Earlier versions were published to `tinajanks-sketch/website` and connected to Netlify. The current review requires fresh owner approval before publication. Import the existing GitHub repository in Netlify, use branch `main`, build command `npm run build` and publish directory `dist`. The included `netlify.toml` already supplies those settings and Node.js 24. This route does not require a Netlify API token or activation of this chat's cloud-environment settings. A source-code upload alone does not configure hosting, DNS or HTTPS.
+See [DEPLOYMENT.md](DEPLOYMENT.md). Earlier versions were published to `tinajanks-sketch/website` and connected to Netlify. The owner approved publication of this revision on 29 October 2026. Subsequent unrelated changes need their own applicable authorisation. Import the existing GitHub repository in Netlify, use branch `main`, build command `npm run build` and publish directory `dist`. The included `netlify.toml` already supplies those settings and Node.js 24. This route does not require a Netlify API token or activation of this chat's cloud-environment settings. A source-code upload alone does not configure hosting, DNS or HTTPS.
 
 An optional API uploader is retained under `tools` for separately authorized API deployments. It uses the official `@netlify/open-api` 2.63.0 protocol. Unit tests simulate recovery and publication safeguards; they are not a live Netlify deployment test.
 
