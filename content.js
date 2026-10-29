@@ -307,9 +307,11 @@
     "lensOperationsBody": "Capacity, delivery timing and process ownership help assess whether plans are feasible and where cost or service pressure may emerge.",
     "lensOperationsMetrics": "Example measures: utilisation · delivery cycle · project margin",
     "lensFoot": "Illustrative questions and measures, not a diagnostic result. Scope and definitions depend on the business.",
-    "practiceDetailsLabel": "What this can include",
+    "practiceDetailsLabel": "Scope and deliverables",
     "practiceEnquire": "Discuss this service",
-    "examplesExpand": "View illustrative project examples"
+    "examplesExpand": "Explore the illustrative briefs",
+    "valuesExplore": "Our principles",
+    "financeServicesExpand": "Explore planning and reporting support"
   },
   "de": {
     "skip": "Zum Inhalt springen",
@@ -613,9 +615,11 @@
     "lensOperationsBody": "Kapazitäten, Leistungstermine und Prozessverantwortung zeigen, ob Pläne realistisch sind und wo Kosten- oder Leistungsdruck entsteht.",
     "lensOperationsMetrics": "Beispielkennzahlen: Auslastung · Durchlaufzeit · Projektmarge",
     "lensFoot": "Beispielhafte Fragen und Kennzahlen, kein Diagnoseergebnis. Umfang und Definitionen hängen vom Geschäftsmodell ab.",
-    "practiceDetailsLabel": "Mögliche Leistungen und Ergebnisse",
+    "practiceDetailsLabel": "Leistungen und Ergebnisse",
     "practiceEnquire": "Diese Leistung besprechen",
-    "examplesExpand": "Beispielhafte Projekte ansehen"
+    "examplesExpand": "Beispielhafte Projektbeschreibungen ansehen",
+    "valuesExplore": "Unsere Grundsätze",
+    "financeServicesExpand": "Mehr zu Finanzplanung und Reporting"
   }
 };
 });
