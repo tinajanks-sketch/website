@@ -19,7 +19,7 @@ Read `CODEX-HANDOFF.md` before editing. It is the authoritative positioning, cop
 - Accounting distinction between bookings, recognised revenue, invoices, receivables and cash. Illustrative financial data is not client data.
 
 ## Design review status
-The Mineral Slate & Copper changes are on a **separate review branch**, not yet approved for production. Do not merge or deploy this redesign until the owner explicitly approves it. Check desktop/mobile screenshots and the readable text/controls of the financial widgets before recommending release.
+The Mineral Slate & Copper changes (with the original website logo/favicons preserved, smaller hero headline and brighter coral primary buttons) are on a **separate review branch**, not yet approved for production. Do not merge or deploy this redesign until the owner explicitly approves it. Check desktop/mobile screenshots and the readable text/controls of the financial widgets before recommending release.
 
 ## Required verification
 Run the test suite in the actual checkout:
