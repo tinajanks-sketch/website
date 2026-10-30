@@ -4,7 +4,11 @@ Independent English/German business website for `consultix.solutions`, based on 
 
 The site uses plain HTML, CSS and JavaScript. It has no production package dependencies, website-builder subscription or application server requirement. Hosting-provider free-plan limits still apply; domain registration and email are separate services.
 
-## Mineral Slate & Copper design refresh (review only)
+## Homepage refinement — approved 30 October 2026
+
+The owner approved publication of the latest homepage changes: remove the full rolling P&L example, add the owner-supplied qualifications, use “HubSpot certified” and “Acumatica certified” without IDs/names, shorten repetitive introductions, and place the remaining KPI examples inside an optional disclosure. The current slate-and-copper identity and other working features remain. The GitHub PR API is unavailable here; this approved revision uses the existing GitHub main → Netlify workflow. No DNS, email, noindex, legal or hosting configuration changes are included.
+
+## Mineral Slate & Copper design refresh
 
 A website-wide editorial colour, typography and copy update was **approved for production on 29 October 2026** and prepared on `consultix-mineral-slate-copper-design`. It uses deep slate, warm ivory, mineral blue and restrained copper, improves the hero's typography and contrast (76px desktop headline cap and 50px standard section headings), preserves the existing Consultix logo, and restores the original high-contrast coral button, and refines the service, financial tool and contact styling. **Publication was expressly approved by the owner on 29 October 2026.** See `DESIGN-SYSTEM-2026.md` for the rationale and QA checklist.
 
@@ -90,7 +94,7 @@ Visible example engagement cards remain clearly labelled illustrative scopes. Tr
 
 ## Metric explorer
 
-`metrics.js` adds three independent, hypothetical EUR examples: gross margin, net revenue retention and cash runway. Inputs stay in the browser. Each example includes its formula, evaluated arithmetic, proportional input bars and limitations. Percentage results and months display to one decimal; calculations retain precision until formatting.
+`metrics.js` adds three independent, hypothetical EUR examples: gross margin, net revenue retention and cash runway. They are available inside a native disclosure that starts collapsed to keep the homepage concise. Opening/closing and language changes preserve entered values; reloading starts with a compact overview again. Inputs stay in the browser. Each example includes its formula, evaluated arithmetic, proportional input bars and limitations. Percentage results and months display to one decimal; calculations retain precision until formatting.
 
 - Gross margin = (revenue − direct delivery costs) / revenue × 100. Default: (120,000 − 48,000) / 120,000 = 60.0%. Zero revenue is undefined; negative margins are allowed.
 - NRR = (opening cohort MRR + expansion − contraction − churn) / opening MRR × 100. Default: (50,000 + 8,000 − 2,000 − 4,000) / 50,000 = 104.0%. New customers are excluded. Zero opening MRR and cohort losses above the opening base show explanations.
@@ -98,7 +102,7 @@ Visible example engagement cards remain clearly labelled illustrative scopes. Tr
 
 ## Professional qualifications
 
-The owner supplied these exact qualification titles on 30 October 2026: Microsoft Certified: Power BI Data Analyst Associate (Microsoft) and Certified Corporate FP&A Professional (FPAC), Association for Financial Professionals. They appear in a compact bilingual, text-only strip, without company-partner claims or recreated issuer badges. The owner requested HubSpot and Acumatica certification to be mentioned generically, with no IDs or personal names. No specific certification level or partner status is inferred. No independent credential verification is claimed.
+The owner supplied these exact qualification titles on 30 October 2026: Microsoft Certified: Power BI Data Analyst Associate (Microsoft) and Certified Corporate FP&A Professional (FPAC), Association for Financial Professionals. They appear in a compact bilingual, text-only strip, without company-partner claims or recreated issuer badges. The owner requested the exact labels “HubSpot certified” and “Acumatica certified”, with German equivalents and no IDs or personal names. No specific certification level or partner status is inferred. No independent credential verification is claimed.
 
 ## Removed homepage rolling forecast
 

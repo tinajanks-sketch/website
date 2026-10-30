@@ -69,3 +69,6 @@ Comparative research references: [RevOps Hub homepage](https://www.revops-hub.co
 
 ## Homepage simplification — 30 October 2026
 The owner selected the complete rolling P&L forecast for removal. Earlier visual/checklist references to preserving that widget are historical and are superseded by this request. Keep the current identity and finance-service disclosure; do not add replacement statistics or a second simulator. The remaining metric explorer is separate and has not been selected for removal. The main CTA arrow is drawn with CSS so its appearance is independent of installed system-font glyphs.
+
+## Approved final homepage refinement — 30 October 2026
+The owner approved publication of the selected simplifications and requested the exact labels “HubSpot certified” and “Acumatica certified”. Keep the four-column text-only qualifications strip, no IDs or names, current identity and finance-service detail. Reduce repeated introductory copy and start the remaining KPI examples inside a closed native disclosure; the tool remains fully usable when opened. The removed rolling P&L widget is not restored. No decorative client statistics, invented badges or partnerships are added.

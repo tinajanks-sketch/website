@@ -1,10 +1,13 @@
 # Consultix Solutions — five-practice positioning and design handoff
-Updated: 30 October 2026. **The owner explicitly approved publication of this revision on 29 October 2026.** All further changes and deployments beyond this approved scope require approval.
+Updated: 30 October 2026. **The owner explicitly approved publication of the current homepage refinement on 30 October 2026.** Future independent changes still require applicable approval.
 
 Website: https://consultix.solutions/
 Repository: https://github.com/tinajanks-sketch/website
 Source review branch: `consultix-five-practices-2026-review` (approved for publication to main)
 Business email: general@consultix.solutions
+
+## Approved final refinement — 30 October 2026
+The owner requested “HubSpot certified” and “Acumatica certified” with no IDs or personal names, the other discussed simplifications, and an update to the website. Shorter English/German hero, audience and finance copy removes repetition. The remaining KPI examples stay available inside a native disclosure that starts collapsed, opens with keyboard or pointer, and preserves its state across language switching. The large rolling P&L example remains removed. Keep the current design, five practices, offers, contact and other interactions. The owner has approved publishing this scope; no additional confirmation is needed for these changes.
 
 ## Owner-requested removal — 30 October 2026
 The owner selected the illustrative rolling P&L forecast for removal to simplify the homepage. Remove the entire widget and its controls, chart, variance/table views, CSV download, no-script fallback and client runtime in English and German. Keep the five service practices and current slate-and-copper identity. This latest request supersedes earlier instructions to preserve the interactive forecast. It does not authorise unrelated copy cuts or claims about credentials/partnerships.
@@ -64,6 +67,6 @@ npm run test:metrics
 npm run test:browser
 npm run test:deploy
 ```
-Then manually test English and German directly at root and /de/, with and without JavaScript, and desktop/mobile widths including 320px. Check all five practice/offer cards, enquiry selection, details toggles, focus handling, reduced motion, accessibility, the absence of the removed forecast, the remaining metric controls and their reset behaviour. Verify the built preview independently before sharing screenshots. These checks **have not yet been run** against the new review branch in this conversation.
+Then manually test English and German directly at root and /de/, with and without JavaScript, and desktop/mobile widths including 320px. Check all five practice/offer cards, enquiry selection, details toggles, focus handling, reduced motion, accessibility, the absence of the removed forecast, the remaining metric controls and their reset behaviour. Verify the built preview independently before sharing screenshots. Record the actual check results for the final revision; do not reuse historical results for changed code.
 
-Publication of this specific revision has been approved. Before any subsequent update, provide the test results and a reviewable PR; do not deploy further unapproved changes. See `AGENTS.md` for the post-publication Codex continuation task.
+Publication of this specific refinement has been approved on 30 October. The review branch is available for inspection. GitHub PR APIs are blocked in this environment, so use the existing Git publishing route for this approved revision and report deployment-verification limits. Future independent updates still need their applicable review and approval. See `AGENTS.md` for the post-publication Codex continuation task.

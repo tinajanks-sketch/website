@@ -639,3 +639,18 @@ h3{font-size:clamp(22px,2vw,30px);letter-spacing:-.028em}
 .credential-issuer{font-size:12px;line-height:1.6;color:var(--graphite);margin-top:12px}
 @media(max-width:900px){.credentials-inner{grid-template-columns:1fr 1fr}.credentials h2{grid-column:1/-1}.credential{padding-left:0;border-left:0;border-top:1px solid var(--line);padding-top:20px}}
 @media(max-width:600px){.credentials{padding-block:30px}.credentials-inner{grid-template-columns:1fr;gap:22px}.credentials h2{font-size:17px}.credential h3{font-size:17px}}
+
+/* Optional metric examples reduce the initial reading load without removing the tool. */
+.metric-explorer{padding-block:34px}
+.metric-disclosure>summary{list-style:none;cursor:pointer;padding:22px 24px;border:1px solid var(--line);border-radius:9px;background:var(--white)}
+.metric-disclosure>summary::-webkit-details-marker{display:none}
+.metric-disclosure>summary h2{display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:clamp(21px,2vw,27px);line-height:1.4;max-width:none;white-space:normal;margin:0}
+.metric-disclosure>summary:hover{border-color:var(--mineral)}
+.metric-disclosure>summary:focus-visible{outline:3px solid var(--coral);outline-offset:4px}
+.metric-disclosure-icon{position:relative;display:block;flex-shrink:0;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;color:var(--mineral)}
+.metric-disclosure-icon:before,.metric-disclosure-icon:after{content:'';position:absolute;top:12px;left:8px;width:10px;height:1px;background:currentColor}
+.metric-disclosure-icon:after{transform:rotate(90deg)}
+.metric-disclosure[open] .metric-disclosure-icon:after{transform:none}
+.metric-disclosure-content{padding-top:28px}
+.metric-intro{font-size:16px;color:var(--graphite);max-width:1050px;line-height:1.75;margin:0 0 25px}
+@media(max-width:700px){.metric-explorer{padding-block:24px}.metric-disclosure>summary{padding:18px}.metric-disclosure>summary h2{font-size:21px;gap:15px}}

@@ -24,8 +24,9 @@
   }
   const copy = {
     en: {
+      compactTitle: 'Explore KPI definitions',
       eyebrow: 'METRIC EXPLORER · ILLUSTRATIVE ASSUMPTIONS', title: 'A useful metric starts with a clear definition.',
-      intro: 'Explore three calculations, adjust the sample inputs and see what each measure can tell you. These independent examples are not client results, forecasts or performance benchmarks.',
+      intro: 'Optional examples of gross margin, revenue retention and cash runway. Adjust hypothetical inputs to explore the definitions and calculations.',
       margin: 'Gross margin', retention: 'Net revenue retention', runway: 'Cash runway',
       revenue: 'Revenue · EUR / month', delivery: 'Direct delivery costs · EUR / month',
       opening: 'Opening MRR · EUR / month', expansion: 'Expansion MRR · EUR / month', contraction: 'Contraction MRR · EUR / month', churn: 'Churned MRR · EUR / month',
@@ -45,8 +46,9 @@
       updated: 'Example updated: '
     },
     de: {
+      compactTitle: 'Kennzahlen und Beispiele ansehen',
       eyebrow: 'KENNZAHLEN ENTDECKEN · FIKTIVE ANNAHMEN', title: 'Eine nützliche Kennzahl beginnt mit einer klaren Definition.',
-      intro: 'Entdecken Sie drei Berechnungen, ändern Sie die Beispielwerte und prüfen Sie die Aussagekraft. Diese unabhängigen Beispiele sind weder Kundenergebnisse noch Prognosen oder Leistungsbenchmarks.',
+      intro: 'Optionale Beispiele zu Bruttomarge, Umsatzbindung und Liquiditätsreichweite. Ändern Sie fiktive Eingaben, um Definitionen und Berechnungen nachzuvollziehen.',
       margin: 'Bruttomarge', retention: 'Nettoumsatzbindung', runway: 'Liquiditätsreichweite',
       revenue: 'Umsatz · EUR / Monat', delivery: 'Direkte Leistungskosten · EUR / Monat',
       opening: 'MRR zu Beginn · EUR / Monat', expansion: 'Zusätzlicher MRR · EUR / Monat', contraction: 'Reduzierter MRR · EUR / Monat', churn: 'Gekündigter MRR · EUR / Monat',

@@ -1,3 +1,21 @@
+# Approved homepage update — 30 October 2026
+
+The owner explicitly requested “HubSpot certified” and “Acumatica certified”, the other discussed homepage refinements and publication. This approval follows inspection of the review branch and supersedes the earlier pending-publication status for this scope.
+
+- Publishes the full rolling P&L widget removal and the four owner-supplied qualifications, with no IDs or personal names.
+- Uses the requested English certification labels and German equivalents.
+- Shortens the hero, audience and finance introductions, removing repeated paragraphs.
+- Keeps the remaining KPI definitions/calculators behind a native disclosure that starts collapsed. Keyboard access, calculation updates, German direct URLs and state across language changes were checked.
+- Preserves the current slate-and-copper design, five practices, offers, enquiry routing, other interactions and the corrected CSS CTA arrow. No client results or fabricated testimonials are added.
+- Validation passed: 42 Node tests, 3 Python deployment-helper tests and 218 functional browser checks, including desktop/mobile WCAG 2/2.1 A/AA automated scans. Build, syntax and whitespace checks passed. English/German pages were checked at 320–1920px; the closed KPI overview and qualifications were inspected visually.
+- Current screenshots: `/workspace/exports/approved-homepage-2026-10-30/`.
+- GitHub PR APIs remain forbidden from this environment. The owner has approved publishing, so this revision uses the existing authenticated Git main → Netlify publishing route. A source push and a verified Netlify deployment remain distinct; report actual remote SHA and any live-verification limitation.
+- No changes to Netlify build configuration, domain/DNS, mail, legal content, indexing directives or brand assets.
+
+---
+
+Earlier review records follow; their pending-publication statements describe the earlier stage.
+
 # Homepage refinement review — 30 October 2026
 
 Base: published commit `73a4ee9`. Review branch: `remove-homepage-forecast`.
