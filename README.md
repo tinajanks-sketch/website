@@ -98,7 +98,7 @@ Visible example engagement cards remain clearly labelled illustrative scopes. Tr
 
 ## Professional qualifications
 
-The owner supplied these exact qualification titles on 30 October 2026: Microsoft Certified: Power BI Data Analyst Associate (Microsoft) and Certified Corporate FP&A Professional (FPAC), Association for Financial Professionals. They appear in a compact bilingual, text-only strip, without company-partner claims or recreated issuer badges. Attribution to named credential holders and the exact HubSpot/Acumatica certificate names remain pending. No independent credential verification is claimed.
+The owner supplied these exact qualification titles on 30 October 2026: Microsoft Certified: Power BI Data Analyst Associate (Microsoft) and Certified Corporate FP&A Professional (FPAC), Association for Financial Professionals. They appear in a compact bilingual, text-only strip, without company-partner claims or recreated issuer badges. The owner requested HubSpot and Acumatica certification to be mentioned generically, with no IDs or personal names. No specific certification level or partner status is inferred. No independent credential verification is claimed.
 
 ## Removed homepage rolling forecast
 

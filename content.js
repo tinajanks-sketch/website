@@ -6,6 +6,12 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   return {
   "en": {
+    "credentialHubSpotCategory": "CRM & REVENUE OPERATIONS",
+    "credentialHubSpotTitle": "HubSpot certification",
+    "credentialHubSpotIssuer": "HubSpot",
+    "credentialAcumaticaCategory": "BUSINESS SYSTEMS",
+    "credentialAcumaticaTitle": "Acumatica certification",
+    "credentialAcumaticaIssuer": "Acumatica",
     "credentialsTitle": "Professional qualifications",
     "credentialMicrosoftCategory": "DATA ANALYTICS",
     "credentialMicrosoftTitle": "Microsoft Certified: Power BI Data Analyst Associate",
@@ -322,6 +328,12 @@
     "offerDetails": "What the project includes"
   },
   "de": {
+    "credentialHubSpotCategory": "CRM & REVENUE OPERATIONS",
+    "credentialHubSpotTitle": "HubSpot-Zertifizierung",
+    "credentialHubSpotIssuer": "HubSpot",
+    "credentialAcumaticaCategory": "UNTERNEHMENSSYSTEME",
+    "credentialAcumaticaTitle": "Acumatica-Zertifizierung",
+    "credentialAcumaticaIssuer": "Acumatica",
     "credentialsTitle": "Berufliche Qualifikationen",
     "credentialMicrosoftCategory": "DATENANALYSE",
     "credentialMicrosoftTitle": "Microsoft Certified: Power BI Data Analyst Associate",

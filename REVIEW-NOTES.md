@@ -4,7 +4,7 @@ Base: published commit `73a4ee9`. Review branch: `remove-homepage-forecast`.
 
 - Removed the entire rolling P&L simulator, monthly comparison table, CSV/reset controls, model runtime and unused styles from both language pages. Financial consulting services remain available through their existing disclosure. The calculation module/tests remain offline only.
 - Updated links and captions that referred to the removed example. The independent metric explorer and current slate-and-copper design remain.
-- Added a compact, text-only qualifications strip using the owner's exact Microsoft Power BI and AFP FPAC titles. Credential-holder attribution and precise HubSpot/Acumatica certificate names remain pending. No issuer badges or company-partner claims are invented.
+- Added a compact, text-only qualifications strip using the owner's exact Microsoft Power BI and AFP FPAC titles. At the owner’s request, no individual names or IDs are displayed. HubSpot and Acumatica use generic certification descriptions without an invented level or specialism. No issuer badges or company-partner claims are invented.
 - Fixed the primary CTA arrow rendering as a missing-font square by drawing it in CSS.
 - Passed 42 Node checks/tests (positioning, design, content layout, archived forecast model and active metric calculations), 3 Python deployment-helper tests and 212 functional browser checks with desktop/mobile WCAG 2/2.1 A/AA scans. The build and syntax checks pass. Browser checks cover both languages, direct German pages, no-script service access, controls, contact draft and 320–1920px page widths. Screenshots were inspected for the compact finance section, credentials and CTA arrow.
 - Current screenshots: `/workspace/exports/homepage-refinement-2026-10-30/`.
