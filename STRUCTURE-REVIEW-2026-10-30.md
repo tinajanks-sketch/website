@@ -6,6 +6,10 @@ to production. The owner asked for more distinction between sections, the visibl
 business-type explanation, image-based qualifications near the end and a modern,
 professional presentation similar in polish to a Wix design.
 
+The owner's subsequent geographic edit replaces Germany/the Balkans with
+**Europe and the US** throughout the English audience copy and **Europa und die
+USA** in German, including the optional audience closing text.
+
 ## Current page structure
 
 1. Slate architectural hero; existing logo and fonts.
