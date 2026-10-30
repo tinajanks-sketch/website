@@ -1,5 +1,10 @@
 # Consultix editorial refinement — review draft
 
+The owner subsequently requested stronger section distinction, the visible
+business-type guide and image-based qualifications near the end. The current
+follow-up is documented in `STRUCTURE-REVIEW-2026-10-30.md`. The measurements and
+captures below describe the previous editorial draft.
+
 Prepared on `consultix-editorial-refinement`, based on published `main` commit `ba2bc7f`.
 The owner requested more natural copy and better colour and page structure. This
 draft has not been merged into `main` or published to the production website.

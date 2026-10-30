@@ -1,5 +1,15 @@
 # Preview the Consultix update
 
+## Latest section and carousel review — 30 October 2026
+
+Continue on `consultix-editorial-refinement`. The owner requested distinct section
+colours, the business-type guide visible on the main page and image-based
+qualifications near the end. See `STRUCTURE-REVIEW-2026-10-30.md`. Screenshots are in
+`/workspace/exports/structured-review-2026-10-30/`. Run `npm run build` for current
+standalone English/German HTML. Qualification pictures are original editorial
+illustrations; actual issuer badges have not been supplied or retrieved. This is
+still a review draft; `main` and the live site have not been changed.
+
 ## Latest editorial review draft — 30 October 2026
 
 The current review branch `consultix-editorial-refinement` proposes more natural

@@ -5,7 +5,7 @@ const path=require('node:path');
 const {localise}=require('./localise.js');
 const root=__dirname;
 const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.woff2':'font/woff2'};
-const assets=new Set(['architecture.svg','favicon.svg','manrope-latin-wght-normal.woff2','dm-sans-latin-wght-normal.woff2']);
+const assets=new Set(['architecture.svg','favicon.svg','manrope-latin-wght-normal.woff2','dm-sans-latin-wght-normal.woff2','qualification-data.svg','qualification-finance.svg','qualification-crm.svg','qualification-systems.svg']);
 http.createServer((request,response)=>{
   let pathname;
   try{pathname=new URL(request.url,'http://localhost').pathname;}catch{response.writeHead(400);return response.end('Bad request');}

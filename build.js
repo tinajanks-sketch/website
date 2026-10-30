@@ -20,6 +20,7 @@ html=html.replace(script,'');
 html=html.replace(metricsScript,'');
 html=html.replace(contentScript,'');
 html=html.replace('href="./assets/favicon.svg"',()=> 'href="'+dataUrl('favicon.svg')+'"');
+html=html.replace(/src="\.\/assets\/(qualification-(?:data|finance|crm|systems)\.svg)"/g,(_,name)=>'src="'+dataUrl(name)+'"');
 if(process.env.SITE_INDEXABLE==='1')html=html.replace('content="noindex,nofollow"','content="index,follow"');
 if(/(?:href|src)="\.\//.test(html)||/url\(['"]\.\/assets\//.test(html))throw Error('A local asset has not been embedded.');
 const output=path.join(__dirname,'dist');

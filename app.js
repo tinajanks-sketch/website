@@ -36,6 +36,7 @@ function setLanguage(next){
     try{history.replaceState(null,'',(next==='de'?'/de/':'/')+location.search+location.hash);}catch{}
   }
   metricExplorer?.setLanguage(next);
+  credentialCarousel.setLanguage(next);
   choiceSelectors.forEach(selector=>selector.clearStatus());
   renderApprovedTestimonials(approvedTestimonials,next);
   document.getElementById('copy-status').textContent='';
@@ -188,7 +189,70 @@ function setupChoices(id) {
   root.hidden=false;
   return { clearStatus() { status.textContent=''; } };
 }
+
+// A manual image rail: native swipe/scroll, keyboard and buttons, never autoplay.
+function setupCredentialCarousel() {
+  const section = document.getElementById('qualifications');
+  const track = section.querySelector('.credential-track');
+  const cards = [...track.querySelectorAll('.credential')];
+  const controls = section.querySelector('.credential-controls');
+  const previous = section.querySelector('#credential-previous');
+  const next = section.querySelector('#credential-next');
+  const position = section.querySelector('#credential-position');
+  let locale = 'en';
+  let frame = 0;
+  function update() {
+    const bounds = track.getBoundingClientRect();
+    const visible = cards.map((card,index) => {
+      const box = card.getBoundingClientRect();
+      const intersection = Math.max(0,Math.min(box.right,bounds.right)-Math.max(box.left,bounds.left));
+      return intersection >= box.width * .6 ? index + 1 : null;
+    }).filter(Boolean);
+    previous.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+    const first = visible[0] || 1;
+    const last = visible.at(-1) || first;
+    position.textContent = first + (first === last ? '' : '–' + last) + (locale === 'de' ? ' von ' : ' of ') + cards.length;
+  }
+  function scheduleUpdate() {
+    if (frame) return;
+    frame = requestAnimationFrame(() => { frame = 0; update(); });
+  }
+  function move(direction) {
+    const step = cards[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 0);
+    const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    track.scrollBy({left:direction * step,behavior});
+  }
+  previous.addEventListener('click',() => move(-1));
+  next.addEventListener('click',() => move(1));
+  track.addEventListener('scroll',scheduleUpdate,{passive:true});
+  track.addEventListener('keydown',event => {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault(); move(event.key === 'ArrowLeft' ? -1 : 1);
+    } else if (event.key === 'Home' || event.key === 'End') {
+      event.preventDefault();
+      const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      track.scrollTo({left:event.key === 'Home' ? 0 : track.scrollWidth,behavior});
+    }
+  });
+  if (typeof ResizeObserver === 'function') new ResizeObserver(scheduleUpdate).observe(track);
+  else window.addEventListener('resize',scheduleUpdate);
+  document.fonts?.ready.then(scheduleUpdate);
+  controls.hidden = false;
+  track.tabIndex = 0;
+  update();
+  return {
+    setLanguage(nextLanguage) {
+      locale = nextLanguage;
+      track.removeAttribute('aria-labelledby');
+      track.setAttribute('aria-label',window.ConsultixCopy[locale].credentialsBrowse);
+      section.querySelector('.credential-carousel').setAttribute('aria-roledescription',locale === 'de' ? 'Karussell' : 'carousel');
+      update();
+    }
+  };
+}
 const choiceSelectors = ['challenge-finder','alignment-flow','business-guide'].map(setupChoices).filter(Boolean);
+const credentialCarousel = setupCredentialCarousel();
 renderApprovedTestimonials(approvedTestimonials,language);
 
 document.getElementById('year').textContent=String(new Date().getFullYear());

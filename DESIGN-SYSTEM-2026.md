@@ -85,3 +85,15 @@ precede the longer guides, which are preserved inside an optional native
 disclosure. Copy focuses on recognisable problems and concrete work. See
 `EDITORIAL-REVIEW-2026-10-30.md` for preview files, scope and measured layout changes.
 This proposal has not been approved for production publication.
+
+## Owner's section-structure follow-up — 30 October 2026
+
+In the current review draft, the owner requested clearer colour distinctions, a
+visible business-type explanation and image-based qualifications near the end.
+Use mineral blue with white text for the audience band; white for the five
+services; mineral mist behind the prominent business-type guide; ivory for the
+offers; slate for the process. The qualification carousel uses original category
+illustrations until actual certificate/badge files are provided. Do not represent
+them as official issuer artwork. Keep the carousel manual, keyboard- and
+swipe-accessible, and translated. See `STRUCTURE-REVIEW-2026-10-30.md` for the current
+proposal and QA. Existing production approval does not publish this review draft.
