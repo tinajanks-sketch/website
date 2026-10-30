@@ -72,3 +72,16 @@ The owner selected the complete rolling P&L forecast for removal. Earlier visual
 
 ## Approved final homepage refinement — 30 October 2026
 The owner approved publication of the selected simplifications and requested the exact labels “HubSpot certified” and “Acumatica certified”. Keep the four-column text-only qualifications strip, no IDs or names, current identity and finance-service detail. Reduce repeated introductory copy and start the remaining KPI examples inside a closed native disclosure; the tool remains fully usable when opened. The removed rolling P&L widget is not restored. No decorative client statistics, invented badges or partnerships are added.
+
+## Editorial refinement proposal — 30 October 2026
+
+The owner requested more natural language and a more deliberate use of colour and
+structure. The draft on `consultix-editorial-refinement` keeps the established
+palette, fonts, architecture and logo. Ivory carries the main service and offer
+content; mineral mist identifies the process and contact sections; slate carries
+the hero, optional performance lens and footer. Coral remains the primary-action
+colour. Flat project rows replace repeated raised cards. Services and offers
+precede the longer guides, which are preserved inside an optional native
+disclosure. Copy focuses on recognisable problems and concrete work. See
+`EDITORIAL-REVIEW-2026-10-30.md` for preview files, scope and measured layout changes.
+This proposal has not been approved for production publication.

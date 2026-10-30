@@ -654,3 +654,112 @@ h3{font-size:clamp(22px,2vw,30px);letter-spacing:-.028em}
 .metric-disclosure-content{padding-top:28px}
 .metric-intro{font-size:16px;color:var(--graphite);max-width:1050px;line-height:1.75;margin:0 0 25px}
 @media(max-width:700px){.metric-explorer{padding-block:24px}.metric-disclosure>summary{padding:18px}.metric-disclosure>summary h2{font-size:21px;gap:15px}}
+
+/* Editorial refinement: purposeful colour, flatter surfaces and compact project rows.
+   Ivory carries the service/offer story; slate marks the explanatory perspective.
+   Coral is reserved for primary actions. Existing interaction states remain explicit. */
+.hero{background:var(--ink);min-height:min(770px,100svh)}
+.hero:after{background:linear-gradient(90deg,rgba(27,45,55,.95),rgba(27,45,55,.68) 60%,rgba(27,45,55,.3))}
+.hero .eyebrow{color:#D6E0E1;letter-spacing:.08em}
+.hero-description{max-width:650px}
+.hero-foot{color:#C8D2D5}
+.button{border-radius:4px;box-shadow:none}
+.button:hover{box-shadow:none;transform:none}
+.underlined-link{border-color:currentColor}
+.audience{padding-block:48px;background:var(--ivory)}
+.audience h2{font-size:clamp(26px,2.4vw,35px);max-width:460px}
+.audience .section-copy .lead{font-size:clamp(16px,1.25vw,19px);line-height:1.7;margin:0}
+.credentials{background:var(--ivory);padding-block:30px}
+.credentials-inner{gap:20px 28px}
+.credentials h2{font-size:15px;color:var(--graphite)}
+.credential h3{font-size:16px;line-height:1.5}
+.credential-category{letter-spacing:.04em}
+.credential-issuer{margin-top:8px}
+.practices,.engagements,.challenge-finder,.alignment,.strategic-finance,.metric-explorer,.segment-guide,.example-engagements{background:var(--ivory)}
+.practices,.engagements,.challenge-finder,.alignment,.strategic-finance,.segment-guide,.about,.example-engagements{border-top:1px solid var(--line)}
+.practices .practice-row{padding-block:32px;transition:background-color .15s}
+.practices .practice-row:hover,.practices .practice-row:focus-within{padding-left:0;background:#EEF2F0}
+.practice-number{color:var(--graphite);font-weight:500;letter-spacing:0}
+.practice-details-inner{border-left:0;padding-left:0}
+.tags>li{border-radius:3px;background:transparent;padding:6px 10px}
+.engagements{padding-top:64px}
+.review-offer{border:0;border-left:2px solid var(--mineral);border-radius:0;padding:8px 0 8px clamp(24px,3vw,44px);box-shadow:none;background:transparent;gap:clamp(30px,6vw,86px)}
+.review-offer .eyebrow,.ongoing-offer .eyebrow{font-size:11px;letter-spacing:.06em;color:var(--graphite)}
+.review-offer h3{margin-bottom:20px}
+.review-offer .feature-list{border-top:0;padding-top:0}
+.feature-list>li::before{background:var(--mineral)}
+.offer-group-heading{margin-top:52px}
+.offer-group-heading h3{font-size:clamp(23px,2vw,29px)}
+.engagement-cards{display:block}
+.engagement-card{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px clamp(32px,6vw,86px);padding:28px 0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;box-shadow:none;transition:none}
+.engagement-card:hover{transform:none;box-shadow:none;border-color:var(--line)}
+.engagement-card>.eyebrow{grid-column:1;grid-row:1;min-height:0;margin:0;font-size:10px;letter-spacing:.06em}
+.engagement-card>h4{grid-column:1;grid-row:2;min-height:0;margin:0;font-size:clamp(21px,1.65vw,26px);max-width:450px}
+.engagement-card>p:not(.eyebrow){grid-column:2;grid-row:1 / span 2;font-size:16px;line-height:1.7;margin:0;max-width:660px}
+.engagement-card>.offer-details{grid-column:2;grid-row:3;border:0;margin:0}
+.engagement-card>.offer-details>summary{padding-block:8px;min-height:42px}
+.engagement-card>.text-link{grid-column:1;grid-row:3;justify-self:start;align-self:start;margin-top:8px;font-size:13px}
+.startup-note{margin-top:22px;padding-top:24px}
+.startup-note p,.ongoing-offer>div>p:not(.eyebrow):not(.fee-note){font-size:16px;line-height:1.7;max-width:800px}
+.ongoing-offer{background:transparent;border:0;border-top:1px solid var(--line);border-radius:0;padding:32px 0 0;margin-top:32px}
+.ongoing-offer h3{font-size:clamp(24px,2.3vw,32px)}
+.approach{background:var(--surface-mist);color:var(--ink)}
+.approach .eyebrow,.approach .section-copy,.approach .steps p{color:var(--graphite)}
+.approach .step-number{color:var(--graphite);font-size:13px}
+.approach .step-number:after{background:#AEBFC2}
+.approach .timeline{display:none}
+.approach .steps h3{font-size:clamp(22px,1.8vw,27px);margin-bottom:16px}
+.approach .steps p{font-size:16px;line-height:1.75}
+.connected-lens{background:var(--ink)}
+.connected-lens::before{display:none}
+.lens-card,.lens-card[open]{border-radius:3px}
+.lens-content{animation:none}
+.lens-card summary:focus-visible{border-radius:0}
+.choice-group button{border-radius:3px;background:transparent}
+.choice-panel,.segment-panel{border-radius:0;background:transparent;border-inline:0;box-shadow:none}
+.flow-panel{background:#FFFFFF}
+.strategic-finance .section-heading{margin-bottom:28px}
+.metric-explorer{padding-top:0}
+.metric-disclosure>summary{background:transparent;border-inline:0;border-radius:0;padding-inline:0}
+.metric-workspace,.example-card{border-radius:3px;box-shadow:none}
+.about{background:var(--ivory)}
+.contact{background:var(--surface-mist)}
+.enquiry-form{border-radius:3px;box-shadow:none}
+.site-footer{background:var(--ink)}
+.resource-library{background:var(--ivory);border-block:1px solid var(--line)}
+.resource-summary{list-style:none;cursor:pointer;padding-block:44px}
+.resource-summary::-webkit-details-marker{display:none}
+.resource-summary>.eyebrow{display:block;margin-bottom:16px}
+.resource-summary>h2{display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:clamp(26px,2.8vw,38px);line-height:1.3}
+.resource-summary>p{font-size:16px;line-height:1.7;max-width:720px;color:var(--graphite);margin:16px 50px 0 0}
+.resource-summary:hover .resource-icon{border-color:var(--ink)}
+.resource-summary:focus-visible{outline:3px solid var(--coral);outline-offset:-5px}
+.resource-icon{position:relative;display:block;flex:0 0 38px;width:38px;height:38px;border:1px solid #8DA0A5;border-radius:50%}
+.resource-icon::before,.resource-icon::after{content:'';position:absolute;top:18px;left:11px;width:14px;height:1px;background:var(--ink)}
+.resource-icon::after{transform:rotate(90deg)}
+.resource-library[open]>.resource-summary .resource-icon::after{transform:none}
+.resource-content{border-top:1px solid var(--line)}
+.resource-content>.section{padding-block:clamp(48px,5vw,76px)}
+.resource-content>.metric-explorer{padding-block:0 34px}
+@media(max-width:900px){
+ .review-offer{padding-left:24px}
+ .credential h3{font-size:16px}
+}
+@media(max-width:700px){
+ .hero{min-height:100svh}
+ .audience{padding-block:36px}
+ .credentials{padding-block:26px}
+ .credentials-inner{gap:20px}
+ .practices .practice-row{padding-block:28px}
+ .engagements{padding-top:52px}
+ .review-offer{padding-left:20px}
+ .engagement-card{display:flex;gap:0;padding-block:25px}
+ .engagement-card>.eyebrow{margin-bottom:12px}
+ .engagement-card>h4{font-size:23px;margin-bottom:16px}
+ .engagement-card>p:not(.eyebrow){font-size:16px;margin-bottom:12px}
+ .engagement-card>.offer-details{border-top:1px solid var(--line);margin-bottom:12px}
+ .engagement-card>.text-link{margin-top:0}
+ .approach .steps{margin-top:28px}
+ .choice-panel{padding-inline:0}
+ .segment-panel{padding-inline:0}
+}

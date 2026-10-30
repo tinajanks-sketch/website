@@ -1,5 +1,16 @@
 # Preview the Consultix update
 
+## Latest editorial review draft — 30 October 2026
+
+The current review branch `consultix-editorial-refinement` proposes more natural
+English/German copy, compact project rows, services and offers earlier in the page,
+and optional detailed guides. The existing palette has clearer section roles,
+with fewer decorative effects. The production branch remains unchanged. See
+`EDITORIAL-REVIEW-2026-10-30.md` for changes, before/after measurements and review
+instructions. Screenshots are in
+`/workspace/exports/editorial-refinement-2026-10-30/`. Run `npm run build` to create
+the standalone English and German preview pages.
+
 ## Approved homepage simplification — 30 October 2026
 
 Prepared on `remove-homepage-forecast`, starting from published commit `73a4ee9`. The owner requested removal of the large rolling P&L example and supplied Microsoft and FPAC qualification titles for a compact credentials strip. The current build removes that complete widget from both languages, uses “HubSpot certified” and “Acumatica certified”, shortens repeated introductory text and keeps the remaining KPI examples behind an optional disclosure. It preserves the latest slate-and-copper design and finance service details. It also corrects the primary-button arrow so it does not depend on a system-font glyph.

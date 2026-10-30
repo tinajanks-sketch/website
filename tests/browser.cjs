@@ -24,7 +24,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   page.on('request',request=>{if(/^https?:/.test(request.url())&&!request.url().startsWith(origin+'/'))externalRequests.push(request.url());});
   await page.goto(origin);
   await page.evaluate(()=>document.fonts.ready);
-  check((await page.locator('h1').innerText()).includes('Financial insight'),'English homepage renders');
+  check((await page.locator('h1').innerText())===require('../content.js').en.heroTitle,'English homepage renders the current headline');
   check(await page.locator('.practice-row').count()===5,'Five connected service practices');
   check(await page.locator('#qualifications .credential').count()===4,'The four owner-supplied qualification descriptions appear');
   check(await page.locator('[data-i=credentialHubSpotTitle]').innerText()==='HubSpot certified'&&await page.locator('[data-i=credentialAcumaticaTitle]').innerText()==='Acumatica certified','Credential labels use the requested wording');
@@ -45,6 +45,14 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   check(!await page.locator('#testimonials').isVisible()&&await page.locator('.testimonial-card').count()===0,'Unsupplied testimonials stay hidden');
   check((await page.locator('#example-engagements').innerText()).includes('not completed client projects'),'Example scopes are distinguished from client case studies');
   check(await page.evaluate(()=>[...document.querySelectorAll('a[href^="#"]')].every(link=>document.getElementById(link.getAttribute('href').slice(1)))),'All internal links point to existing sections');
+  check(!await page.locator('.resource-library').evaluate(node=>node.open),'Detailed guides start collapsed');
+  await page.locator('#practice-finance .practice-details>summary').click();
+  await page.locator('#practice-finance a[href="#strategic-finance"]').click();
+  check(await page.locator('.resource-library').evaluate(node=>node.open)&&await page.locator('#finance-title').isVisible(),'Service deep links reveal the detailed guides');
+  await page.locator('.resource-library>summary').focus();await page.keyboard.press('Enter');
+  check(!await page.locator('#challenge-finder').isVisible(),'The detailed guides collapse with the keyboard');
+  await page.keyboard.press('Enter');
+  check(await page.locator('#challenge-finder').isVisible(),'The detailed guides reopen with the keyboard');
   await page.locator('#challenge-finder [data-choice=analytics]').click();
   check(await page.locator('#finder-analytics').isVisible()&&!await page.locator('#finder-finance').isVisible(),'Challenge finder shows the selected recommendation');
   await page.locator('#finder-analytics [data-engagement=review]').click();
@@ -212,8 +220,10 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   check(mobileAccessibility.violations.length===0,'Mobile accessibility: '+JSON.stringify(mobileAccessibility.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))));
   if(screenshotDirectory){
    await page.screenshot({path:path.join(screenshotDirectory,'consultix-mobile-hero.png')});
+   if(!await page.locator('.resource-library').evaluate(node=>node.open))await page.locator('.resource-library>summary').click();
    await page.locator('#strategic-finance').screenshot({path:path.join(screenshotDirectory,'consultix-finance-mobile-without-forecast.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
   }
+  if(!await page.locator('.resource-library').evaluate(node=>node.open))await page.locator('.resource-library>summary').click();
   // Check every new panel at the narrow and wide extremes in both languages.
   for(const language of ['en','de']){
    await page.locator('[data-language='+language+']').click();
@@ -249,6 +259,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   }
   const noScriptContext=await browser.newContext({javaScriptEnabled:false});
   const noScriptPage=await noScriptContext.newPage();await noScriptPage.goto(origin);
+  await noScriptPage.locator('.resource-library>summary').click();
   check(await noScriptPage.locator('#finance-title').isVisible(),'Finance copy is available without JavaScript');
   check(await noScriptPage.locator('#forecast-demo,.finance-noscript').count()===0,'The removed example is absent without JavaScript');
   check(!await noScriptPage.locator('#metric-explorer').isVisible()&&!await noScriptPage.locator('#business-guide').isVisible(),'Inactive new interactions stay hidden without JavaScript');
@@ -262,6 +273,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   check(await directPage.locator('#metric-value').textContent()==='60,0%'&&await directPage.locator('#forecast-demo').count()===0,'Direct German URL initialises the metric explorer without the removed forecast');
   check(await directPage.locator('[data-language=de]').getAttribute('aria-pressed')==='true','Direct German URL selects the German toggle');
   check(!await directPage.locator('#metric-explorer .metric-workspace').isVisible(),'Direct German page also starts with a compact KPI section');
+  await directPage.locator('.resource-library>summary').focus();await directPage.keyboard.press('Enter');
   await directPage.locator('.metric-disclosure>summary').focus();await directPage.keyboard.press('Enter');
   check(await directPage.locator('#metric-explorer .metric-workspace').isVisible()&&await directPage.locator('#metric-value').innerText()==='60,0%','German KPI disclosure opens with the keyboard and shows the calculated result');
   await directPage.locator('[data-language=en]').click();
