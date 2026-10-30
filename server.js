@@ -12,7 +12,7 @@ http.createServer((request,response)=>{
   if(pathname==='/de'){response.writeHead(308,{Location:'/de/'});return response.end();}
   const germanPage=pathname==='/de/'||pathname==='/de/index.html';
   const file=pathname==='/'||germanPage?'index.html':pathname.slice(1);
-  if(!['index.html','style.css','content.js','forecast.js','metrics.js','app.js'].includes(file)&&!(file.startsWith('assets/')&&assets.has(file.slice(7)))){response.writeHead(404);return response.end('Not found');}
+  if(!['index.html','style.css','content.js','metrics.js','app.js'].includes(file)&&!(file.startsWith('assets/')&&assets.has(file.slice(7)))){response.writeHead(404);return response.end('Not found');}
   if(!['GET','HEAD'].includes(request.method)){response.writeHead(405,{Allow:'GET, HEAD'});return response.end('Method not allowed');}
   fs.readFile(path.join(root,file),(error,data)=>{
     if(error){response.writeHead(500);return response.end('Unable to load page');}

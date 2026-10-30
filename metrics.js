@@ -41,7 +41,7 @@
       invalidInputs: 'Enter a value between 0 and 1,000,000,000 in each field.', zeroRevenue: 'Gross margin is undefined when revenue is zero.',
       zeroOpening: 'Retention is undefined when opening MRR is zero.', excessLosses: 'Contraction and churn cannot exceed the opening cohort MRR in this simplified example.',
       nonPositiveBurn: 'No positive net cash burn: this formula does not give a finite runway. Review cash timing and commitments separately.',
-      note: 'All amounts are hypothetical EUR inputs. Calculations use the entered amounts; percentages and months display to one decimal place. Inputs stay in your browser and do not change the P&L forecast above.',
+      note: 'All amounts are hypothetical EUR inputs. Calculations use the entered amounts; percentages and months display to one decimal place. Inputs stay in your browser.',
       updated: 'Example updated: '
     },
     de: {
@@ -62,7 +62,7 @@
       invalidInputs: 'Geben Sie in jedem Feld einen Wert zwischen 0 und 1.000.000.000 ein.', zeroRevenue: 'Bei einem Umsatz von null ist die Bruttomarge nicht definiert.',
       zeroOpening: 'Bei einem MRR von null zu Beginn ist die Umsatzbindung nicht definiert.', excessLosses: 'Reduzierungen und Kündigungen dürfen in diesem vereinfachten Beispiel den MRR der Anfangskohorte nicht übersteigen.',
       nonPositiveBurn: 'Kein positiver Netto-Liquiditätsverbrauch: Die Formel ergibt keine endliche Reichweite. Zahlungszeitpunkte und Verpflichtungen müssen separat betrachtet werden.',
-      note: 'Alle Beträge sind fiktive EUR-Eingaben. Gerechnet wird mit den eingegebenen Beträgen; Prozentwerte und Monate erscheinen mit einer Nachkommastelle. Ihre Eingaben bleiben im Browser und ändern die obige Ergebnisplanung nicht.',
+      note: 'Alle Beträge sind fiktive EUR-Eingaben. Gerechnet wird mit den eingegebenen Beträgen; Prozentwerte und Monate erscheinen mit einer Nachkommastelle. Ihre Eingaben bleiben im Browser.',
       updated: 'Beispiel aktualisiert: '
     }
   };

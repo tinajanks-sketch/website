@@ -35,7 +35,7 @@ test('detailed financial and example material remains available on demand',()=>{
   assert.match(html,/<details class="example-disclosure">/);
   assert.match(html,/<details class="values-disclosure">/);
   assert.equal(count(html,/<details class="offer-details">/g),5);
-  assert.match(html,/id="forecast-demo"/);
+  assert.doesNotMatch(html,/id="forecast-demo"|id="forecast-table"|id="forecast-download"|src="\.\/forecast\.js"/);
   assert.match(html,/id="metric-explorer"/);
   assert.match(html,/id="performance-lens"/);
   assert.match(html,/id="revenue-finance"/);

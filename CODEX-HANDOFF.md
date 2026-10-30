@@ -1,10 +1,16 @@
 # Consultix Solutions — five-practice positioning and design handoff
-Updated: 29 October 2026. **The owner explicitly approved publication of this revision on 29 October 2026.** All further changes and deployments beyond this approved scope require approval.
+Updated: 30 October 2026. **The owner explicitly approved publication of this revision on 29 October 2026.** All further changes and deployments beyond this approved scope require approval.
 
 Website: https://consultix.solutions/
 Repository: https://github.com/tinajanks-sketch/website
 Source review branch: `consultix-five-practices-2026-review` (approved for publication to main)
 Business email: general@consultix.solutions
+
+## Owner-requested removal — 30 October 2026
+The owner selected the illustrative rolling P&L forecast for removal to simplify the homepage. Remove the entire widget and its controls, chart, variance/table views, CSV download, no-script fallback and client runtime in English and German. Keep the five service practices and current slate-and-copper identity. This latest request supersedes earlier instructions to preserve the interactive forecast. It does not authorise unrelated copy cuts or claims about credentials/partnerships.
+
+## Owner-supplied qualifications — 30 October 2026
+The owner supplied Microsoft Certified: Power BI Data Analyst Associate (Microsoft) and Certified Corporate FP&A Professional (FPAC), Association for Financial Professionals, and asked to show credentials. A compact text-only strip uses those exact titles. Named holder attribution and the exact HubSpot/Acumatica certification names are pending. Do not infer certified-partner/company status, invent badges or attribute a qualification to a specific person without the supplied details.
 
 ## Context and purpose
 This handoff supersedes the old October 2026 copy specification where service names, practice order and offer descriptions differ. Work from the current files on the review branch, not from old screenshots or prior plans. Preserve the existing branding and functioning features.
@@ -37,14 +43,14 @@ Write naturally, with connected sentences rather than exaggerated slogans, isola
 ## Visual direction
 - Preserve the architectural hero illustration, logo, Manrope/DM Sans and editorial spacing. The colour/typography refresh proposed on `consultix-mineral-slate-copper-design` uses Mineral Slate & Copper; see `DESIGN-SYSTEM-2026.md` for exact design tokens, dark/light section treatment and accessibility constraints.
 - The new **Connected Performance Lens** uses three native expandable perspectives (financial, commercial and operational). Keep it accessible by keyboard and without JS, mobile-friendly down to 320px, and compatible with reduced motion. It is an explanatory interaction, not a personalised diagnosis.
-- Preserve and improve the existing challenge finder, audience guide, interactive revenue-to-finance flow, rolling financial forecast with CSV, metric explorer, contact form and bilingual language toggle. Avoid gimmicky animated dashboards or redundant widgets.
+- Preserve and improve the existing challenge finder, audience guide, interactive revenue-to-finance flow, metric explorer, contact form and bilingual language toggle. Avoid gimmicky animated dashboards or redundant widgets.
 - Keep emphasis on typography, precise hierarchy, interactive states, focus visibility and sensible whitespace. Reuse existing components and avoid new runtime dependencies, marketing trackers or third-party assets.
 - Existing testimonial data must stay empty; no fictional quotes, invented clients or statistics. The earlier co-founder section was removed at the owner's request and must not be restored.
 
 ## Technical and legal boundaries
 - Keep GoDaddy registration, Netlify hosting/DNS and Zoho email settings unchanged. Preserve `netlify.toml`, build `npm run build`, publish `dist` and Node 24.
 - Retain the published site's noindex configuration until separately approved. Do not change legal/privacy content or send form data to the URL. The form prepares a mailto draft; direct email must remain available.
-- Do not change financial model calculations or hypothetical values. Revenue/operating result is not cash flow; IFRS 15 recognition depends on the applicable contracts and policies. Retain existing forecast boundary handling, German labels and CSV/reset behaviour.
+- Do not change financial model calculations or hypothetical values. Revenue/operating result is not cash flow; IFRS 15 recognition depends on the applicable contracts and policies. The earlier rolling P&L example was explicitly removed on 30 October; retain the calculation module as offline reference only, and do not restore the widget or CSV controls.
 - No guaranteed AI savings, false accreditation, client results, partner badges or regulated tax/audit/investment advice.
 
 ## Verification before launch
@@ -58,6 +64,6 @@ npm run test:metrics
 npm run test:browser
 npm run test:deploy
 ```
-Then manually test English and German directly at root and /de/, with and without JavaScript, and desktop/mobile widths including 320px. Check all five practice/offer cards, enquiry selection, details toggles, focus handling, reduced motion, accessibility, every forecast input and CSV download. Verify the built preview independently before sharing screenshots. These checks **have not yet been run** against the new review branch in this conversation.
+Then manually test English and German directly at root and /de/, with and without JavaScript, and desktop/mobile widths including 320px. Check all five practice/offer cards, enquiry selection, details toggles, focus handling, reduced motion, accessibility, the absence of the removed forecast, the remaining metric controls and their reset behaviour. Verify the built preview independently before sharing screenshots. These checks **have not yet been run** against the new review branch in this conversation.
 
 Publication of this specific revision has been approved. Before any subsequent update, provide the test results and a reviewable PR; do not deploy further unapproved changes. See `AGENTS.md` for the post-publication Codex continuation task.

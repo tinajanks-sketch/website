@@ -1,54 +1,15 @@
 # Preview the Consultix update
 
-## Mineral Slate & Copper review preview — 29 October 2026
+## Homepage forecast removal — 30 October 2026
 
-The site-wide colour, typography and editorial update was **approved for publication on 29 October 2026**. This file preserves the original preview reference and QA history.
+Prepared on `remove-homepage-forecast`, starting from published commit `73a4ee9`. The owner requested removal of the large rolling P&L example and supplied Microsoft and FPAC qualification titles for a compact credentials strip. The current build removes that complete widget from both languages, while preserving the latest slate-and-copper design and the remaining finance service details. It also corrects the primary-button arrow so it does not depend on a system-font glyph.
 
-- English preview: https://deploy-preview-3--consultixsolutions.netlify.app/
-- German preview: https://deploy-preview-3--consultixsolutions.netlify.app/de/
-- Review PR: https://github.com/tinajanks-sketch/website/pull/3
-- Design documentation: [DESIGN-SYSTEM-2026.md](DESIGN-SYSTEM-2026.md)
+Build with `npm run build`. Open `dist/index.html` or `dist/de/index.html`, or use `npm run dev` and the workspace’s port-3000 preview. A localhost address on your own Windows computer does not reach the cloud workspace.
 
-Netlify reported a **successful deploy-preview** build for this branch. Source-level colour, contrast and structural checks passed. Full visual/browser accessibility testing and mobile screenshots have not been completed and should be checked before approval. The preview itself did not modify the live domain; publishing uses the approved GitHub `main` merge and Netlify production deployment.
+Screenshots for this revision are in `/workspace/exports/homepage-refinement-2026-10-30/`. There is no new public deploy-preview URL until a real GitHub pull request and successful Netlify preview build are confirmed. Do not reuse the older PR-3 preview link as though it contains this change.
 
-Review both languages, the smaller desktop hero headline, the original Consultix logo, the brighter coral action button and 320px mobile layout, and try the forecast, KPI explorer, challenge selector and contact form. The new dark slate, warm ivory and muted copper scheme should feel consistent across all sections.
+The remaining finance-service disclosure, challenge finder, performance lens, revenue flow, audience guide, metric explorer and contact draft should remain usable in both languages. No approved client quotations have been supplied. The qualifications strip uses only the exact Microsoft Certified: Power BI Data Analyst Associate and Certified Corporate FP&A Professional (FPAC) titles supplied by the owner. Credential holders and the exact HubSpot/Acumatica titles remain pending. No company partnership status or recreated issuer badges are shown.
 
-The update was prepared on `consultix-update-kit-review`; the owner approved publication on 29 October 2026. Opening the supplied preview files does not change consultix.solutions. The co-founder section is removed. A separate, clearly labelled testimonial-layout screenshot is a design preview, not published client feedback.
+## Publication
 
-## Open the ready-made files
-
-1. Open the supplied preview folder or ZIP. On Windows, extract the ZIP first.
-2. Double-click `index.html` to open the English website in Chrome or Edge.
-3. Use **DE** at the top to switch to German. You can also open `de/index.html` directly.
-4. Try the challenge selector, business-type guide, metric examples, forecast controls and CSV download.
-
-Keep the extension **.html**, not `.txt`. The files contain their own fonts, illustration, styles and scripts, so you do not need Node.js, a terminal or a paid website builder to view them. The testimonial section is intentionally absent because no approved quotations were supplied. Its code is ready for real feedback.
-
-The enquiry form prepares an email draft; your email app sends it. Some browsers restrict clipboard actions on local files, so the visible email address can be selected and copied instead.
-
-## Preview inside the development workspace
-
-From `/workspace/website`:
-
-```sh
-npm run dev
-```
-
-The server uses port **3000**. Open that port in your workspace's preview interface, if available. The English path is `/` and the German path is `/de/`. A localhost address on your own Windows computer does not reach this cloud workspace.
-
-To regenerate the standalone files after source edits, run `npm run build`. Use `dist/index.html` or `dist/de/index.html`.
-
-## Approved publishing workflow
-
-The existing Netlify project already builds GitHub's `main` branch. No new project, domain registration, token or DNS change is needed.
-
-The owner approved this version on 29 October 2026. To publish it:
-
-1. Commit and merge the reviewed changes into `main`, then push `main` to the existing GitHub repository.
-2. In the existing Netlify project's **Deploys**, wait for that commit's production build to show **Published**. Its settings remain `npm run build`, `dist`, Node.js 24.
-3. Open `https://consultix.solutions/` and `/de/`, then check the mobile menu, languages, tools and contact draft. On Windows, press **Ctrl+F5** if an older copy appears.
-
-Use the existing Git workflow; the preview ZIP is for offline review. Search indexing, legal/footer content, contact address and domain settings are outside this update's publishing approval.
-
-## Shorter-copy and editorial structure review
-The same design preview now includes an additional editorial revision: shorter visible text, five expandable service summaries, scoped project-detail disclosures, shorter standard headings and no automatic heading hyphenation. Examine a long service title on desktop and on 320px mobile; verify that text wraps between words rather than breaking one in half. Open a service's *Scope and deliverables* panel and an offer's *What the project includes* panel to confirm all supporting information remains accessible. The interactive financial forecast and Revenue-to-Finance visual should still function independently of these panels. The owner explicitly approved publishing this version on 29 October 2026. Subsequent changes require separate approval.
+Keep the existing Netlify project, domain/DNS, Zoho records, contact email and indexing configuration. Use the repository’s separate review-PR workflow. Report the actual PR and build status; do not claim the live site has changed before publication is confirmed.

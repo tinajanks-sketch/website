@@ -11,14 +11,12 @@ const dataUrl=name=>{
 let html=read('index.html');
 const stylesheet='<link rel="stylesheet" href="./style.css">';
 const script='<script src="./app.js" defer></script>';
-const forecastScript='<script src="./forecast.js" defer></script>';
 const metricsScript='<script src="./metrics.js" defer></script>';
 const contentScript='<script src="./content.js" defer></script>';
-if(!html.includes(stylesheet)||!html.includes(script)||!html.includes(forecastScript)||!html.includes(metricsScript)||!html.includes(contentScript)||!html.includes('</body>'))throw Error('Expected stylesheet, script or body tag is missing.');
+if(!html.includes(stylesheet)||!html.includes(script)||!html.includes(metricsScript)||!html.includes(contentScript)||!html.includes('</body>'))throw Error('Expected stylesheet, script or body tag is missing.');
 const css=read('style.css').replace(/url\(['"]\.\/assets\/([a-z0-9.-]+)['"]\)/g,(_,name)=>'url("'+dataUrl(name)+'")');
 html=html.replace(stylesheet,()=>'<style>'+css+'</style>');
 html=html.replace(script,'');
-html=html.replace(forecastScript,'');
 html=html.replace(metricsScript,'');
 html=html.replace(contentScript,'');
 html=html.replace('href="./assets/favicon.svg"',()=> 'href="'+dataUrl('favicon.svg')+'"');
@@ -29,7 +27,7 @@ fs.mkdirSync(output,{recursive:true});
 for(const language of ['en','de']){
   const directory=language==='de'?path.join(output,'de'):output;
   fs.mkdirSync(directory,{recursive:true});
-  const page=localise(html,language).replace('</body>',()=>'<script>'+read('content.js')+'</script><script>'+read('forecast.js')+'</script><script>'+read('metrics.js')+'</script><script>'+read('app.js')+'</script></body>');
+  const page=localise(html,language).replace('</body>',()=>'<script>'+read('content.js')+'</script><script>'+read('metrics.js')+'</script><script>'+read('app.js')+'</script></body>');
   fs.writeFileSync(path.join(directory,'index.html'),page,'utf8');
   console.log('Built self-contained '+path.relative(__dirname,path.join(directory,'index.html'))+' ('+Buffer.byteLength(page)+' bytes).');
 }

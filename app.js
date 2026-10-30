@@ -9,7 +9,6 @@ const messages = {
 const header = document.getElementById('site-header');
 const menuToggle = document.getElementById('menu-toggle');
 let language = 'en';
-const forecastDemo = window.ConsultixForecast.mount(document.getElementById('forecast-demo'));
 const metricExplorer = window.ConsultixMetrics.mount(document.getElementById('metric-explorer'));
 function setMenu(open,restoreFocus=false){
   header.classList.toggle('menu-open',open);
@@ -36,7 +35,6 @@ function setLanguage(next){
   if(location.protocol!=='file:'){
     try{history.replaceState(null,'',(next==='de'?'/de/':'/')+location.search+location.hash);}catch{}
   }
-  forecastDemo?.setLanguage(next);
   metricExplorer?.setLanguage(next);
   choiceSelectors.forEach(selector=>selector.clearStatus());
   renderApprovedTestimonials(approvedTestimonials,next);

@@ -42,3 +42,8 @@ For future Codex tasks, start from the current `main` branch, read `DESIGN-SYSTE
 
 ## Editorial homepage revision
 The review branch also simplifies copy and introduces progressive disclosure for the five practices, five offer cards, finance service detail, principles and illustrative briefs. Read `DESIGN-SYSTEM-2026.md` for the information hierarchy. The headline must stay moderately sized without mid-word hyphens. Keep all practice details accessible to keyboard and screen reader users, preserve direct enquiry links, and test English/German with and without JavaScript. Run `npm run test:content-layout` in addition to existing checks. This edition of the design and copy is owner-approved for production. Do not merge or deploy further revisions without approval.
+
+## Latest owner request — 30 October 2026
+The owner explicitly selected the illustrative rolling P&L forecast for removal from the homepage to reduce detail. Earlier preservation instructions for that widget and CSV export are superseded by this request. Preserve the finance consulting service and the other current interactions. The tested calculation module can remain offline; it must not be embedded or served to visitors. Check the remaining English/German layouts and links after the removal. Keep the existing review/approval workflow for publication.
+
+The owner also supplied the exact Microsoft Certified: Power BI Data Analyst Associate and Certified Corporate FP&A Professional (FPAC) titles on 30 October for a compact qualifications strip. Preserve their exact names and issuer attribution. The credential-holder names and exact HubSpot/Acumatica certifications have not yet been supplied; do not invent partner status or badges.

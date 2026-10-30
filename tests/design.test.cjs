@@ -45,7 +45,7 @@ test('hero typography is reduced and has responsive safeguards',()=>{
   assert.match(css,/\.hero-illustration\s*\{[^}]*opacity:\.52/);
 });
 test('interactive visual styling and motion safeguards are preserved',()=>{
-  for(const cls of ['.connected-lens','.forecast-demo','.metric-workspace','.choice-group','.enquiry-form']){
+  for(const cls of ['.connected-lens','.strategic-finance','.metric-workspace','.choice-group','.enquiry-form']){
     assert.ok(css.includes(cls),'Missing '+cls);
   }
   assert.match(css, /prefers-reduced-motion:reduce/);

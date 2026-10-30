@@ -20,7 +20,7 @@ The five practices in order are:
 4. Revenue-to-Finance Alignment (strategic finance, profitability, revenue, collections and planning)
 5. AI Enablement & Automation
 
-A native HTML details-based 'connected performance' perspective explorer now explains how financial, commercial and operating decisions connect. The existing financial forecast, KPI calculator, challenge selector, business guide and revenue-to-finance flow remain in place. All new content is bilingual with pre-rendered German fallback. No fake testimonials, badges, or client results were added.
+A native HTML details-based 'connected performance' perspective explorer now explains how financial, commercial and operating decisions connect. The KPI calculator, challenge selector, business guide and revenue-to-finance flow remain in place. The owner requested removal of the homepage rolling P&L forecast on 30 October 2026; its UI, CSV controls and browser runtime are removed in the current revision. All new content is bilingual with pre-rendered German fallback. No fake testimonials, badges, or client results were added.
 
 The review intentionally preserves the financial arithmetic, legal content, email settings, assets and Netlify settings. Follow up with `npm run check`, `npm run build`, `npm run test:forecast`, `npm run test:metrics`, `npm run test:browser`, `npm run test:deploy`, plus responsive and German language review before publication. The Netlify pull-request deploy-preview status succeeded. Full automated browser testing and screenshot inspection were not completed in this conversation; see `AGENTS.md` for the follow-up Codex QA task.
 
@@ -64,7 +64,7 @@ npm run test:metrics
 npm run test:deploy
 ```
 
-Browser checks exercise the built site over HTTP: both languages, 320–1920px layouts, mobile navigation and keyboard interaction, enquiry validation and encoded draft contents, clipboard behavior, language persistence, accessibility scans and absence of third-party requests. They also exercise the business-challenge finder, revenue-to-finance information flow, offer-to-enquiry links, genuine-feedback rendering safeguards and the forecasting interface. Forecast checks cover fixed actuals and budgets, rolling periods, current overhead continuity, annualised growth, variance breakdowns, loss scenarios and CSV export.
+Browser checks exercise the built site over HTTP: both languages, 320–1920px layouts, mobile navigation and keyboard interaction, enquiry validation and encoded draft contents, clipboard behavior, language persistence, accessibility scans and absence of third-party requests. They also exercise the business-challenge finder, revenue-to-finance information flow, offer-to-enquiry links, genuine-feedback rendering safeguards and absence of the removed forecast interface. Archived forecast-model checks cover fixed actuals and budgets, rolling periods, current overhead continuity, annualised growth, variance breakdowns, loss scenarios and CSV export.
 
 ## Services and offers
 
@@ -72,11 +72,11 @@ The five public practices are Financial Planning & Management Reporting; Revenue
 
 The paid entry offer is a Business Performance & Planning Review, with inputs, scope and fixed fee agreed before work begins. Focused offers now follow the five-practice order: Financial Planning & Management Reporting, Revenue Operations & CRM Improvement, Business Intelligence & Data Analytics, Revenue-to-Finance Alignment, and Practical AI & Workflow Pilot. Startup planning and ongoing support remain available with separately agreed scope.
 
-No free audit, invented price, unverified certifications, guaranteed savings, statutory tax/investment/audit advice, or broad outsourced-CFO credentials are advertised. The challenge finder, audience guide, financial simulator, metric explorer, and revenue-to-finance flow remain available with hypothetical figures distinguished from outcomes.
+No free audit, invented price, unverified certifications, guaranteed savings, statutory tax/investment/audit advice, or broad outsourced-CFO credentials are advertised. The challenge finder, audience guide, metric explorer and revenue-to-finance flow remain available with hypothetical figures distinguished from outcomes. The rolling financial simulator has been removed at the owner’s request.
 
 ## Bilingual content
 
-`content.js` is the shared English/German copy source for `data-i` elements. `localise.js` renders both language pages at build time. `index.html` retains readable English template text; keep this consistent with `content.js` when changing the structure or copy. Calculator-specific copy remains in `forecast.js` and `metrics.js`. German uses formal Sie. An owner-arranged native-language editorial review remains useful before approving publication.
+`content.js` is the shared English/German copy source for `data-i` elements. `localise.js` renders both language pages at build time. `index.html` retains readable English template text; keep this consistent with `content.js` when changing the structure or copy. The remaining calculator-specific copy is in `metrics.js`. `forecast.js` is retained as an offline reference and is not served or embedded in production. German uses formal Sie. An owner-arranged native-language editorial review remains useful before approving publication.
 
 ## Client feedback
 
@@ -90,21 +90,21 @@ Visible example engagement cards remain clearly labelled illustrative scopes. Tr
 
 ## Metric explorer
 
-`metrics.js` adds three independent, hypothetical EUR examples: gross margin, net revenue retention and cash runway. Inputs stay in the browser and never change the rolling forecast. Each example includes its formula, evaluated arithmetic, proportional input bars and limitations. Percentage results and months display to one decimal; calculations retain precision until formatting.
+`metrics.js` adds three independent, hypothetical EUR examples: gross margin, net revenue retention and cash runway. Inputs stay in the browser. Each example includes its formula, evaluated arithmetic, proportional input bars and limitations. Percentage results and months display to one decimal; calculations retain precision until formatting.
 
 - Gross margin = (revenue − direct delivery costs) / revenue × 100. Default: (120,000 − 48,000) / 120,000 = 60.0%. Zero revenue is undefined; negative margins are allowed.
 - NRR = (opening cohort MRR + expansion − contraction − churn) / opening MRR × 100. Default: (50,000 + 8,000 − 2,000 − 4,000) / 50,000 = 104.0%. New customers are excluded. Zero opening MRR and cohort losses above the opening base show explanations.
 - Runway = available cash / (monthly cash payments − monthly cash receipts), only for positive, reasonably stable net burn. Default: 150,000 / (75,000 − 50,000) = 6.0 months. Zero/negative burn shows an explanation rather than an infinite or negative runway. This estimate does not replace a cash-flow forecast.
 
-## Illustrative rolling forecast
+## Professional qualifications
 
-The Strategic Finance section includes a dependency-free example in `forecast.js`. All data is hypothetical. Its selectable reporting cutoffs are March, June and September 2026; each selection shows three recent actual months and the next twelve forecast months, including the following calendar year. Summary cards distinguish year-to-date actuals from the twelve-month outlook.
+The owner supplied these exact qualification titles on 30 October 2026: Microsoft Certified: Power BI Data Analyst Associate (Microsoft) and Certified Corporate FP&A Professional (FPAC), Association for Financial Professionals. They appear in a compact bilingual, text-only strip, without company-partner claims or recreated issuer badges. Attribution to named credential holders and the exact HubSpot/Acumatica certificate names remain pending. No independent credential verification is claimed.
 
-The original budget starts with January 2026 revenue of EUR 100,000, 2% monthly growth, variable costs of 40% and monthly fixed overheads of EUR 42,000. Historical actuals are a separate fixed dataset. Forecasts start from the selected cutoff's actual revenue and apply adjustable monthly growth, variable-cost share and fixed-overhead adjustment. The overhead baseline is the latest actual month: EUR 42,500 in March, EUR 43,000 in June and EUR 44,000 in September. A zero adjustment carries that cost forward. The baseline and annualised growth are displayed beside the inputs. Scenario controls never revise actuals or the original budget. Values round to whole euros monthly.
+## Removed homepage rolling forecast
 
-Operating result is revenue minus variable costs and fixed overheads. The simplified example holds adjusted overheads constant and does not model seasonality, hiring, capacity constraints, cash collection/payment timing, financing or taxes. It must not be described as cash flow or a full client forecast. A real client model needs business-specific drivers. The interactive example includes a revenue/result chart, monthly budget variances and a variance breakdown for year-to-date actuals or the forward twelve months. Revenue effects add to the budget result; higher costs reduce it. Calculation notes and a CSV disclose the assumptions and latest actual cost baseline. The model runs entirely in the browser and does not collect or upload financial data. Without JavaScript, the service description remains available and the inactive example is hidden with an explanatory note.
+On 30 October 2026 the owner asked to remove the illustrative rolling P&L forecast to reduce homepage detail. The entire widget, inputs, chart, variance bridge, monthly table, CSV/reset actions, disclaimer/fallback and forecast-specific styles are removed. The production build and development server no longer load or serve `forecast.js`. Finance service descriptions remain available through the existing disclosure panel.
 
-`npm run test:forecast` checks the calculation module against independently calculated reference figures, horizon changes, cost/loss scenarios, overhead continuity, annualised growth, variance reconciliation, immutable actuals and budgets, invalid assumptions and CSV contents. Use a review branch while preparing changes and follow the owner's publishing authorisation. Keep the existing review `noindex,nofollow` setting until separately authorised to change it.
+The calculation module and `npm run test:forecast` are retained as an offline reference; they are not an active website feature. No financial formulas or historical sample figures were changed. Both languages have updated service links and no references to a forecast above or below the current content. Keep the existing `noindex,nofollow` setting until separately authorised to change it.
 
 For optional browser validation, install the tools outside the checkout:
 
@@ -123,4 +123,4 @@ An optional API uploader is retained under `tools` for separately authorized API
 
 ## Content for launch
 
-No client statistics, testimonials, partnership credentials, legal entity details or team biographies are fabricated. The owner has chosen Consultix Solutions as the name; no independent trademark/name clearance is claimed. Add any applicable owner-supplied legal/privacy information before commercial launch. The requested contact address is configured, but its mailbox and delivery have not been verified from this workspace.
+No client statistics, testimonials, company partnerships, legal entity details or team biographies are fabricated. Qualification titles are limited to the owner-supplied facts documented above. The owner has chosen Consultix Solutions as the name; no independent trademark/name clearance is claimed. Add any applicable owner-supplied legal/privacy information before commercial launch. The requested contact address is configured, but its mailbox and delivery have not been verified from this workspace.
