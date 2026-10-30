@@ -405,7 +405,7 @@
     "p1tag4": "Margen & Abweichungen",
     "financeExplore": "Finanzplanung und Reporting ansehen",
     "practice2Title": "Revenue Operations Management & CRM",
-    "practice2Body": "Verkaufschancen bleiben liegen, Leads gehen verloren und der Pipeline fehlt das Vertrauen. Wir verbessern die CRM-Daten, Abläufe und Übergaben hinter dem Bericht.",
+    "practice2Body": "Verkaufschancen bleiben liegen, Leads gehen verloren und der Pipeline-Bericht ist unzuverlässig. Wir verbessern die CRM-Daten, Abläufe und Übergaben hinter dem Bericht.",
     "practice2Output": "Eine CRM-Bestandsaufnahme mit Verbesserungsplan, vereinbarte Pipeline-Phasen, Regeln zur Lead-Zuweisung, ausgewählte Workflows, Berichte und Administrationshinweise.",
     "practice2Benefit": "Klären Sie die Verantwortung je Phase und machen Sie sichtbar, wo Handlungsbedarf besteht.",
     "p2tag1": "Umsatzprozesse & Go-to-Market",
