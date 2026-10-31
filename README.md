@@ -9,7 +9,9 @@ The site uses plain HTML, CSS and JavaScript. It has no production package depen
 The owner approved the complete editorial review: more natural bilingual copy,
 separate section backgrounds, a visible business-type guide, compact offers,
 illustrated qualification carousel and Europe/US targeting. Primary orange
-buttons use white text on `#C25032`, with `#AC432A` on hover, for readable contrast.
+buttons use the owner-requested original `#F47758` with white text and original
+`#FFA080` hover. The owner explicitly rejected the darker alternative; this exact
+pairing has a documented text-contrast exception.
 Publish through the existing Git-connected main → Netlify workflow. No
 infrastructure, indexing, legal, logo/favicon or financial-formula changes are
 included. A separately requested Version 2 is for comparison only.
@@ -112,7 +114,7 @@ Visible example engagement cards remain clearly labelled illustrative scopes. Tr
 
 ## Professional qualifications
 
-The owner supplied these exact qualification titles on 30 October 2026: Microsoft Certified: Power BI Data Analyst Associate (Microsoft) and Certified Corporate FP&A Professional (FPAC), Association for Financial Professionals. They appear in a compact bilingual, text-only strip, without company-partner claims or recreated issuer badges. The owner requested the exact labels “HubSpot certified” and “Acumatica certified”, with German equivalents and no IDs or personal names. No specific certification level or partner status is inferred. No independent credential verification is claimed.
+The qualification carousel uses the owner-requested display labels “Power BI Data Analyst Associates” and “Certified Corporate FP&A Professionals (FPAC)” with Microsoft and Association for Financial Professionals issuer captions. “HubSpot certified” and “Acumatica certified” retain their German equivalents. Pictures are original editorial illustrations, not official issuer badges. No IDs, personal names, unconfirmed levels, partner status or independent credential verification are implied.
 
 ## Removed homepage rolling forecast
 

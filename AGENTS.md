@@ -63,3 +63,28 @@ The owner also requested a separate, substantially redesigned Version 2 for
 comparison. Keep that alternative out of the production build and do not replace
 the approved live version with it without approval. Preserve core copy, offers,
 bilingual paths and functionality in the alternative. No invented proof or badges.
+
+## Owner's exact colour correction — 31 October 2026
+The owner rejected the deeper-orange buttons and explicitly requested the previous
+bright orange with white text. Restore `#F47758` and the original `#FFA080` hover,
+retain white labels, and publish this correction to the already approved Version 1.
+This supersedes the earlier deeper-orange requirement. Do not darken the chosen
+orange again or replace the labels with dark text. Record the known text-contrast
+exception honestly; do not claim this exact pairing passes AA. All other
+accessibility checks remain applicable. Do not merge the separate Version 2.
+
+## Additional owner corrections — 31 October 2026
+Keep the orange restoration and also distinguish the strategic finance flow,
+financial planning/reporting detail and About sections. The requested qualification
+labels are exactly “Power BI Data Analyst Associates” and “Certified Corporate
+FP&A Professionals (FPAC)” in both language versions. These owner-requested display
+labels supersede earlier singular title wording. Keep the issuer attributions,
+no IDs or personal names, and no invented issuer badges or partner status.
+
+## Natural presentation across A–D — 31 October 2026
+The owner asked that every version feel deliberately designed rather than generic.
+Use natural sentence-case section labels, remove redundant repeated signposts and
+unnecessary tag-chip decoration, and retain the concrete business copy. Versions
+C and D are separate comparison previews: C uses asymmetric features, sticky
+service tabs and a horizontal proof rail; D adds restrained motion and a custom
+mobile drawer. Do not invent client logos, statistics or feedback for proof.

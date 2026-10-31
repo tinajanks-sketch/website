@@ -2,7 +2,9 @@
 
 Review branch: `consultix-editorial-refinement`.
 The owner approved publication of this editorial Version 1 on 31 October 2026,
-with white text on deeper-orange buttons. The owner asked for more distinction between sections, the visible
+with white text on orange buttons. The owner then rejected the deeper orange and
+explicitly restored the original bright `#F47758` (hover `#FFA080`) with white text.
+That exact pairing has a documented text-contrast exception. The owner asked for more distinction between sections, the visible
 business-type explanation, image-based qualifications near the end and a modern,
 professional presentation similar in polish to a Wix design.
 

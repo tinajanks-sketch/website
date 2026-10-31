@@ -61,6 +61,6 @@ test('privacy and established identity are preserved',()=>{
   assert.match(html,/noindex,nofollow/);
   assert.match(html,/id="testimonials"[^>]*hidden/);
   assert.match(html,/<svg class="brand-mark" viewBox="0 0 42 64"/);
-  assert.match(css,/--cta-coral:#C25032/);
+  assert.match(css,/--cta-coral:#F47758/);
   assert.match(html,/general@consultix\.solutions/);
 });

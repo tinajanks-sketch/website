@@ -1,5 +1,5 @@
 # Consultix Solutions — five-practice positioning and design handoff
-Updated: 31 October 2026. **The owner approved publication of the full editorial Version 1, including white text on accessible orange buttons.** A separate Version 2 was requested for comparison only; future independent production changes still require approval.
+Updated: 31 October 2026. **The owner approved publication of the full editorial Version 1, including white text on the original bright-orange buttons.** A separate Version 2 was requested for comparison only; future independent production changes still require approval.
 
 Website: https://consultix.solutions/
 Repository: https://github.com/tinajanks-sketch/website
@@ -7,7 +7,10 @@ Source review branch: `consultix-editorial-refinement` (approved for publication
 Business email: general@consultix.solutions
 
 ## Latest publication approval — 31 October 2026
-The owner approved the complete editorial review, restored business-type guide, distinct backgrounds, illustrated qualifications carousel and Europe/US targeting, then asked for white button text and publication. Use white on `#C25032`, with hover `#AC432A` (at least 4.5:1 contrast). Preserve the logo/favicon and hosting, email, legal and indexing settings. Publish Version 1 through the existing Git-connected Netlify route after checks. Version 2 is a separate design preview and is not authorised to replace production.
+The owner approved the complete editorial review, restored business-type guide, distinct backgrounds, illustrated qualifications carousel and Europe/US targeting, then asked for white button text and publication. The owner subsequently rejected the darker orange and explicitly requested white on the original `#F47758`, with original hover `#FFA080`. Keep that exact choice; its 2.75:1 default and 1.98:1 hover text contrast are documented exceptions, not AA passes. Preserve the logo/favicon and hosting, email, legal and indexing settings. Publish Version 1 through the existing Git-connected Netlify route after checks. Version 2 is a separate design preview and is not authorised to replace production.
+
+## Additional corrections — 31 October 2026
+The owner asked for distinct strategic finance, financial planning/reporting and About backgrounds. Use mineral mist for the revenue-to-finance flow, white for financial planning detail and mineral blue with white text for About, including expanded principles. The owner-requested qualification labels are exactly “Power BI Data Analyst Associates” and “Certified Corporate FP&A Professionals (FPAC)” in English and German. Keep issuer captions and the other supplied qualification descriptions.
 
 ## Approved final refinement — 30 October 2026
 The owner requested “HubSpot certified” and “Acumatica certified” with no IDs or personal names, the other discussed simplifications, and an update to the website. Shorter English/German hero, audience and finance copy removes repetition. The remaining KPI examples stay available inside a native disclosure that starts collapsed, opens with keyboard or pointer, and preserves its state across language switching. The large rolling P&L example remains removed. Keep the current design, five practices, offers, contact and other interactions. The owner has approved publishing this scope; no additional confirmation is needed for these changes.

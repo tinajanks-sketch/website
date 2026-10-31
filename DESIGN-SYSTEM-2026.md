@@ -110,3 +110,25 @@ This replaces the earlier dark-text-on-bright-coral button specification. The
 original logo, favicon, fonts and remaining identity are preserved. Version 2 is
 a separately requested comparison design; do not publish it over Version 1
 without approval.
+
+
+## Exact original-orange correction — 31 October 2026
+
+The owner rejected the darker button shown in the previous release and explicitly
+requested the original bright orange with white text. Restore primary button
+`#F47758`, original hover `#FFA080`, and white `#FFFFFF` labels. Do not darken the
+button again. This supersedes the immediately preceding deeper-orange change.
+White text has 2.75:1 default and 1.98:1 hover contrast, below the AA text threshold;
+record this known owner-selected exception rather than reporting full AA compliance.
+Other contrast and accessibility checks remain in effect. This correction is
+authorised for the already approved live Version 1; keep Version 2 separate.
+
+## Additional section distinction and qualification labels — 31 October 2026
+
+The owner requested more distinction between the strategic finance, financial
+planning/reporting and About sections. The strategic revenue-to-finance flow uses
+mineral mist `#E6EDED`, finance service detail uses white `#FFFFFF`, and About uses
+mineral blue `#42647A` with white text, including the expandable principles.
+The professional qualification display labels are now “Power BI Data Analyst
+Associates” and “Certified Corporate FP&A Professionals (FPAC)”, as requested.
+Keep their Microsoft and Association for Financial Professionals issuer captions.

@@ -4,8 +4,9 @@
 
 The owner approved publication of the full editorial layout with Europe/US
 targeting, the visible business-type guide and the illustrated qualifications
-carousel. Primary orange buttons now have white text; their deeper orange meets
-4.5:1 contrast in default and hover states. This approved version is published
+carousel. The owner subsequently rejected the darker orange. Primary buttons now use the
+original bright `#F47758` and original `#FFA080` hover with white text. This exact
+choice has a documented contrast exception. This approved version is published
 through the existing main → Netlify route after verification. See the latest
 notes in `CODEX-HANDOFF.md`. Version 2 is a separate comparison design request;
 it will not replace the approved site without approval.

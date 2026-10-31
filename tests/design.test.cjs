@@ -24,17 +24,17 @@ test('design tokens reflect the selected site-wide palette',()=>{
   assert.equal(token('surface-mist'),'#E6EDED');
   assert.match(html, /name="theme-color" content="#1B2D37"/);
 });
-test('principal text and CTA combinations meet 4.5:1 minimum contrast',()=>{
+test('the remaining principal text combinations meet 4.5:1 contrast',()=>{
   assert.ok(contrast('#1B2D37','#F7F5F0')>=4.5);
   assert.ok(contrast('#536873','#F7F5F0')>=4.5);
   assert.ok(contrast('#FFFFFF','#AC5A42')>=4.5);
   assert.ok(contrast('#E9A894','#1B2D37')>=4.5);
-  assert.ok(contrast('#FFFFFF',token('cta-coral'))>=4.5);
-  assert.ok(contrast('#FFFFFF',token('cta-coral-hover'))>=4.5);
+  // The owner explicitly chose white on the original bright orange. That
+  // combination is reported as a known exception by browser QA, not an AA pass.
 });
-test('primary buttons use the approved white text and accessible orange',()=>{
-  assert.equal(token('cta-coral'),'#C25032');
-  assert.equal(token('cta-coral-hover'),'#AC432A');
+test('primary buttons use the owner-requested original orange and white text',()=>{
+  assert.equal(token('cta-coral'),'#F47758');
+  assert.equal(token('cta-coral-hover'),'#FFA080');
   assert.match(css,/\.button\s*\{[^}]*background:var\(--cta-coral\)/);
   assert.match(css,/\.button\s*\{[^}]*background:var\(--cta-coral\);\s*color:#FFFFFF/);
   assert.match(css,/\.hero-actions \.button::after\s*\{/);

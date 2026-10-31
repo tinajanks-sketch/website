@@ -414,9 +414,9 @@ h2{letter-spacing:-.048em}
 }
 
 
-/* Owner-approved white button text, 31 Oct 2026. A deeper orange preserves
-   at least 4.5:1 text contrast in default and hover states. Logo is unchanged. */
-:root{--cta-coral:#C25032;--cta-coral-hover:#AC432A}
+/* Owner's explicit correction, 31 Oct 2026: restore the original bright orange
+   and keep white text. This pairing has a documented text-contrast exception. */
+:root{--cta-coral:#F47758;--cta-coral-hover:#FFA080}
 .button{
   background:var(--cta-coral);
   color:#FFFFFF;
@@ -842,3 +842,25 @@ h3{font-size:clamp(22px,2vw,30px);letter-spacing:-.028em}
  .credentials h2{font-size:32px}
  .credential-buttons button{width:44px;height:44px}
 }
+
+/* Owner's section contrast correction: three distinct finance/About surfaces. */
+#revenue-finance{background:var(--surface-mist)}
+#strategic-finance{background:var(--white)}
+.about{background:var(--mineral);color:var(--white)}
+.about .eyebrow,.about .section-copy,.about .section-copy .lead,
+.about .values p,.about .values>div>span,.about .values h3{color:var(--white)}
+.about .values-disclosure,.about .values{border-color:rgba(255,255,255,.4)}
+.about .values-disclosure>summary,.about .values-disclosure>summary:hover{color:var(--white)}
+.about .values-disclosure>summary::after{color:var(--white);border-color:var(--white)}
+.about .values-disclosure[open]>summary::after{background:var(--white);color:var(--ink)}
+.about .values-disclosure>summary:focus-visible{outline-color:var(--white)}
+
+/* Editorial restraint shared by the comparison designs: clear labels, fewer
+   repeated signposts and plain scope lists instead of decorative tag chips. */
+.eyebrow{letter-spacing:.025em;font-size:12px;text-transform:none}
+.about>.container>.split-section .eyebrow,
+.approach .section-heading .eyebrow,
+.credentials .section-heading .eyebrow{display:none}
+.tags{gap:8px 16px}
+.tags>li{background:transparent;border:0;border-radius:0;padding:0;font-size:12px;line-height:1.6}
+.tags>li+li:before{content:'·';margin-right:16px;color:var(--graphite)}

@@ -8,6 +8,32 @@ const axePath=process.env.AXE_CORE_PATH||require.resolve('axe-core/axe.min.js');
 const root=path.resolve(__dirname,'..');
 let checks=0;
 const check=(condition,message)=>{assert.ok(condition,message);checks++;};
+const chosenButtonContrast=new Set();
+async function scanAccessibility(page,selector=null){
+ const result=await page.evaluate(async selector=>{
+  const report=await axe.run(selector?document.querySelector(selector):document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}});
+  const accepted=[];
+  // Keep scanning every element/rule. Only the exact owner-selected white-on-
+  // orange button text is an exception; unrelated contrast failures still fail.
+  report.violations=report.violations.map(violation=>{
+   if(violation.id!=='color-contrast')return violation;
+   const nodes=violation.nodes.filter(node=>{
+    let element;
+    try{if(node.target.length===1&&typeof node.target[0]==='string')element=document.querySelector(node.target[0]);}catch{}
+    const button=element?.closest('.button');
+    const foreground=element&&getComputedStyle(element).color;
+    const background=button&&getComputedStyle(button).backgroundColor;
+    const expected=button&&foreground==='rgb(255, 255, 255)'&&['rgb(244, 119, 88)','rgb(255, 160, 128)'].includes(background);
+    if(expected)accepted.push(node.target.join(' ')+' / '+background);
+    return !expected;
+   });
+   return {...violation,nodes};
+  }).filter(violation=>violation.nodes.length);
+  return {violations:report.violations,accepted};
+ },selector);
+ result.accepted.forEach(target=>chosenButtonContrast.add(target));
+ return result;
+}
 (async()=>{
  const html=fs.readFileSync(path.join(root,'dist/index.html'),'utf8');
  const germanHTML=fs.readFileSync(path.join(root,'dist/de/index.html'),'utf8');
@@ -28,7 +54,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   check(await page.locator('.practice-row').count()===5,'Five connected service practices');
   check(await page.locator('#qualifications .credential').count()===4,'The four owner-supplied qualification descriptions appear');
   check(await page.locator('[data-i=credentialHubSpotTitle]').innerText()==='HubSpot certified'&&await page.locator('[data-i=credentialAcumaticaTitle]').innerText()==='Acumatica certified','Credential labels use the requested wording');
-  check((await page.locator('#qualifications').innerText()).includes('Power BI Data Analyst Associate')&&(await page.locator('#qualifications').innerText()).includes('Certified Corporate FP&A Professional (FPAC)'),'Credential titles match the owner-supplied names');
+  check((await page.locator('#qualifications').innerText()).includes('Power BI Data Analyst Associates')&&(await page.locator('#qualifications').innerText()).includes('Certified Corporate FP&A Professionals (FPAC)'),'Credential captions match the owner-requested display labels');
   check(!/partner|certified firm|platinum|gold|silver/i.test(await page.locator('#qualifications').innerText()),'Qualification descriptions do not invent company partner status or certification levels');
   check(await page.locator('.engagement-card').count()===5,'Five focused project offers');
   check(await page.locator('link[rel=canonical]').getAttribute('href')==='https://consultix.solutions/','Selected domain');
@@ -55,7 +81,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   check(await page.locator('.credential-art img').count()===4,'Four qualification illustrations load in the standalone build');
   check(await page.locator('#credential-previous').isDisabled()&&!await page.locator('#credential-next').isDisabled(),'The image carousel starts at its first position');
   await page.locator('#credential-next').click();
-  await page.waitForFunction(()=>document.getElementById('credential-track').scrollLeft>20);
+  await page.waitForFunction(()=>document.getElementById('credential-track').scrollLeft>20&&!document.getElementById('credential-previous').disabled);
   check(!await page.locator('#credential-previous').isDisabled(),'Carousel next advances the image rail');
   await page.locator('#credential-track').focus();await page.keyboard.press('End');
   await page.waitForFunction(()=>document.getElementById('credential-next').disabled);
@@ -148,7 +174,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   await page.keyboard.press('End');
   check(await page.locator('#testimonial-next').isDisabled(),'End moves to the last quotation');
   await page.addScriptTag({path:axePath});
-  const testimonialAccessibility=await page.evaluate(()=>axe.run(document.getElementById('testimonials'),{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}}));
+  const testimonialAccessibility=await scanAccessibility(page,'#testimonials');
   check(testimonialAccessibility.violations.length===0,'Active carousel accessibility: '+JSON.stringify(testimonialAccessibility.violations.map(v=>v.id)));
   await page.evaluate(()=>{approvedTestimonials.length=0;renderApprovedTestimonials(approvedTestimonials,'de');});
   await page.locator('[data-language=en]').click();
@@ -178,7 +204,12 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   check(await page.locator('.finance-services').isVisible(),'Planning and reporting details open with the keyboard');
   await page.keyboard.press('Enter');
   check(!await page.locator('.finance-services').isVisible(),'Planning details can be collapsed');
+  const sectionColours=await page.evaluate(()=>['revenue-finance','strategic-finance','about'].map(id=>getComputedStyle(document.getElementById(id)).backgroundColor));
+  check(new Set(sectionColours).size===3,'Strategic finance, financial planning and About have distinct backgrounds');
+  await page.locator('.values-disclosure>summary').click();
+  check(await page.locator('#about .values').isVisible(),'About principles expand on the updated background');
   if(screenshotDirectory){
+   await page.locator('#about').screenshot({path:path.join(screenshotDirectory,'consultix-about.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
    await page.locator('#strategic-finance').screenshot({path:path.join(screenshotDirectory,'consultix-finance-without-forecast.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
    for(const [selector,name] of [['#qualifications','qualifications'],['#practices','practices'],['#challenge-finder','challenge-finder'],['#engagements','offers'],['#revenue-finance','alignment'],['#performance-lens','performance-lens'],['#business-guide','segments'],['#metric-explorer','metrics']]){
     await page.locator(selector).screenshot({path:path.join(screenshotDirectory,'consultix-'+name+'.png'),style:'.site-header,.skip-link{visibility:hidden!important}'});
@@ -195,7 +226,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
     check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow at '+width+' in '+language);
    }
    await page.addScriptTag({path:axePath});
-   const accessibility=await page.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}}));
+   const accessibility=await scanAccessibility(page);
    check(accessibility.violations.length===0,'Accessibility '+language+': '+JSON.stringify(accessibility.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))));
   }
   await page.setViewportSize({width:1440,height:1000});
@@ -236,7 +267,7 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   check(!await page.locator('#main-nav').isVisible(),'Navigation closes mobile menu');
   await page.locator('[data-language=en]').click();await page.evaluate(()=>scrollTo(0,0));
   await page.addScriptTag({path:axePath});
-  const mobileAccessibility=await page.evaluate(()=>axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}}));
+  const mobileAccessibility=await scanAccessibility(page);
   check(mobileAccessibility.violations.length===0,'Mobile accessibility: '+JSON.stringify(mobileAccessibility.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))));
   if(screenshotDirectory){
    await page.screenshot({path:path.join(screenshotDirectory,'consultix-mobile-hero.png')});
@@ -311,5 +342,6 @@ const check=(condition,message)=>{assert.ok(condition,message);checks++;};
   check(errors.length===0,'No browser exceptions: '+errors.join(', '));
   check(externalRequests.length===0,'No third-party requests: '+externalRequests.join(', '));
   console.log('PASS: '+checks+' functional checks; desktop/mobile accessibility scans; no third-party requests.');
+  if(chosenButtonContrast.size)console.log('KNOWN OWNER-SELECTED EXCEPTION: white text on the original orange buttons falls below AA text contrast ('+chosenButtonContrast.size+' element/state matches). All other accessibility findings are checked.');
  }finally{if(browser)await browser.close();await new Promise(resolve=>server.close(resolve));}
 })().catch(error=>{console.error(error);process.exit(1);});
