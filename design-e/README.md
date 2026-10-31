@@ -47,6 +47,10 @@ form, all offer detail or full legal/privacy presentation. Those existing featur
 are untouched in the main site and would be integrated after the direction is
 chosen. This preview must not be substituted into Netlify's production build.
 
+The CTA cleanup removes five service email links and the extra ongoing-support
+email link. Contact actions remain in the header, hero, paid-review feature and
+final contact section; the service and support descriptions remain intact.
+
 No fabricated testimonials, client logos, statistics, partner badges or co-founder
 section have been added. The testimonial content remains absent until approved
 quotations exist. No illustrative financial results are introduced here.
