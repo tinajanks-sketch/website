@@ -1,5 +1,18 @@
 # Preview the Consultix update
 
+## Version 2 comparison design — 31 October 2026
+
+`design-v2/index.html` and `design-v2/style.css` contain the separately requested
+Swiss architectural design. Run `npm run build:v2`, then open
+`design-v2/dist/index.html` or `design-v2/dist/de/index.html`. The complete source
+and navigation-to-footer outline are documented in `design-v2/README.md`.
+Preview artifacts are in `/workspace/exports/version-2-swiss-2026-10-31/`.
+
+The approved Version 1 was pushed to production main at `1a8a33a`, including white
+button text on deeper orange. Live-site access is blocked by the environment
+proxy, so final Netlify deployment completion could not be confirmed. Version 2
+is a comparison preview and has not replaced it.
+
 ## Approved Version 1 — 31 October 2026
 
 The owner approved publication of the full editorial layout with Europe/US

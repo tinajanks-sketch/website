@@ -4,6 +4,14 @@ Independent English/German business website for `consultix.solutions`, based on 
 
 The site uses plain HTML, CSS and JavaScript. It has no production package dependencies, website-builder subscription or application server requirement. Hosting-provider free-plan limits still apply; domain registration and email are separate services.
 
+## Version 2 comparison design — 31 October 2026
+
+On the separate `consultix-version-2-swiss` branch, `design-v2/` contains the
+requested second, Swiss-inspired comparison design. Read `design-v2/README.md`
+for the full navigation-to-footer layout, exact palette, code and tests. Run
+`npm run build:v2` to build it. The normal production build and Netlify publish
+directory are unchanged; this alternative does not replace approved Version 1.
+
 ## Editorial Version 1 — approved 31 October 2026
 
 The owner approved the complete editorial review: more natural bilingual copy,
