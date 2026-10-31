@@ -27,8 +27,22 @@
     <div class="hero-main"><h1 id="hero-title">{{heroHeading}}</h1><div class="hero-bottom"><p>{{heroDescription}}</p><a class="cta" href="#contact">{{heroCta}}<span class="arrow" aria-hidden="true"></span></a></div></div>
   </section>
 
+  <figure class="hero-visual shell"><img src="../assets/architecture.svg" alt="{{architectureAlt}}" width="1800" height="1080" fetchpriority="high" decoding="async"></figure>
+
+
+  <section class="services" id="services" aria-labelledby="services-title">
+    <div class="shell service-heading"><div><p class="section-label">{{practicesEyebrow}}</p><h2 id="services-title">{{practicesTitle}}</h2></div><div><p>{{practicesDescription}}</p><div class="gallery-controls"><span class="gallery-position" role="status" aria-live="polite">1 / 5</span><button id="service-previous" type="button" aria-label="{{previousService}}" aria-controls="capability-track" disabled><span class="line-arrow previous" aria-hidden="true"></span></button><button id="service-next" type="button" aria-label="{{nextService}}" aria-controls="capability-track"><span class="line-arrow" aria-hidden="true"></span></button></div></div></div>
+    <div class="capability-track" id="capability-track" role="region" aria-labelledby="services-title" tabindex="0">{{servicePanels}}</div>
+  </section>
+
+  <section class="engagements shell section-space" id="working-together" aria-labelledby="offers-title">
+    <div class="section-heading"><p class="section-label">{{engagementsEyebrow}}</p><h2 id="offers-title">{{offersHeading}}</h2></div>
+    <article class="review-offer"><div class="offer-marker"><p>{{reviewEyebrow}}</p></div><div class="review-content"><h3>{{reviewTitle}}</h3><p>{{reviewBody}}</p><ul><li>{{reviewFeature2}}</li><li>{{reviewFeature3}}</li><li>{{reviewFeature4}}</li></ul><p class="fee-note">{{reviewFee}} {{reviewNote}}</p></div></article>
+    <div class="other-offers"><article><p class="section-label">{{projectHeading}}</p><h3>{{projectTitle}}</h3><p>{{projectsDescription}}</p></article><article><p class="section-label">{{ongoingEyebrow}}</p><h3>{{ongoingTitle}}</h3><p>{{ongoingBody}}</p><p class="fee-note">{{ongoingFee}}</p></article></div>
+  </section>
+
   <section class="systems-map shell" aria-labelledby="map-title">
-    <div class="map-topline"><h2 id="map-title">{{mapTitle}}</h2><span>{{mapCaption}}</span></div>
+    <div class="map-topline"><h2 id="map-title">{{mapTitle}}</h2></div>
     <div class="map-controls" role="group" aria-labelledby="map-title">
       <button type="button" data-map="revenue" aria-pressed="true" aria-controls="map-revenue"><span class="map-name">{{mapRevenue}}</span><span class="map-wire" aria-hidden="true"></span><span class="map-subtitle">{{mapRevenueSub}}</span></button>
       <button type="button" data-map="operations" aria-pressed="false" aria-controls="map-operations"><span class="map-name">{{mapOperations}}</span><span class="map-wire" aria-hidden="true"></span><span class="map-subtitle">{{mapOperationsSub}}</span></button>
@@ -38,20 +52,9 @@
     <p class="map-note">{{mapNote}}</p>
   </section>
 
-  <section class="services" id="services" aria-labelledby="services-title">
-    <div class="shell service-heading"><div><p class="section-label">{{practicesEyebrow}}</p><h2 id="services-title">{{practicesTitle}}</h2></div><div><p>{{practicesDescription}}</p><div class="gallery-controls"><span class="gallery-position" role="status" aria-live="polite">1 / 5</span><button id="service-previous" type="button" aria-label="{{previousService}}" aria-controls="capability-track" disabled><span class="line-arrow previous" aria-hidden="true"></span></button><button id="service-next" type="button" aria-label="{{nextService}}" aria-controls="capability-track"><span class="line-arrow" aria-hidden="true"></span></button></div></div></div>
-    <div class="capability-track" id="capability-track" role="region" aria-labelledby="services-title" tabindex="0">{{servicePanels}}</div>
-  </section>
-
-  <section class="engagements shell section-space" id="working-together" aria-labelledby="offers-title">
-    <div class="section-heading"><p class="section-label">{{engagementsEyebrow}}</p><h2 id="offers-title">{{offersHeading}}</h2></div>
-    <article class="review-offer"><div class="offer-marker"><span aria-hidden="true">01</span><p>{{reviewEyebrow}}</p></div><div class="review-content"><h3>{{reviewTitle}}</h3><p>{{reviewBody}}</p><ul><li>{{reviewFeature2}}</li><li>{{reviewFeature3}}</li><li>{{reviewFeature4}}</li></ul><p class="fee-note">{{reviewFee}} {{reviewNote}}</p></div></article>
-    <div class="other-offers"><article><p class="section-label">02 / {{projectHeading}}</p><h3>{{projectTitle}}</h3><p>{{projectsDescription}}</p></article><article><p class="section-label">03 / {{ongoingEyebrow}}</p><h3>{{ongoingTitle}}</h3><p>{{ongoingBody}}</p><p class="fee-note">{{ongoingFee}}</p></article></div>
-  </section>
-
   <section class="audience" id="your-business" aria-labelledby="audience-title"><div class="shell audience-layout"><div><p class="section-label">{{segmentsEyebrow}}</p><h2 id="audience-title">{{audienceTitle}}</h2><div class="audience-select"><label for="business-type">{{chooseBusiness}}</label><select id="business-type"><option value="startup">{{segmentstartup}}</option><option value="saas">{{segmentsaas}}</option><option value="sme">{{segmentsme}}</option></select></div></div><div class="audience-panels">{{audiencePanels}}</div></div></section>
 
-  <section class="about shell section-space" id="about" aria-labelledby="about-title"><div class="about-layout"><p class="section-label">{{aboutTitle}}</p><div><h2 id="about-title">{{aboutLead}}</h2><p>{{aboutBody}}</p></div></div><div class="qualifications"><h3>{{credentialsTitle}}</h3><dl>{{qualificationRows}}</dl></div></section>
+  <section class="about shell section-space" id="about" aria-labelledby="about-title"><div class="about-layout"><p class="section-label">{{aboutTitle}}</p><div><h2 id="about-title">{{aboutLead}}</h2><p>{{aboutBody}}</p></div></div><section class="qualifications" id="qualifications" aria-labelledby="qualifications-title"><h3 id="qualifications-title">{{credentialsTitle}}</h3><p class="qualification-note">{{qualificationNote}}</p><div class="qualification-gallery" tabindex="0" role="group" aria-labelledby="qualifications-title">{{qualificationImages}}</div></section></section>
 
   <section class="contact" id="contact" aria-labelledby="contact-title"><div class="shell"><p class="section-label">{{contactEyebrow}}</p><div class="contact-layout"><h2 id="contact-title">{{contactTitle}}</h2><div><p>{{contactDescription}}</p><a class="email-link" href="mailto:general@consultix.solutions">general@consultix.solutions<span class="arrow" aria-hidden="true"></span></a></div></div></div></section>
 </main>

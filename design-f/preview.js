@@ -41,6 +41,20 @@
   });
   window.addEventListener('resize',updateGallery);updateGallery();
 
+  // Qualifications use a native horizontal image rail, with no extra CTA buttons.
+  const qualifications=document.querySelector('.qualification-gallery');
+  const qualificationItems=[...qualifications.querySelectorAll('.qualification-item')];
+  qualifications.addEventListener('keydown',event=>{
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)||qualifications.scrollWidth<=qualifications.clientWidth+2)return;
+    event.preventDefault();
+    const offset=item=>item.getBoundingClientRect().left-qualifications.getBoundingClientRect().left+qualifications.scrollLeft;
+    const focused=qualificationItems.indexOf(document.activeElement);
+    const current=focused>=0?focused:qualificationItems.reduce((nearest,item,i)=>Math.abs(offset(item)-qualifications.scrollLeft)<Math.abs(offset(qualificationItems[nearest])-qualifications.scrollLeft)?i:nearest,0);
+    const selected=Math.max(0,Math.min(qualificationItems.length-1,event.key==='Home'?0:event.key==='End'?qualificationItems.length-1:current+(event.key==='ArrowRight'?1:-1)));
+    if(focused>=0)qualificationItems[selected].focus({preventScroll:true});
+    qualifications.scrollTo({left:offset(qualificationItems[selected]),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+  });
+
   const business=document.getElementById('business-type');
   const audiencePanels=[...document.querySelectorAll('[data-audience]')];
   function selectBusiness(){audiencePanels.forEach(panel=>panel.hidden=panel.dataset.audience!==business.value);}

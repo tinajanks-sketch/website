@@ -1,26 +1,31 @@
-# Version F — modern consulting studio
+# Version F refined — architecture and qualification imagery
 
-The owner liked Version E and requested a new, more modern alternative. F is a
-separate design prototype based on the current CTA-reduced `main` (`578947a`).
-It has not been merged into production or deployed over the live website.
+The owner liked F and asked for a more modern, less generic refinement, pictures
+for the qualifications and the original architectural imagery in the opening.
+This review branch builds on F (`a74cf1f`) and retains the CTA-reduced production
+base (`578947a`). It has not been deployed over the live website.
 
-## Visual direction
+## Visual refinement
 
-- Geist sans-serif typography, a cool near-white canvas, near-black service/contact
-  bands and the existing orange accent. The Consultix logo and favicon are retained.
-- An offset hero: a small context column beside the headline, supporting copy below,
-  and a broad conceptual diagram underneath. No serif, stock photograph, gradient,
-  glass panel or architecture backdrop.
-- A compact diagram explaining the revenue, operating and financial perspectives.
-  Its three controls reveal different questions and information handoffs. It is
-  explicitly conceptual; bookings, recognised revenue and cash remain distinct.
-- A horizontal, swipeable service gallery rather than a five-card grid or repeated
-  accordion index. Buttons, ArrowLeft/Right and Home/End work; the gallery does not
-  autoplay. All five services and their current deliverables remain in the HTML.
-- One paid review feature, two compact project/support descriptions, a business-type
-  selector, a text-led qualifications area and a direct email ending.
-- One prominent orange CTA in the hero. The desktop header and final email remain
-  available; no per-service or per-project conversion links are added.
+- Retain Geist, the cool near-white canvas, dark sections and original orange CTA.
+  The Consultix logo and favicon are unchanged.
+- Use a calmer black headline with less compressed tracking. Remove the grey
+  second-line treatment and redundant decorative service/offer counters.
+- Add the original `assets/architecture.svg` as a wide cropped image below the
+  opening text. It is the existing architectural illustration, not a new stock
+  photograph. Its angular façades carry the same geometry as the Consultix mark.
+- Move the conceptual business diagram after the offers. Its three perspectives
+  still work, while the opening contains one prominent visual idea.
+- Keep the horizontal service gallery, its single useful position indicator,
+  keyboard controls and all five service descriptions/deliverables.
+- Use plainer offer headings and keep the business-type selector, About and direct
+  email contact. There are no per-service enquiry links or new conversion buttons.
+- Add four qualification pictures in a horizontal image rail. These are the
+  existing subject illustrations, with exact qualification names and issuer
+  captions. A visible note distinguishes illustrations from the credential itself.
+  They are not official issuer badges or certificate scans. See `IMAGE-SOURCES.md`.
+- The qualification rail supports touch, scrolling, Tab, ArrowLeft/Right and
+  Home/End without adding more button clutter. It does not autoplay.
 
 ## Palette and fonts
 
@@ -46,7 +51,7 @@ AA. Automated checks exempt only that pairing on `.cta`; other findings still fa
 
 English and German use the existing shared `content.js` for all five services,
 deliverables, offers, client types, About, qualification names and contact details.
-The conceptual diagram and a few headings have concise bilingual copy local to F.
+The conceptual diagram, image descriptions and a few headings have concise bilingual copy local to F.
 There are no new financial projections, client statistics, partner badges or
 testimonials. The qualification wording is owner supplied; no independent
 verification or company partner status is implied.
@@ -74,21 +79,23 @@ The builder writes only to `design-f/dist`. Root `npm run build`, production
 
 ## Verification completed
 
-- All 338 independent F checks pass across EN/DE at 320, 390, 768, 1024, 1440 and
-  1920px: font loading, language paths, mobile menu/Escape/focus, all diagram
-  perspectives, gallery buttons/keyboard/bounds/status, all business types,
-  no-JavaScript access, no overflow, no browser exceptions or external requests.
+- All 494 independent refined-F checks pass across EN/DE at 320, 390, 768, 1024,
+  1440 and 1920px: fonts, language paths, mobile menu/Escape/focus, map perspectives,
+  service-gallery buttons/keyboard/bounds/status, business types, reduced CTAs,
+  document order, images/captions, qualification-rail keyboard/focus and no-JS access.
+- No page overflow, browser exceptions or external requests were found.
 - Four axe scans (EN/DE, 390/1440px) pass apart from the documented exact
-  orange/white CTA choice. No unrelated contrast rule is disabled.
-- Screenshots of the hero, full page, service gallery, offers and business types
-  were captured in both languages at 390 and 1440px and visually reviewed.
-- German mobile headings are sized to keep long words intact without clipping.
-- Production source comparison shows no changes to the main HTML/CSS, shared
-  content/app/calculations, build/server, Netlify configuration or favicon.
-- Existing syntax and 17 positioning/design/layout tests pass, as do the 14
-  archived-forecast tests, 11 KPI tests and 3 deployment-helper tests. The main
-  site's browser result is reported separately in the review artifacts.
+  orange/white CTA choice. No unrelated contrast finding is disabled.
+- The original hero SVG is embedded unmodified. All four subject illustrations
+  load, preserve their aspect ratio and retain readable qualification/issuer text.
+- Screenshots include the hero, full page, services, offers, audiences and
+  qualifications in both languages at 390 and 1440px and were visually reviewed.
+- Production source comparison shows no change to main HTML/CSS, shared
+  copy/app/calculations, build/server, Netlify configuration or favicon.
+- The existing shared suites and production browser result are recorded in the
+  review artifacts; the prototype does not modify the financial calculations.
 
-Browser tools were installed outside the repository at `/tmp/consultix-f-tools`.
-The independent QA helper is `/tmp/consultix-f-qa.cjs`; its actual report and
-screenshots are in `/workspace/exports/consultix-version-f-2026-10-31/`.
+Browser tools are outside the repository at `/tmp/consultix-f-tools`. The independent
+QA helper is `/tmp/consultix-f-refined-qa.cjs`. Reports, screenshots, standalone
+previews and the before/after comparison are under
+`/workspace/exports/consultix-version-f-refined-2026-10-31/`.
