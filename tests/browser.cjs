@@ -35,8 +35,9 @@ async function scanAccessibility(page,selector=null){
  return result;
 }
 (async()=>{
- const html=fs.readFileSync(path.join(root,'dist/index.html'),'utf8');
- const germanHTML=fs.readFileSync(path.join(root,'dist/de/index.html'),'utf8');
+ const buildRoot=path.resolve(root,process.env.CONSULTIX_BUILD_DIR||'dist');
+ const html=fs.readFileSync(path.join(buildRoot,'index.html'),'utf8');
+ const germanHTML=fs.readFileSync(path.join(buildRoot,'de/index.html'),'utf8');
  const server=http.createServer((request,response)=>{const pathname=new URL(request.url,'http://localhost').pathname;if(!['/','/index.html','/de/'].includes(pathname)){response.writeHead(404);return response.end();}response.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});response.end(pathname==='/de/'?germanHTML:html);});
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  const origin='http://127.0.0.1:'+server.address().port;
@@ -63,8 +64,12 @@ async function scanAccessibility(page,selector=null){
   const screenshotDirectory=process.env.CONSULTIX_SCREENSHOTS;
   if(screenshotDirectory){fs.mkdirSync(screenshotDirectory,{recursive:true});await page.screenshot({path:path.join(screenshotDirectory,'consultix-hero.png')});await page.screenshot({path:path.join(screenshotDirectory,'consultix-full.png'),fullPage:true});}
 
+  const serviceTabs=await page.locator('[data-c-tabs]').count();
+  if(serviceTabs)await page.locator('#c-tab-analytics').click();
   check((await page.locator('#practice-analytics h3').innerText()).includes('Data Analytics'),'Data analytics has a dedicated practice');
+  if(serviceTabs)await page.locator('#c-tab-systems').click();
   check((await page.locator('#practice-systems h3').innerText()).includes('Revenue-to-Finance'),'Revenue-to-Finance has a dedicated practice');
+  if(serviceTabs)await page.locator('#c-tab-finance').click();
   check(await page.locator('.review-offer').count()===1&&await page.locator('.ongoing-offer').count()===1,'Paid review and ongoing support are distinct offers');
   check(await page.locator('#review-title').innerText()==='Business Performance & Planning Review','A general business review is available');
   check(await page.locator('#founders,.founder-card,[data-i=cofounder]').count()===0,'The co-founder section is removed');
