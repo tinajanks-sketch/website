@@ -1,10 +1,13 @@
 # Consultix Solutions — five-practice positioning and design handoff
-Updated: 30 October 2026. **The owner explicitly approved publication of the current homepage refinement on 30 October 2026.** Future independent changes still require applicable approval.
+Updated: 31 October 2026. **The owner approved publication of the full editorial Version 1, including white text on accessible orange buttons.** A separate Version 2 was requested for comparison only; future independent production changes still require approval.
 
 Website: https://consultix.solutions/
 Repository: https://github.com/tinajanks-sketch/website
-Source review branch: `consultix-five-practices-2026-review` (approved for publication to main)
+Source review branch: `consultix-editorial-refinement` (approved for publication to main on 31 October 2026)
 Business email: general@consultix.solutions
+
+## Latest publication approval — 31 October 2026
+The owner approved the complete editorial review, restored business-type guide, distinct backgrounds, illustrated qualifications carousel and Europe/US targeting, then asked for white button text and publication. Use white on `#C25032`, with hover `#AC432A` (at least 4.5:1 contrast). Preserve the logo/favicon and hosting, email, legal and indexing settings. Publish Version 1 through the existing Git-connected Netlify route after checks. Version 2 is a separate design preview and is not authorised to replace production.
 
 ## Approved final refinement — 30 October 2026
 The owner requested “HubSpot certified” and “Acumatica certified” with no IDs or personal names, the other discussed simplifications, and an update to the website. Shorter English/German hero, audience and finance copy removes repetition. The remaining KPI examples stay available inside a native disclosure that starts collapsed, opens with keyboard or pointer, and preserves its state across language switching. The large rolling P&L example remains removed. Keep the current design, five practices, offers, contact and other interactions. The owner has approved publishing this scope; no additional confirmation is needed for these changes.

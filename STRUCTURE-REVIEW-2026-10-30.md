@@ -1,8 +1,8 @@
 # Section structure, business-type guide and qualification carousel
 
 Review branch: `consultix-editorial-refinement`.
-This continues the owner's review of the editorial draft; it has not been merged
-to production. The owner asked for more distinction between sections, the visible
+The owner approved publication of this editorial Version 1 on 31 October 2026,
+with white text on deeper-orange buttons. The owner asked for more distinction between sections, the visible
 business-type explanation, image-based qualifications near the end and a modern,
 professional presentation similar in polish to a Wix design.
 
@@ -80,4 +80,4 @@ Completed for this revision:
   business-type guide and qualifications carousel. The screenshot review reports
   no page errors or horizontal overflow.
 
-No new public Netlify preview or finished production deployment is claimed.
+The approved source is published through GitHub main → Netlify. Verify and report the remote main commit separately from a finished Netlify/live deployment. A separate Version 2 has been requested for comparison, not production replacement.

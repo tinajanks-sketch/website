@@ -97,3 +97,16 @@ illustrations until actual certificate/badge files are provided. Do not represen
 them as official issuer artwork. Keep the carousel manual, keyboard- and
 swipe-accessible, and translated. See `STRUCTURE-REVIEW-2026-10-30.md` for the current
 proposal and QA. Existing production approval does not publish this review draft.
+
+
+## Publication approval and white button text — 31 October 2026
+
+The owner approved the complete editorial layout, distinct colour chapters,
+prominent business-type guide, illustrated qualification carousel and Europe/US
+targeting, asked to check white button text, and explicitly requested publication.
+For the primary buttons only, use orange `#C25032` with white `#FFFFFF` text and
+hover orange `#AC432A`. White contrast is 4.68:1 by default and 5.85:1 on hover.
+This replaces the earlier dark-text-on-bright-coral button specification. The
+original logo, favicon, fonts and remaining identity are preserved. Version 2 is
+a separately requested comparison design; do not publish it over Version 1
+without approval.

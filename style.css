@@ -414,12 +414,12 @@ h2{letter-spacing:-.048em}
 }
 
 
-/* High-visibility primary CTA, preserving the established Consultix logo, owner feedback 29 Oct 2026.
-   Copper remains the restrained brand accent; vivid coral is reserved for primary actions. */
-:root{--cta-coral:#F47758;--cta-coral-hover:#FFA080}
+/* Owner-approved white button text, 31 Oct 2026. A deeper orange preserves
+   at least 4.5:1 text contrast in default and hover states. Logo is unchanged. */
+:root{--cta-coral:#C25032;--cta-coral-hover:#AC432A}
 .button{
   background:var(--cta-coral);
-  color:#1B2D37;
+  color:#FFFFFF;
   font-weight:750;
   border:1px solid rgba(27,45,55,.12);
   box-shadow:0 10px 23px rgba(12,30,41,.16);
@@ -427,7 +427,7 @@ h2{letter-spacing:-.048em}
 }
 .button:hover{
   background:var(--cta-coral-hover);
-  color:#1B2D37;
+  color:#FFFFFF;
   box-shadow:0 13px 27px rgba(12,30,41,.23);
 }
 .button:focus-visible{

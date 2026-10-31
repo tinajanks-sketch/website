@@ -4,6 +4,16 @@ Independent English/German business website for `consultix.solutions`, based on 
 
 The site uses plain HTML, CSS and JavaScript. It has no production package dependencies, website-builder subscription or application server requirement. Hosting-provider free-plan limits still apply; domain registration and email are separate services.
 
+## Editorial Version 1 — approved 31 October 2026
+
+The owner approved the complete editorial review: more natural bilingual copy,
+separate section backgrounds, a visible business-type guide, compact offers,
+illustrated qualification carousel and Europe/US targeting. Primary orange
+buttons use white text on `#C25032`, with `#AC432A` on hover, for readable contrast.
+Publish through the existing Git-connected main → Netlify workflow. No
+infrastructure, indexing, legal, logo/favicon or financial-formula changes are
+included. A separately requested Version 2 is for comparison only.
+
 ## Homepage refinement — approved 30 October 2026
 
 The owner approved publication of the latest homepage changes: remove the full rolling P&L example, add the owner-supplied qualifications, use “HubSpot certified” and “Acumatica certified” without IDs/names, shorten repetitive introductions, and place the remaining KPI examples inside an optional disclosure. The current slate-and-copper identity and other working features remain. The GitHub PR API is unavailable here; this approved revision uses the existing GitHub main → Netlify workflow. No DNS, email, noindex, legal or hosting configuration changes are included.

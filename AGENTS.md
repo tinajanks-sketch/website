@@ -50,3 +50,16 @@ The owner also supplied the exact Microsoft Certified: Power BI Data Analyst Ass
 
 ## Publication approval — 30 October 2026
 The owner reviewed the homepage-refinement draft and explicitly requested the labels “HubSpot certified” and “Acumatica certified”, the other discussed copy/layout tweaks and publication of the website update. This approval covers the current forecast removal, qualifications strip, shorter introductory copy, optional KPI disclosure and CTA arrow fix. No IDs or personal names are shown. GitHub PR APIs are unavailable from this environment; publish this approved revision through the existing Git-connected Netlify production workflow, preserve all infrastructure/indexing settings, and report source publication separately from verified deployment completion. Future independent revisions still follow the review/approval workflow above.
+
+## Publication approval and separate Version 2 — 31 October 2026
+The owner approved the complete editorial review, distinct section colours,
+visible business-type guide, qualifications image carousel and Europe/US targeting,
+asked to check white text on orange buttons, and explicitly said to publish.
+Use white button text with a sufficiently deep orange for at least 4.5:1 contrast.
+This supersedes the earlier dark-on-bright-coral button requirement only for the
+primary buttons; preserve the existing logo and favicon. Publish this approved
+Version 1 through the Git-connected Netlify main workflow after verification.
+The owner also requested a separate, substantially redesigned Version 2 for
+comparison. Keep that alternative out of the production build and do not replace
+the approved live version with it without approval. Preserve core copy, offers,
+bilingual paths and functionality in the alternative. No invented proof or badges.
