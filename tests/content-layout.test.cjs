@@ -20,12 +20,11 @@ test('headings are sized for reading rather than oversized or auto-hyphenated',(
 test('five practices show concise copy with full optional detail',()=>{
   const rows=[...html.matchAll(/<article class="practice-row"[\s\S]*?<\/article>/g)];
   assert.equal(rows.length,5);
-  const topics=['planning','crm','analytics','workflow','automation'];
   for(const [i,row] of rows.entries()){
     assert.match(row[0],new RegExp('data-i="practice'+(i+1)+'Body"'));
     assert.match(row[0],/<details class="practice-details" name="consultix-practice">/);
     assert.match(row[0],/<summary data-i="practiceDetailsLabel">/);
-    assert.match(row[0],new RegExp('data-engagement="'+topics[i]+'"'));
+    assert.doesNotMatch(row[0],/href="#contact"|data-engagement=/,'Service information does not repeat an enquiry CTA');
     assert.match(row[0],new RegExp('data-i="practice'+(i+1)+'Output"'));
   }
 });

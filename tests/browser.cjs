@@ -101,16 +101,17 @@ async function scanAccessibility(page,selector=null){
   check(await page.locator('#challenge-finder').isVisible(),'The detailed guides reopen with the keyboard');
   await page.locator('#challenge-finder [data-choice=analytics]').click();
   check(await page.locator('#finder-analytics').isVisible()&&!await page.locator('#finder-finance').isVisible(),'Challenge finder shows the selected recommendation');
-  await page.locator('#finder-analytics [data-engagement=review]').click();
-  check(await page.locator('#interest').inputValue()==='review','Challenge recommendation selects the review enquiry');
+  await page.locator('#finder-analytics a[href="#practice-analytics"]').click();
+  check(await page.locator('#practice-analytics').isVisible(),'Challenge recommendation still leads to the relevant service');
   await page.locator('#alignment-flow [data-choice=billing]').focus();await page.keyboard.press('Enter');
   check(await page.locator('#flow-billing').isVisible()&&!await page.locator('#flow-pipeline').isVisible(),'Connected-information visual works with the keyboard');
   await page.locator('.review-offer [data-engagement=review]').click();
   check(await page.locator('#interest').inputValue()==='review','General review CTA selects the matching offer');
-  for(const topic of ['planning','analytics','workflow']){
-   await page.locator('.engagement-card [data-engagement='+topic+']').click();
-   check(await page.locator('#interest').inputValue()===topic,'Project enquiry routes correctly: '+topic);
+  for(const topic of ['general','review','planning','analytics','workflow','crm','automation','startup','ongoing']){
+   await page.locator('#interest').selectOption(topic);
+   check(await page.locator('#interest').inputValue()===topic,'Contact form still accepts the enquiry topic directly: '+topic);
   }
+  check(await page.locator('main a[href="#contact"]').evaluateAll(links=>links.length===2&&links.every(link=>link.closest('.hero,.review-offer'))),'Body enquiry CTAs are limited to the hero and the single paid-review offer');
   check(JSON.stringify(await page.locator('.practice-row h3').allTextContents())===JSON.stringify(['Financial Planning & Management Reporting','Revenue Operations Management & CRM','Business Intelligence & Data Analytics','Revenue-to-Finance Alignment','AI Enablement & Automation']),'Five practices follow the new boundaries and order');
   check(await page.locator('#practice-systems a[href="#revenue-finance"]').count()===1&&await page.locator('#practice-revenue a[href="#crm-offer"]').count()===1,'RevOps and Revenue-to-Finance have distinct onward links');
   check(await page.evaluate(()=>translatedElements.every(node=>typeof german[node.dataset.i]==='string'&&german[node.dataset.i].trim())),'Every English content key has a German translation');
@@ -119,12 +120,7 @@ async function scanAccessibility(page,selector=null){
    check(await page.locator('#segment-'+segment).isVisible(),'Audience guide works with the keyboard: '+segment);
    check(await page.locator('#segment-'+segment+' .segment-columns>div:first-child li').count()===3,'Each segment describes three representative questions: '+segment);
   }
-  await page.locator('#segment-sme [data-engagement=review]').click();
-  check(await page.locator('#interest').inputValue()==='review','Audience guide routes to a relevant enquiry');
-  for(const topic of ['crm','automation']){
-   await page.locator('#'+topic+'-offer [data-engagement='+topic+']').click();
-   check(await page.locator('#interest').inputValue()===topic,'New offer routes correctly: '+topic);
-  }
+  check(await page.locator('#business-guide a[href="#contact"],.engagement-card a[href="#contact"]').count()===0,'Audience guidance and project descriptions have no repeated enquiry links');
   check(!await page.locator('#metric-explorer .metric-workspace').isVisible(),'Optional KPI examples start collapsed');
   await page.locator('.metric-disclosure>summary').focus();await page.keyboard.press('Enter');
   check(await page.locator('#metric-explorer .metric-workspace').isVisible(),'KPI examples open with the keyboard');
@@ -230,8 +226,9 @@ async function scanAccessibility(page,selector=null){
    check(accessibility.violations.length===0,'Accessibility '+language+': '+JSON.stringify(accessibility.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))));
   }
   await page.setViewportSize({width:1440,height:1000});
-  await page.locator('.engagement-card [data-engagement=workflow]').click();
-  check(await page.locator('#interest').inputValue()==='workflow','Offer link selects enquiry topic');
+  await page.locator('#contact').scrollIntoViewIfNeeded();
+  await page.locator('#interest').selectOption('workflow');
+  check(await page.locator('#interest').inputValue()==='workflow','Visitor can choose revenue-to-finance support directly in the contact form');
   check(await page.locator('#site-header').evaluate(el=>el.classList.contains('is-scrolled')),'Header readable over light sections');
   await page.locator('#copy-email').click();
   check(await page.evaluate(()=>navigator.clipboard.readText())==='general@consultix.solutions','Copy email works');
